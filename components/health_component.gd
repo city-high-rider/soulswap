@@ -28,7 +28,7 @@ signal max_health_changed(new_max_health: int)
 signal died
 
 # method for taking damage
-func damage(damage: int) -> void:
+func take_damage(damage: int) -> void:
 	current_health = max(0, current_health - damage)
 	if current_health <= 0:
 		emit_signal("died")
