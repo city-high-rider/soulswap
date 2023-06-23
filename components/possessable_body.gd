@@ -17,7 +17,6 @@ class_name Shell
 func _ready() -> void:
 	ghost.emitted_output.connect(_on_ghost_emitted_output)
 
-
 func _on_ghost_emitted_output(output: Vector2) -> void:
 	velocity = transform.basis * Vector3(output.x, 0, -output.y)
 	
