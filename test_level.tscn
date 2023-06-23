@@ -31,4 +31,4 @@ use_collision = true
 size = Vector3(14.507, 0.349575, 13.4162)
 
 [node name="PossessableBody" parent="." instance=ExtResource("1_0ans4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.247261, 1.47936, 0.270824)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00222445, 1.33837, -0.72311)

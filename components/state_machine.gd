@@ -26,7 +26,7 @@ func init(new_user: Node) -> void:
 	current_state = initial_state
 	# set the user and state maanger of the children state nodes.
 	for state in get_children().filter(func(c): if c is State: return true else: return false):
-		state.uesr = user
+		state.user = user
 		state.state_machine = self
 
 # function that should be called on the user's physics process
