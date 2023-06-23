@@ -17,8 +17,17 @@ class_name Shell
 func _ready() -> void:
 	ghost.emitted_output.connect(_on_ghost_emitted_output)
 
-func _on_ghost_emitted_output(output: Vector2) -> void:
-	velocity = transform.basis * Vector3(output.x, 0, -output.y)
+
+# If only we had ADTs like in Haskell or Elm...
+func _on_ghost_emitted_output(action: String, payload) -> void:
+	match action:
+		"moving":
+			velocity = transform.basis * Vector3(payload.x, 0, -payload.y)
+		"looking":
+			rotate_y(deg_to_rad(-payload.x * 0.1))
+			camera.rotate_x(deg_to_rad(-payload.y * 0.1))
+			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+	
 	
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
