@@ -32,14 +32,14 @@ func _on_ghost_emitted_output(action: String, payload) -> void:
 			rotate_y(deg_to_rad(-payload.x))
 			camera.rotate_x(deg_to_rad(-payload.y))
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+		"possess":
+			if ray.get_collider() is Shell:
+				var new_host : Shell = ray.get_collider()
+				new_host.change_ghost(ghost)
+				queue_free()
 
 func _physics_process(delta: float) -> void:
 	state_machine.handle_physics(delta)
-	# Test possession code.
-	if ray.get_collider() is Shell and Input.is_action_just_pressed("ui_accept"):
-		var new_host : Shell = ray.get_collider()
-		new_host.change_ghost(ghost)
-		queue_free()
 
 
 func change_ghost(new_ghost: Ghost) -> void:
@@ -55,4 +55,8 @@ func change_ghost(new_ghost: Ghost) -> void:
 	ghost.get_parent().remove_child(ghost)
 	add_child(ghost)
 	
+	# Set our camera as the current one.
+	camera.make_current()
+	
 	print_tree_pretty()
+	print_debug(ghost)

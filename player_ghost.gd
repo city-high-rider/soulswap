@@ -15,3 +15,5 @@ func _input(event: InputEvent) -> void:
 		emit_signal("emitted_output", "moving", input_direction)
 	if event is InputEventMouseMotion:
 		emit_signal("emitted_output", "looking", Vector2(event.relative.x, event.relative.y) * mouse_sensitivity)
+	if Input.is_action_just_pressed("possess"):
+		emit_signal("emitted_output", "possess", null)

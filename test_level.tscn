@@ -43,7 +43,7 @@ ghost = NodePath("DummyGhost")
 [node name="DummyGhost" parent="PossessableBody2" instance=ExtResource("2_varnb")]
 
 [node name="PossessableBody3" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("1_0ans4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.11301, 1.10567, 2.20875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.11301, 1.10567, 4.20875)
 ghost = NodePath("DummyGhost")
 
 [node name="DummyGhost" parent="PossessableBody3" instance=ExtResource("2_varnb")]
