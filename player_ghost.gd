@@ -11,6 +11,7 @@ func _ready() -> void:
 	
 func _input(event: InputEvent) -> void:
 	var input_direction: Vector2 = Input.get_vector("left", "right", "back", "forward")
-	emit_signal("emitted_output", "moving", input_direction)
+	if input_direction:
+		emit_signal("emitted_output", "moving", input_direction)
 	if event is InputEventMouseMotion:
 		emit_signal("emitted_output", "looking", Vector2(event.relative.x, event.relative.y) * mouse_sensitivity)

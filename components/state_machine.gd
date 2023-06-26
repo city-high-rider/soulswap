@@ -13,12 +13,16 @@ var user : Node = null
 # What is the current state?
 var current_state : State
 
+signal switched_state(new_state: String)
+
+
 # Function for switching states.
 func swtich_state(new_state: State) -> void:
 	if current_state:
 		current_state.exit()
 	current_state = new_state
 	current_state.enter()
+	emit_signal("switched_state", str(current_state))
 	
 # Start the state machine.
 func init(new_user: Node) -> void:
@@ -37,6 +41,6 @@ func handle_physics(delta: float) -> void:
 func handle_process(delta: float) -> void:
 	current_state.handle_process(delta)
 	
-# function that handles the user's input.
-func handle_input(event: InputEvent) -> void:
-	current_state.handle_input(event)
+# function that handles the ghost's input.
+func handle_ghost_output(action: String, payload) -> void:
+	current_state.handle_ghost_output(action, payload)

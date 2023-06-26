@@ -27,5 +27,5 @@ func handle_process(delta: float) -> void:
 	pass
 	
 # Input is passed to this function.
-func handle_input(event: InputEvent) -> void:
+func handle_ghost_output(action: String, payload) -> void:
 	pass

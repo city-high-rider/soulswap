@@ -16,21 +16,43 @@ class_name Shell
 # Which state machine is this body using? It will govern how our body moves, falls, etc.
 @export var state_machine : StateMachine
 
+# ray to hit possessable bodies from. Being used for testing.
+@onready var ray : RayCast3D = camera.get_node("RayCast3D")
+
 
 func _ready() -> void:
 	ghost.emitted_output.connect(_on_ghost_emitted_output)
-
+	state_machine.init(self)
 
 # If only we had ADTs like in Haskell or Elm...
 func _on_ghost_emitted_output(action: String, payload) -> void:
+	state_machine.handle_ghost_output(action, payload)
 	match action:
-		"moving":
-			velocity = transform.basis * Vector3(payload.x, 0, -payload.y)
 		"looking":
 			rotate_y(deg_to_rad(-payload.x))
 			camera.rotate_x(deg_to_rad(-payload.y))
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+
+func _physics_process(delta: float) -> void:
+	state_machine.handle_physics(delta)
+	# Test possession code.
+	if ray.get_collider() is Shell and Input.is_action_just_pressed("ui_accept"):
+		var new_host : Shell = ray.get_collider()
+		new_host.change_ghost(ghost)
+		queue_free()
+
+
+func change_ghost(new_ghost: Ghost) -> void:
+	# first, get rid of the current ghost.
+	if ghost:
+		ghost.emitted_output.disconnect(_on_ghost_emitted_output)
+		remove_child(ghost)
+		ghost.queue_free()
 	
+	# then, attach the new one.
+	ghost = new_ghost
+	ghost.emitted_output.connect(_on_ghost_emitted_output)
+	ghost.get_parent().remove_child(ghost)
+	add_child(ghost)
 	
-func _physics_process(_delta: float) -> void:
-	move_and_slide()
+	print_tree_pretty()
