@@ -13,6 +13,4 @@ func handle_physics(delta: float) -> void:
 
 
 func handle_ghost_output(action: String, payload):
-	match action:
-		"moving":
-			state_machine.swtich_state(move_state)
+	pass

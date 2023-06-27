@@ -28,10 +28,6 @@ func _ready() -> void:
 func _on_ghost_emitted_output(action: String, payload) -> void:
 	state_machine.handle_ghost_output(action, payload)
 	match action:
-		"looking":
-			rotate_y(deg_to_rad(-payload.x))
-			camera.rotate_x(deg_to_rad(-payload.y))
-			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 		"possess":
 			if ray.get_collider() is Shell:
 				var new_host : Shell = ray.get_collider()
@@ -40,6 +36,10 @@ func _on_ghost_emitted_output(action: String, payload) -> void:
 
 func _physics_process(delta: float) -> void:
 	state_machine.handle_physics(delta)
+	# Look around using the ghost's mouse direction.
+	rotate_y(deg_to_rad(-ghost.mouse_direction.x))
+	camera.rotate_x(deg_to_rad(-ghost.mouse_direction.y))
+	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 
 
 func change_ghost(new_ghost: Ghost) -> void:

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bb3ty1kswqumk" path="res://player/player_body.tscn" id="1_0ans4"]
 [ext_resource type="PackedScene" uid="uid://danr4y7gq7sch" path="res://player_ghost.tscn" id="2_6lav1"]
-[ext_resource type="PackedScene" uid="uid://4pb4cmdkvqam" path="res://dummy_ghost.tscn" id="2_varnb"]
+[ext_resource type="PackedScene" uid="uid://4pb4cmdkvqam" path="res://dummy_ghost.tscn" id="3_33ie2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obdej"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -36,16 +36,10 @@ size = Vector3(14.507, 0.349575, 13.4162)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.854058, 1.10567, -2.36493)
 ghost = NodePath("../PlayerGhost")
 
-[node name="PossessableBody2" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("1_0ans4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.854058, 1.10567, 2.20875)
-ghost = NodePath("DummyGhost")
-
-[node name="DummyGhost" parent="PossessableBody2" instance=ExtResource("2_varnb")]
-
-[node name="PossessableBody3" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("1_0ans4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.11301, 1.10567, 4.20875)
-ghost = NodePath("DummyGhost")
-
-[node name="DummyGhost" parent="PossessableBody3" instance=ExtResource("2_varnb")]
-
 [node name="PlayerGhost" parent="." instance=ExtResource("2_6lav1")]
+
+[node name="PossessableBody2" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("1_0ans4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88552, 1.3641, 1.75498)
+ghost = NodePath("DummyGhost")
+
+[node name="DummyGhost" parent="PossessableBody2" instance=ExtResource("3_33ie2")]
