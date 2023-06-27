@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://bb3ty1kswqumk"]
+
+[ext_resource type="Script" path="res://components/possessable_body.gd" id="1_i6q6v"]
+[ext_resource type="Script" path="res://components/hitbox.gd" id="2_4rdql"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="3_fdlml"]
+[ext_resource type="Script" path="res://components/state_machine.gd" id="4_6reha"]
+[ext_resource type="Script" path="res://player/idle.gd" id="6_xeyt5"]
+[ext_resource type="Script" path="res://player/move.gd" id="7_g40tn"]
+[ext_resource type="Script" path="res://player/Label.gd" id="8_m1f34"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ng65v"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oresp"]
+
+[node name="PossessableBody" type="CharacterBody3D" node_paths=PackedStringArray("health", "camera", "ghost", "state_machine")]
+script = ExtResource("1_i6q6v")
+health = NodePath("HealthComponent")
+camera = NodePath("Camera3D")
+ghost = NodePath("")
+state_machine = NodePath("StateMachine")
+
+[node name="Hitbox" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
+shape = SubResource("CapsuleShape3D_ng65v")
+script = ExtResource("2_4rdql")
+health_component = NodePath("../HealthComponent")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_oresp")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_fdlml")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.581344, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -20)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_6reha")
+initial_state = NodePath("move")
+
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("move_state")]
+script = ExtResource("6_xeyt5")
+move_state = NodePath("../move")
+
+[node name="move" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("7_g40tn")
+idle_state = NodePath("../idle")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("8_m1f34")
+
+[connection signal="switched_state" from="StateMachine" to="Label" method="_on_state_machine_switched_state"]

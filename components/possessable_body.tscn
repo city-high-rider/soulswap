@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dircf4nak7ufa"]
+
+[ext_resource type="Script" path="res://components/possessable_body.gd" id="1_m6hg4"]
+
+[node name="PossessableBody" type="CharacterBody3D"]
+script = ExtResource("1_m6hg4")

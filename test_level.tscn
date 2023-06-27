@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://cuna3v5lattg1"]
+
+[ext_resource type="PackedScene" uid="uid://bb3ty1kswqumk" path="res://player/player_body.tscn" id="1_0ans4"]
+[ext_resource type="PackedScene" uid="uid://danr4y7gq7sch" path="res://player_ghost.tscn" id="2_6lav1"]
+[ext_resource type="PackedScene" uid="uid://4pb4cmdkvqam" path="res://dummy_ghost.tscn" id="3_33ie2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obdej"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ruq33"]
+sky_material = SubResource("ProceduralSkyMaterial_obdej")
+
+[sub_resource type="Environment" id="Environment_m6vkg"]
+background_mode = 2
+sky = SubResource("Sky_ruq33")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="test_level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_m6vkg")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.04284, 0)
+omni_range = 6.14423
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="floor" type="CSGBox3D" parent="CSGCombiner3D"]
+size = Vector3(14.507, 0.349575, 13.4162)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17844, 0)
+size = Vector3(5.24708, 4.09761, 4.13243)
+
+[node name="PossessableBody" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("1_0ans4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.854058, 1.10567, -4.36493)
+ghost = NodePath("../PlayerGhost")
+
+[node name="PlayerGhost" parent="." instance=ExtResource("2_6lav1")]
+
+[node name="PossessableBody2" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("1_0ans4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.949069, 5.3505, 0.314417)
+ghost = NodePath("DummyGhost")
+
+[node name="DummyGhost" parent="PossessableBody2" instance=ExtResource("3_33ie2")]
