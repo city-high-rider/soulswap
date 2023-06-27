@@ -32,14 +32,18 @@ use_collision = true
 [node name="floor" type="CSGBox3D" parent="CSGCombiner3D"]
 size = Vector3(14.507, 0.349575, 13.4162)
 
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17844, 0)
+size = Vector3(5.24708, 4.09761, 4.13243)
+
 [node name="PossessableBody" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("1_0ans4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.854058, 1.10567, -2.36493)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.854058, 1.10567, -4.36493)
 ghost = NodePath("../PlayerGhost")
 
 [node name="PlayerGhost" parent="." instance=ExtResource("2_6lav1")]
 
 [node name="PossessableBody2" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("1_0ans4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88552, 1.3641, 1.75498)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.949069, 5.3505, 0.314417)
 ghost = NodePath("DummyGhost")
 
 [node name="DummyGhost" parent="PossessableBody2" instance=ExtResource("3_33ie2")]
