@@ -16,6 +16,9 @@ class_name Shell
 # Which state machine is this body using? It will govern how our body moves, falls, etc.
 @export var state_machine : StateMachine
 
+# What's the UI node? We hide this when the body is not being used by a player.
+@export var UI : Control
+
 # ray to hit possessable bodies from. Being used for testing.
 @onready var ray : RayCast3D = camera.get_node("RayCast3D")
 
@@ -23,6 +26,10 @@ class_name Shell
 func _ready() -> void:
 	ghost.emitted_output.connect(_on_ghost_emitted_output)
 	state_machine.init(self)
+	if ghost is PlayerGhost:
+		UI.show()
+	else:
+		UI.hide()
 
 # If only we had ADTs like in Haskell or Elm...
 func _on_ghost_emitted_output(action: String, payload) -> void:
@@ -54,6 +61,12 @@ func change_ghost(new_ghost: Ghost) -> void:
 	ghost.emitted_output.connect(_on_ghost_emitted_output)
 	ghost.get_parent().remove_child(ghost)
 	add_child(ghost)
+	
+	# Show or hide the UI
+	if ghost is PlayerGhost:
+		UI.show()
+	else:
+		UI.hide()
 	
 	# Set our camera as the current one.
 	camera.make_current()

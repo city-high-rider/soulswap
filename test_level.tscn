@@ -46,4 +46,9 @@ ghost = NodePath("../PlayerGhost")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.949069, 5.3505, 0.314417)
 ghost = NodePath("DummyGhost")
 
+[node name="Label" parent="PossessableBody2/UI" index="1"]
+text = "WAHOOO"
+
 [node name="DummyGhost" parent="PossessableBody2" instance=ExtResource("3_33ie2")]
+
+[editable path="PossessableBody2"]

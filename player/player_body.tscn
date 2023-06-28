@@ -13,12 +13,13 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_oresp"]
 
-[node name="PossessableBody" type="CharacterBody3D" node_paths=PackedStringArray("health", "camera", "ghost", "state_machine")]
+[node name="PossessableBody" type="CharacterBody3D" node_paths=PackedStringArray("health", "camera", "ghost", "state_machine", "UI")]
 script = ExtResource("1_i6q6v")
 health = NodePath("HealthComponent")
 camera = NodePath("Camera3D")
 ghost = NodePath("")
 state_machine = NodePath("StateMachine")
+UI = NodePath("UI")
 
 [node name="Hitbox" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
 shape = SubResource("CapsuleShape3D_ng65v")
@@ -51,19 +52,22 @@ idle_state = NodePath("../idle")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HealthBar" parent="UI" node_paths=PackedStringArray("health") instance=ExtResource("8_b0uty")]
 layout_mode = 0
 offset_left = 0.0
-offset_top = 0.0
+offset_top = 570.0
 offset_right = 456.0
-offset_bottom = 40.0
+offset_bottom = 610.0
 health = NodePath("../../HealthComponent")
 
 [node name="Label" type="Label" parent="UI"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("8_m1f34")
