@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bb3ty1kswqumk"]
+[gd_scene load_steps=13 format=3 uid="uid://bb3ty1kswqumk"]
 
 [ext_resource type="Script" path="res://components/possessable_body.gd" id="1_i6q6v"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_4rdql"]
@@ -6,8 +6,10 @@
 [ext_resource type="Script" path="res://components/state_machine.gd" id="4_6reha"]
 [ext_resource type="Script" path="res://player/idle.gd" id="6_xeyt5"]
 [ext_resource type="Script" path="res://player/move.gd" id="7_g40tn"]
+[ext_resource type="Script" path="res://components/UI/UI.gd" id="7_slyyp"]
 [ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="8_b0uty"]
 [ext_resource type="Script" path="res://player/Label.gd" id="8_m1f34"]
+[ext_resource type="PackedScene" uid="uid://clsubmog0dnfk" path="res://components/UI/body_information.tscn" id="10_pacg2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ng65v"]
 
@@ -50,20 +52,26 @@ move_state = NodePath("../move")
 script = ExtResource("7_g40tn")
 idle_state = NodePath("../idle")
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("body_info")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("7_slyyp")
+body_info = NodePath("BodyInformation")
 
 [node name="HealthBar" parent="UI" node_paths=PackedStringArray("health") instance=ExtResource("8_b0uty")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
 offset_left = 0.0
-offset_top = 570.0
+offset_top = -27.0
 offset_right = 456.0
-offset_bottom = 610.0
+offset_bottom = 0.0
+grow_vertical = 0
 health = NodePath("../../HealthComponent")
 
 [node name="Label" type="Label" parent="UI"]
@@ -71,5 +79,36 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("8_m1f34")
+
+[node name="BodyInformation" parent="UI" instance=ExtResource("10_pacg2")]
+layout_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/BodyInformation"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/BodyInformation/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "You are playing as a Husk."
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/BodyInformation/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "WASD to move, space to jump. Default FPS controls."
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/BodyInformation/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Press F while looking at something to possess it."
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="UI/BodyInformation/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Press TAB to toggle this popup."
+horizontal_alignment = 1
 
 [connection signal="switched_state" from="StateMachine" to="UI/Label" method="_on_state_machine_switched_state"]

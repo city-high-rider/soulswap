@@ -40,6 +40,8 @@ func _on_ghost_emitted_output(action: String, payload) -> void:
 				var new_host : Shell = ray.get_collider()
 				new_host.change_ghost(ghost)
 				queue_free()
+		"toggle_info":
+			UI.toggle_body_info()
 
 func _physics_process(delta: float) -> void:
 	state_machine.handle_physics(delta)
