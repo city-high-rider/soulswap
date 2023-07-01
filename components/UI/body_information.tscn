@@ -17,7 +17,7 @@ alignment = 1
 [node name="BodyName" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "You are controlling: "
+text = "You are controlling: ??"
 horizontal_alignment = 1
 
 [node name="BodyInfo" type="Label" parent="VBoxContainer"]

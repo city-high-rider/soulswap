@@ -5,9 +5,9 @@
 [ext_resource type="Script" path="res://components/health_component.gd" id="3_ogw27"]
 [ext_resource type="PackedScene" uid="uid://s4xxvp4y718y" path="res://components/player_head.tscn" id="4_cgkt8"]
 [ext_resource type="Script" path="res://components/state_machine.gd" id="4_mt13q"]
-[ext_resource type="Script" path="res://components/UI/UI.gd" id="4_uwp5g"]
 [ext_resource type="Script" path="res://player/idle.gd" id="5_4qmvs"]
 [ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="5_18nsp"]
+[ext_resource type="PackedScene" uid="uid://dvlfw4kqxil1t" path="res://components/UI/player_ui.tscn" id="7_hxkvw"]
 [ext_resource type="PackedScene" uid="uid://clsubmog0dnfk" path="res://components/UI/body_information.tscn" id="7_yux01"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_82ide"]
@@ -19,7 +19,7 @@ script = ExtResource("1_l07wf")
 health = NodePath("HealthComponent")
 head = NodePath("Camera3D")
 state_machine = NodePath("StateMachine")
-UI = NodePath("PlayerUI")
+UI = NodePath("")
 
 [node name="Hitbox" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
 shape = SubResource("SphereShape3D_82ide")
@@ -42,14 +42,7 @@ initial_state = NodePath("idle")
 [node name="idle" type="Node" parent="StateMachine"]
 script = ExtResource("5_4qmvs")
 
-[node name="PlayerUI" type="Control" parent="." node_paths=PackedStringArray("body_info")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("4_uwp5g")
+[node name="PlayerUI" parent="." node_paths=PackedStringArray("body_info") instance=ExtResource("7_hxkvw")]
 body_info = NodePath("BodyInformation")
 
 [node name="BodyInformation" parent="PlayerUI" instance=ExtResource("7_yux01")]

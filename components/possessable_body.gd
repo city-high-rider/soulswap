@@ -34,7 +34,8 @@ func _on_ghost_emitted_output(action: String, payload) -> void:
 		"possess":
 			if head.look_ray.get_collider() is Shell:
 				var new_host : Shell = head.look_ray.get_collider()
-				new_host.change_ghost(ghost)
+				set_physics_process(false)
+				new_host.call_deferred("change_ghost", ghost)
 				queue_free()
 		"toggle_info":
 			UI.toggle_body_info()
@@ -55,9 +56,8 @@ func change_ghost(new_ghost: Ghost) -> void:
 		ghost.queue_free()
 	
 	# then, attach the new one.
-	ghost = new_ghost
+	ghost = new_ghost.duplicate()
 	ghost.emitted_output.connect(_on_ghost_emitted_output)
-	ghost.get_parent().remove_child(ghost)
 	add_child(ghost)
 	
 	# Show or hide the UI

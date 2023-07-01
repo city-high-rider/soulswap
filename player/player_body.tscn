@@ -7,9 +7,9 @@
 [ext_resource type="Script" path="res://components/state_machine.gd" id="4_6reha"]
 [ext_resource type="Script" path="res://player/idle.gd" id="6_xeyt5"]
 [ext_resource type="Script" path="res://player/move.gd" id="7_g40tn"]
-[ext_resource type="Script" path="res://components/UI/UI.gd" id="7_slyyp"]
 [ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="8_b0uty"]
 [ext_resource type="Script" path="res://player/Label.gd" id="8_m1f34"]
+[ext_resource type="PackedScene" uid="uid://dvlfw4kqxil1t" path="res://components/UI/player_ui.tscn" id="8_sm05t"]
 [ext_resource type="PackedScene" uid="uid://clsubmog0dnfk" path="res://components/UI/body_information.tscn" id="10_pacg2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ng65v"]
@@ -22,7 +22,7 @@ health = NodePath("HealthComponent")
 head = NodePath("head")
 ghost = NodePath("")
 state_machine = NodePath("StateMachine")
-UI = NodePath("UI")
+UI = NodePath("")
 
 [node name="Hitbox" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
 shape = SubResource("CapsuleShape3D_ng65v")
@@ -49,17 +49,9 @@ move_state = NodePath("../move")
 script = ExtResource("7_g40tn")
 idle_state = NodePath("../idle")
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("body_info")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("7_slyyp")
-body_info = NodePath("BodyInformation")
+[node name="PlayerUI" parent="." instance=ExtResource("8_sm05t")]
 
-[node name="HealthBar" parent="UI" node_paths=PackedStringArray("health") instance=ExtResource("8_b0uty")]
+[node name="HealthBar" parent="PlayerUI" node_paths=PackedStringArray("health") instance=ExtResource("8_b0uty")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -71,15 +63,15 @@ offset_bottom = 0.0
 grow_vertical = 0
 health = NodePath("../../HealthComponent")
 
-[node name="Label" type="Label" parent="UI"]
+[node name="Label" type="Label" parent="PlayerUI"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("8_m1f34")
 
-[node name="BodyInformation" parent="UI" instance=ExtResource("10_pacg2")]
+[node name="BodyInformation" parent="PlayerUI" instance=ExtResource("10_pacg2")]
 layout_mode = 1
 shell_name = "Husk"
 shell_description = "A weak shell that isn't good at much, other than being a temporary host until you find a better vessel."
 
-[connection signal="switched_state" from="StateMachine" to="UI/Label" method="_on_state_machine_switched_state"]
+[connection signal="switched_state" from="StateMachine" to="PlayerUI/Label" method="_on_state_machine_switched_state"]
