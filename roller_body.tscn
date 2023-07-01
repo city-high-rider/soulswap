@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://djmr5rbqoq33n"]
+[gd_scene load_steps=11 format=3 uid="uid://djmr5rbqoq33n"]
 
 [ext_resource type="Script" path="res://components/possessable_body.gd" id="1_l07wf"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_dg4nn"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="3_ogw27"]
+[ext_resource type="Script" path="res://components/state_machine.gd" id="4_mt13q"]
 [ext_resource type="Script" path="res://components/UI/UI.gd" id="4_uwp5g"]
+[ext_resource type="Script" path="res://player/idle.gd" id="5_4qmvs"]
 [ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="5_18nsp"]
 [ext_resource type="PackedScene" uid="uid://clsubmog0dnfk" path="res://components/UI/body_information.tscn" id="7_yux01"]
 
@@ -11,8 +13,12 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_wy4oy"]
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("health", "camera", "state_machine", "UI")]
 script = ExtResource("1_l07wf")
+health = NodePath("HealthComponent")
+camera = NodePath("Camera3D")
+state_machine = NodePath("StateMachine")
+UI = NodePath("PlayerUI")
 
 [node name="Hitbox" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
 shape = SubResource("SphereShape3D_82ide")
@@ -24,6 +30,15 @@ script = ExtResource("3_ogw27")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_wy4oy")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_mt13q")
+initial_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="StateMachine"]
+script = ExtResource("5_4qmvs")
 
 [node name="PlayerUI" type="Control" parent="." node_paths=PackedStringArray("body_info")]
 layout_mode = 3
