@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://djmr5rbqoq33n"]
+
+[ext_resource type="Script" path="res://components/possessable_body.gd" id="1_l07wf"]
+[ext_resource type="Script" path="res://components/hitbox.gd" id="2_dg4nn"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="3_ogw27"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_82ide"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wy4oy"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_l07wf")
+
+[node name="Hitbox" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
+shape = SubResource("SphereShape3D_82ide")
+script = ExtResource("2_dg4nn")
+health_component = NodePath("../HealthComponent")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_ogw27")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_wy4oy")

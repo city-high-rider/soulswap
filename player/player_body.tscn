@@ -82,33 +82,7 @@ script = ExtResource("8_m1f34")
 
 [node name="BodyInformation" parent="UI" instance=ExtResource("10_pacg2")]
 layout_mode = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/BodyInformation"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="UI/BodyInformation/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "You are playing as a Husk."
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/BodyInformation/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "WASD to move, space to jump. Default FPS controls."
-horizontal_alignment = 1
-
-[node name="Label3" type="Label" parent="UI/BodyInformation/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Press F while looking at something to possess it."
-horizontal_alignment = 1
-
-[node name="Label4" type="Label" parent="UI/BodyInformation/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Press TAB to toggle this popup."
-horizontal_alignment = 1
+shell_name = "Husk"
+shell_description = "A weak shell that isn't good at much, other than being a temporary host until you find a better vessel."
 
 [connection signal="switched_state" from="StateMachine" to="UI/Label" method="_on_state_machine_switched_state"]
