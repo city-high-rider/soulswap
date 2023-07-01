@@ -22,7 +22,7 @@ health = NodePath("HealthComponent")
 head = NodePath("head")
 ghost = NodePath("")
 state_machine = NodePath("StateMachine")
-UI = NodePath("")
+UI = NodePath("PlayerUI")
 
 [node name="Hitbox" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
 shape = SubResource("CapsuleShape3D_ng65v")
@@ -49,7 +49,8 @@ move_state = NodePath("../move")
 script = ExtResource("7_g40tn")
 idle_state = NodePath("../idle")
 
-[node name="PlayerUI" parent="." instance=ExtResource("8_sm05t")]
+[node name="PlayerUI" parent="." node_paths=PackedStringArray("body_info") instance=ExtResource("8_sm05t")]
+body_info = NodePath("BodyInformation")
 
 [node name="HealthBar" parent="PlayerUI" node_paths=PackedStringArray("health") instance=ExtResource("8_b0uty")]
 layout_mode = 1

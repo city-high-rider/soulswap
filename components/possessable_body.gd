@@ -17,7 +17,7 @@ class_name Shell
 @export var state_machine : StateMachine
 
 # What's the UI node? We hide this when the body is not being used by a player.
-@export var UI : Control
+@export var UI : PlayerUI
 
 func _ready() -> void:
 	ghost.emitted_output.connect(_on_ghost_emitted_output)

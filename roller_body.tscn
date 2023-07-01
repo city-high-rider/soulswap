@@ -19,7 +19,7 @@ script = ExtResource("1_l07wf")
 health = NodePath("HealthComponent")
 head = NodePath("Camera3D")
 state_machine = NodePath("StateMachine")
-UI = NodePath("")
+UI = NodePath("PlayerUI")
 
 [node name="Hitbox" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
 shape = SubResource("SphereShape3D_82ide")

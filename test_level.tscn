@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cuna3v5lattg1"]
+[gd_scene load_steps=9 format=3 uid="uid://cuna3v5lattg1"]
 
 [ext_resource type="PackedScene" uid="uid://bb3ty1kswqumk" path="res://player/player_body.tscn" id="1_0ans4"]
 [ext_resource type="PackedScene" uid="uid://danr4y7gq7sch" path="res://player_ghost.tscn" id="2_6lav1"]
 [ext_resource type="PackedScene" uid="uid://4pb4cmdkvqam" path="res://dummy_ghost.tscn" id="3_33ie2"]
 [ext_resource type="PackedScene" uid="uid://djmr5rbqoq33n" path="res://roller_body.tscn" id="4_kohc7"]
+[ext_resource type="PackedScene" uid="uid://cht1nvmsvv4nx" path="res://interactive/popup_area.tscn" id="5_rnba8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obdej"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -54,3 +55,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.888313, 5.89364, -5.20812)
 ghost = NodePath("DummyGhost")
 
 [node name="DummyGhost" parent="CharacterBody3D" instance=ExtResource("3_33ie2")]
+
+[node name="PopupArea" parent="." instance=ExtResource("5_rnba8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.32988, 0.611001, -2.48519)
+message = "I'm a popup!"
