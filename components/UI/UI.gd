@@ -6,6 +6,9 @@ class_name PlayerUI
 # Which margin container has the body info?
 @export var body_info : MarginContainer
 
+# The text field for pop-ups
+@onready var popup_text : TextBox = $TextBox
+
 var is_body_info_showing : bool = true
 
 func toggle_body_info() -> void:
@@ -14,3 +17,4 @@ func toggle_body_info() -> void:
 	else:
 		body_info.show()
 	is_body_info_showing = !is_body_info_showing
+

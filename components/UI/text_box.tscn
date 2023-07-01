@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://xsrqypypmrdb"]
+
+[ext_resource type="Script" path="res://components/UI/text_box.gd" id="1_462x6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wuqf4"]
+bg_color = Color(0.6, 0.6, 0.6, 0.654902)
+
+[node name="TextBox" type="MarginContainer"]
+anchors_preset = -1
+anchor_top = 0.768519
+anchor_right = 1.0
+anchor_bottom = 0.820988
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+script = ExtResource("1_462x6")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wuqf4")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
