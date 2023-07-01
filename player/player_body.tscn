@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bb3ty1kswqumk"]
+[gd_scene load_steps=14 format=3 uid="uid://bb3ty1kswqumk"]
 
 [ext_resource type="Script" path="res://components/possessable_body.gd" id="1_i6q6v"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_4rdql"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="3_fdlml"]
+[ext_resource type="PackedScene" uid="uid://s4xxvp4y718y" path="res://components/player_head.tscn" id="4_5j8mo"]
 [ext_resource type="Script" path="res://components/state_machine.gd" id="4_6reha"]
 [ext_resource type="Script" path="res://player/idle.gd" id="6_xeyt5"]
 [ext_resource type="Script" path="res://player/move.gd" id="7_g40tn"]
@@ -15,10 +16,10 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_oresp"]
 
-[node name="PossessableBody" type="CharacterBody3D" node_paths=PackedStringArray("health", "camera", "ghost", "state_machine", "UI")]
+[node name="PossessableBody" type="CharacterBody3D" node_paths=PackedStringArray("health", "head", "ghost", "state_machine", "UI")]
 script = ExtResource("1_i6q6v")
 health = NodePath("HealthComponent")
-camera = NodePath("Camera3D")
+head = NodePath("head")
 ghost = NodePath("")
 state_machine = NodePath("StateMachine")
 UI = NodePath("UI")
@@ -34,11 +35,7 @@ mesh = SubResource("CapsuleMesh_oresp")
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_fdlml")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.581344, 0)
-
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
-target_position = Vector3(0, 0, -20)
+[node name="head" parent="." instance=ExtResource("4_5j8mo")]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_6reha")

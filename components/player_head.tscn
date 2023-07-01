@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://s4xxvp4y718y"]
+
+[ext_resource type="Script" path="res://components/player_head.gd" id="1_o6kiu"]
+
+[node name="Camera3D" type="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.581344, 0)
+script = ExtResource("1_o6kiu")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -20)
