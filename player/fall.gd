@@ -8,4 +8,4 @@ extends AirState
 func handle_physics(delta: float) -> void:
 	super(delta)
 	if user.is_on_floor():
-		state_machine.swtich_state(move_state)
+		state_machine.switch_state(move_state)

@@ -6,13 +6,13 @@ class_name MoveState
 # for other, more specific states that DO have transitions!
 
 # How fast do we accelerate?
-@export var acceleration : float = 22
+@export var acceleration : float = 50
 
 # What's our top speed?
-@export var top_speed : float = 6
+@export var top_speed : float = 6.5
 
 # This determines how fast we slow down.
-@export var friction : float = 10
+@export var friction : float = 70
 
 func handle_physics(delta: float) -> void:
 	# Accelerate in input direction.

@@ -8,4 +8,10 @@ extends MoveState
 func handle_physics(delta: float) -> void:
 	super(delta)
 	if !user.is_on_floor():
-		state_machine.swtich_state(fall_state)
+		state_machine.switch_state(fall_state)
+
+func handle_ghost_output(action: String, _payload) -> void:
+	match action:
+		"jump":
+			user.velocity.y += 10
+			state_machine.switch_state(fall_state)

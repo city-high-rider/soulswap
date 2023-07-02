@@ -17,13 +17,12 @@ signal switched_state(new_state: String)
 
 
 # Function for switching states.
-func swtich_state(new_state: State) -> void:
+func switch_state(new_state: State) -> void:
 	if current_state:
 		current_state.exit()
 	current_state = new_state
 	current_state.enter()
 	emit_signal("switched_state", str(current_state))
-	print_debug("Swtiched to " + str(current_state))
 	
 # Start the state machine.
 func init(new_user: Node) -> void:

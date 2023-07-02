@@ -6,8 +6,8 @@ class_name AirState
 # Feel free to use it as a base for other, more specific states that DO have transitions!
 
 # How fast do we fall down?
-@export_range(-10,0,0.1) var gravity : float = -4
+@export_range(-30,0,0.1) var gravity : float = -4
 
 func handle_physics(delta: float) -> void:
-	user.velocity.y = move_toward(user.velocity.y, user.velocity.y + gravity, delta)
+	user.velocity.y += gravity * delta
 	super(delta)
