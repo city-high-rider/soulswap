@@ -29,3 +29,6 @@ func _input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("toggle_info"):
 		emit_signal("emitted_output", "toggle_info", null)
+	
+	if Input.is_action_just_pressed("jump"):
+		emit_signal("emitted_output", "jump", null)
