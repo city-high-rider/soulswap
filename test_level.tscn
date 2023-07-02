@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cuna3v5lattg1"]
+[gd_scene load_steps=11 format=3 uid="uid://cuna3v5lattg1"]
 
 [ext_resource type="PackedScene" uid="uid://bb3ty1kswqumk" path="res://player/player_body.tscn" id="1_0ans4"]
 [ext_resource type="PackedScene" uid="uid://danr4y7gq7sch" path="res://ghosts/player_ghost.tscn" id="2_6lav1"]
@@ -20,6 +20,9 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_toq2o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j1146"]
+size = Vector3(4.16369, 0.933459, 6.26368)
 
 [node name="test_level" type="Node3D"]
 
@@ -80,7 +83,7 @@ ghost = NodePath("DummyGhost")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.730784, 2.29698)
 message = "Press F to possess an enemy that you're looking at."
 
-[node name="CollisionShape3D" parent="PopupArea" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57419, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PopupArea"]
+shape = SubResource("BoxShape3D_j1146")
 
 [editable path="PopupArea"]
