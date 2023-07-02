@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bb3ty1kswqumk"]
+[gd_scene load_steps=15 format=3 uid="uid://bb3ty1kswqumk"]
 
 [ext_resource type="Script" path="res://components/possessable_body.gd" id="1_i6q6v"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_4rdql"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="8_b0uty"]
 [ext_resource type="Script" path="res://player/Label.gd" id="8_m1f34"]
 [ext_resource type="PackedScene" uid="uid://dvlfw4kqxil1t" path="res://components/UI/player_ui.tscn" id="8_sm05t"]
+[ext_resource type="Script" path="res://player/air.gd" id="8_yamsi"]
 [ext_resource type="PackedScene" uid="uid://clsubmog0dnfk" path="res://components/UI/body_information.tscn" id="10_pacg2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ng65v"]
@@ -48,6 +49,9 @@ move_state = NodePath("../move")
 [node name="move" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("7_g40tn")
 idle_state = NodePath("../idle")
+
+[node name="air" type="Node" parent="StateMachine"]
+script = ExtResource("8_yamsi")
 
 [node name="PlayerUI" parent="." node_paths=PackedStringArray("body_info") instance=ExtResource("8_sm05t")]
 body_info = NodePath("BodyInformation")

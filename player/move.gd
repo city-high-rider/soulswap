@@ -1,4 +1,5 @@
 extends State
+class_name MoveState
 
 # this state is for simple moving around.
 
