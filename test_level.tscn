@@ -39,7 +39,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17844, 0)
 size = Vector3(5.24708, 4.09761, 4.13243)
 
 [node name="PossessableBody" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("1_0ans4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.854058, 1.10567, -4.36493)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.854058, 1.45205, -4.36493)
 ghost = NodePath("../PlayerGhost")
 
 [node name="PlayerGhost" parent="." instance=ExtResource("2_6lav1")]

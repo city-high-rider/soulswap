@@ -22,8 +22,8 @@ func handle_physics(delta: float) -> void:
 	user.velocity.x = clamp(user.velocity.x, -top_speed, top_speed)
 	user.velocity.z = clamp(user.velocity.z, -top_speed, top_speed)
 	
-	# apply friction
-	user.velocity = user.velocity.move_toward(Vector3.ZERO, delta * friction)
+	# apply friction. Don't touch the vertical component, though.
+	user.velocity = user.velocity.move_toward(Vector3(0, user.velocity.y, 0), delta * friction)
 	user.move_and_slide()
 	
 

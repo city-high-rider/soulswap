@@ -10,3 +10,4 @@ class_name AirState
 
 func handle_physics(delta: float) -> void:
 	user.velocity.y = move_toward(user.velocity.y, user.velocity.y + gravity, delta)
+	super(delta)
