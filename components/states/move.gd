@@ -1,9 +1,9 @@
 extends State
+class_name MoveState
 
-# this state is for simple moving around.
-
-# what idle state should we go to if we stop moving?
-@export var idle_state : State
+# this state is for simple moving around. It is intended to have only general behaviour
+# for movement, hence it doesn't have any logic for swtiching to other states. Use it as a base
+# for other, more specific states that DO have transitions!
 
 # How fast do we accelerate?
 @export var acceleration : float = 22

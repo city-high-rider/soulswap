@@ -1,23 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://bb3ty1kswqumk"]
+[gd_scene load_steps=14 format=3 uid="uid://bb3ty1kswqumk"]
 
 [ext_resource type="Script" path="res://components/possessable_body.gd" id="1_i6q6v"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_4rdql"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="3_fdlml"]
-[ext_resource type="Script" path="res://components/state_machine.gd" id="4_6reha"]
-[ext_resource type="Script" path="res://player/idle.gd" id="6_xeyt5"]
-[ext_resource type="Script" path="res://player/move.gd" id="7_g40tn"]
-[ext_resource type="Script" path="res://player/Label.gd" id="8_m1f34"]
+[ext_resource type="PackedScene" uid="uid://s4xxvp4y718y" path="res://components/player_head.tscn" id="4_5j8mo"]
+[ext_resource type="Script" path="res://components/states/state_machine.gd" id="5_rv6ym"]
+[ext_resource type="Script" path="res://components/states/move.gd" id="6_dvnfa"]
+[ext_resource type="Script" path="res://components/states/air.gd" id="7_fdxtr"]
+[ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="8_b0uty"]
+[ext_resource type="PackedScene" uid="uid://dvlfw4kqxil1t" path="res://components/UI/player_ui.tscn" id="8_sm05t"]
+[ext_resource type="Script" path="res://components/states/Label.gd" id="10_0b1sr"]
+[ext_resource type="PackedScene" uid="uid://clsubmog0dnfk" path="res://components/UI/body_information.tscn" id="10_pacg2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ng65v"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_oresp"]
 
-[node name="PossessableBody" type="CharacterBody3D" node_paths=PackedStringArray("health", "camera", "ghost", "state_machine")]
+[node name="PossessableBody" type="CharacterBody3D" node_paths=PackedStringArray("health", "head", "ghost", "state_machine", "UI")]
 script = ExtResource("1_i6q6v")
 health = NodePath("HealthComponent")
-camera = NodePath("Camera3D")
+head = NodePath("head")
 ghost = NodePath("")
 state_machine = NodePath("StateMachine")
+UI = NodePath("PlayerUI")
 
 [node name="Hitbox" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
 shape = SubResource("CapsuleShape3D_ng65v")
@@ -30,27 +35,42 @@ mesh = SubResource("CapsuleMesh_oresp")
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_fdlml")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.581344, 0)
-
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
-target_position = Vector3(0, 0, -20)
+[node name="head" parent="." instance=ExtResource("4_5j8mo")]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("4_6reha")
+script = ExtResource("5_rv6ym")
 initial_state = NodePath("move")
 
-[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("move_state")]
-script = ExtResource("6_xeyt5")
-move_state = NodePath("../move")
+[node name="move" type="Node" parent="StateMachine"]
+script = ExtResource("6_dvnfa")
 
-[node name="move" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
-script = ExtResource("7_g40tn")
-idle_state = NodePath("../idle")
+[node name="air" type="Node" parent="StateMachine"]
+script = ExtResource("7_fdxtr")
 
-[node name="Label" type="Label" parent="."]
+[node name="PlayerUI" parent="." node_paths=PackedStringArray("body_info") instance=ExtResource("8_sm05t")]
+body_info = NodePath("BodyInformation")
+
+[node name="HealthBar" parent="PlayerUI" node_paths=PackedStringArray("health") instance=ExtResource("8_b0uty")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = -27.0
+offset_right = 456.0
+offset_bottom = 0.0
+grow_vertical = 0
+health = NodePath("../../HealthComponent")
+
+[node name="Label" type="Label" parent="PlayerUI"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-script = ExtResource("8_m1f34")
+script = ExtResource("10_0b1sr")
 
-[connection signal="switched_state" from="StateMachine" to="Label" method="_on_state_machine_switched_state"]
+[node name="BodyInformation" parent="PlayerUI" instance=ExtResource("10_pacg2")]
+layout_mode = 1
+shell_name = "Husk"
+shell_description = "A weak shell that isn't good at much, other than being a temporary host until you find a better vessel."
+
+[connection signal="switched_state" from="StateMachine" to="PlayerUI/Label" method="_on_state_machine_switched_state"]

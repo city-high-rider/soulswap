@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://4pb4cmdkvqam"]
+
+[ext_resource type="Script" path="res://ghosts/dummy_ghost.gd" id="1_klwco"]
+
+[node name="DummyGhost" type="Node"]
+script = ExtResource("1_klwco")

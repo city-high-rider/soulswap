@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvlfw4kqxil1t"]
+
+[ext_resource type="Script" path="res://components/UI/UI.gd" id="1_81p54"]
+[ext_resource type="PackedScene" uid="uid://xsrqypypmrdb" path="res://components/UI/text_box.tscn" id="2_3lk86"]
+
+[node name="PlayerUI" type="Control" node_paths=PackedStringArray("body_info")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_81p54")
+body_info = NodePath("")
+
+[node name="TextBox" parent="." instance=ExtResource("2_3lk86")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -274.0
+offset_top = -82.0
+offset_right = 272.0
+offset_bottom = -54.0
+grow_vertical = 0
