@@ -4,12 +4,12 @@
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_4rdql"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="3_fdlml"]
 [ext_resource type="PackedScene" uid="uid://s4xxvp4y718y" path="res://components/player_head.tscn" id="4_5j8mo"]
-[ext_resource type="Script" path="res://components/state_machine.gd" id="4_6reha"]
-[ext_resource type="Script" path="res://player/move.gd" id="7_g40tn"]
+[ext_resource type="Script" path="res://components/states/state_machine.gd" id="5_rv6ym"]
+[ext_resource type="Script" path="res://components/states/move.gd" id="6_dvnfa"]
+[ext_resource type="Script" path="res://components/states/air.gd" id="7_fdxtr"]
 [ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="8_b0uty"]
-[ext_resource type="Script" path="res://player/Label.gd" id="8_m1f34"]
 [ext_resource type="PackedScene" uid="uid://dvlfw4kqxil1t" path="res://components/UI/player_ui.tscn" id="8_sm05t"]
-[ext_resource type="Script" path="res://player/air.gd" id="8_yamsi"]
+[ext_resource type="Script" path="res://components/states/Label.gd" id="10_0b1sr"]
 [ext_resource type="PackedScene" uid="uid://clsubmog0dnfk" path="res://components/UI/body_information.tscn" id="10_pacg2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ng65v"]
@@ -38,14 +38,14 @@ script = ExtResource("3_fdlml")
 [node name="head" parent="." instance=ExtResource("4_5j8mo")]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("4_6reha")
+script = ExtResource("5_rv6ym")
 initial_state = NodePath("move")
 
 [node name="move" type="Node" parent="StateMachine"]
-script = ExtResource("7_g40tn")
+script = ExtResource("6_dvnfa")
 
 [node name="air" type="Node" parent="StateMachine"]
-script = ExtResource("8_yamsi")
+script = ExtResource("7_fdxtr")
 
 [node name="PlayerUI" parent="." node_paths=PackedStringArray("body_info") instance=ExtResource("8_sm05t")]
 body_info = NodePath("BodyInformation")
@@ -66,7 +66,7 @@ health = NodePath("../../HealthComponent")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-script = ExtResource("8_m1f34")
+script = ExtResource("10_0b1sr")
 
 [node name="BodyInformation" parent="PlayerUI" instance=ExtResource("10_pacg2")]
 layout_mode = 1
