@@ -24,6 +24,7 @@ func _ready() -> void:
 	state_machine.init(self)
 	if ghost is PlayerGhost:
 		UI.show()
+		head.make_current()
 	else:
 		UI.hide()
 
@@ -59,6 +60,7 @@ func change_ghost(new_ghost: Ghost) -> void:
 	ghost = new_ghost.duplicate()
 	ghost.emitted_output.connect(_on_ghost_emitted_output)
 	add_child(ghost)
+
 	
 	# Show or hide the UI
 	if ghost is PlayerGhost:

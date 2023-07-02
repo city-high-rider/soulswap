@@ -12,7 +12,7 @@ class_name MoveState
 @export var top_speed : float = 6.5
 
 # This determines how fast we slow down.
-@export var friction : float = 70
+@export var friction : float = 20
 
 func handle_physics(delta: float) -> void:
 	# Accelerate in input direction.

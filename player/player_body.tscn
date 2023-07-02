@@ -44,7 +44,6 @@ initial_state = NodePath("move")
 [node name="move" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall_state")]
 script = ExtResource("6_r13xo")
 fall_state = NodePath("../fall")
-friction = 20.0
 
 [node name="fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("move_state")]
 script = ExtResource("7_wkdio")

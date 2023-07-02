@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cviymy0k6qspe"]
+
+[ext_resource type="Script" path="res://ghosts/roller_ai.gd" id="1_j4dip"]
+
+[node name="RollerGhost" type="Node"]
+script = ExtResource("1_j4dip")
