@@ -40,6 +40,7 @@ func _on_ghost_emitted_output(action: String, payload) -> void:
 				queue_free()
 		"toggle_info":
 			UI.toggle_body_info()
+			
 
 func _physics_process(delta: float) -> void:
 	state_machine.handle_physics(delta)
