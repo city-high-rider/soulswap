@@ -11,5 +11,5 @@ class_name AirState
 
 func handle_physics(delta: float) -> void:
 	user.velocity.y = move_toward(user.velocity.y, user.velocity.y + gravity, delta)
-	if user.is_on_ground():
+	if user.is_on_floor():
 		state_machine.switch_state(ground_state)
