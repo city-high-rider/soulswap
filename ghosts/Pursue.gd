@@ -11,10 +11,8 @@ func handle_physics(delta: float) -> void:
 	var current_location : Vector3 = user.global_transform.origin
 	var next_location : Vector3 = nav_agent.get_next_path_position()
 	# Where we're going to go is our velocity times the basis. So we need to multiply by inverse basis when we are converting to inputs.
-	var next_velocity : Vector3 = (next_location - current_location) * user.transform.basis.inverse()
+	var next_velocity : Vector3 = user.to_local((next_location))
 	user.input_direction = Vector2(next_velocity.x, -next_velocity.z).normalized()
-	
-	
 
 func _on_target_update_timer_timeout():
 	nav_agent.set_target_position(target.global_transform.origin)
