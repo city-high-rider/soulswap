@@ -12,8 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://clsubmog0dnfk" path="res://components/UI/body_information.tscn" id="7_yux01"]
 [ext_resource type="Script" path="res://components/states/Label.gd" id="11_2adfa"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_tn2w1"]
-height = 1.05027
+[sub_resource type="SphereShape3D" id="SphereShape3D_0uvj3"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_wy4oy"]
 
@@ -25,7 +24,7 @@ state_machine = NodePath("StateMachine")
 UI = NodePath("PlayerUI")
 
 [node name="Hitbox" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
-shape = SubResource("CylinderShape3D_tn2w1")
+shape = SubResource("SphereShape3D_0uvj3")
 script = ExtResource("2_dg4nn")
 health_component = NodePath("../HealthComponent")
 

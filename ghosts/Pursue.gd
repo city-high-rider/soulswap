@@ -14,5 +14,6 @@ func handle_physics(_delta: float) -> void:
 	var next_velocity : Vector3 = (next_location - current_location) * user.global_transform.basis.inverse()
 	user.input_direction = Vector2(-next_velocity.x, next_velocity.z).normalized()
 
+
 func _on_target_update_timer_timeout():
 	nav_agent.set_target_position(target.global_transform.origin)
