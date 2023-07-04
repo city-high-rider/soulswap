@@ -45,7 +45,7 @@ initial_state = NodePath("move")
 script = ExtResource("6_0p7xq")
 fall_state = NodePath("../fall")
 acceleration = 40.0
-top_speed = 10.0
+top_speed = 7.0
 friction = 10.0
 
 [node name="fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("move_state")]

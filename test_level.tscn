@@ -54,11 +54,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17844, -6.44033)
 size = Vector3(14.4915, 4.09761, 0.458561)
 
 [node name="wall2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 7.17844, 6.55967)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.17844, 6.55967)
 size = Vector3(6, 4.09761, 0.458561)
 
 [node name="wall5" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7.17844, 6.55967)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.17844, 6.55967)
 size = Vector3(6, 4.09761, 0.458561)
 
 [node name="wall7" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
@@ -66,7 +66,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12913, 2.17844, 25.5597)
 size = Vector3(14.1153, 4.09761, 0.458561)
 
 [node name="wall6" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.76555, 5.17472, 6.55967)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015959, 2.83621, 6.55967)
 size = Vector3(2, 2.72386, 0.458561)
 
 [node name="wall3" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
@@ -103,13 +103,13 @@ operation = 2
 size = Vector3(4.65079, 15.7742, 3.74762)
 
 [node name="Husk" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("1_0ans4")]
-transform = Transform3D(0.66769, 0, 0.74444, 0, 1, 0, -0.74444, 0, 0.66769, 4.11029, 1.29377, 22.0862)
+transform = Transform3D(0.66769, 0, 0.74444, 0, 1, 0, -0.74444, 0, 0.66769, 4.11029, 1.29377, 3.62496)
 ghost = NodePath("PlayerGhost")
 
 [node name="PlayerGhost" parent="Husk" instance=ExtResource("2_6lav1")]
 
 [node name="Roller" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("4_kohc7")]
-transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, -4.38906, 1.17479, 16.4424)
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -4.38906, 1.17479, 3.98114)
 ghost = NodePath("RollerGhost")
 
 [node name="RollerGhost" parent="Roller" instance=ExtResource("2_cw06x")]

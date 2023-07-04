@@ -8,11 +8,18 @@ extends State
 @export var target : Shell
 
 func handle_physics(delta: float) -> void:
-	var current_location : Vector3 = user.global_transform.origin
 	var next_location : Vector3 = nav_agent.get_next_path_position()
-	# Where we're going to go is our velocity times the basis. So we need to multiply by inverse basis when we are converting to inputs.
-	var next_velocity : Vector3 = user.to_local((next_location))
+	# that function gives us a path position in global space, but we need it in local space.
+	var next_velocity : Vector3 = user.to_local(next_location)
 	user.input_direction = Vector2(next_velocity.x, -next_velocity.z).normalized()
+	
+	# Let's look at the player while we're at it.
+	look_towards(target.global_transform.origin, delta)
 
 func _on_target_update_timer_timeout():
 	nav_agent.set_target_position(target.global_transform.origin)
+	
+func look_towards(pos: Vector3, delta: float) -> void:
+	var local_pos : Vector3 = user.to_local(pos)
+	var y_angle : float = Vector3.FORWARD.angle_to(local_pos * Vector3(1, 0, 1)) * sign(local_pos.x)
+	user.mouse_direction = Vector2(sign(y_angle) * min(delta * rad_to_deg(TAU), abs(rad_to_deg(y_angle))),0)
