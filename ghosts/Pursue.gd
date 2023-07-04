@@ -7,7 +7,17 @@ extends State
 # What's our target? Hard coded for now
 @export var target : Shell
 
+# How often should we request a new path?
+@export var new_path_poll_rate_seconds : float = 0.4
+
+var time_until_new_path : float = new_path_poll_rate_seconds
+
 func handle_physics(delta: float) -> void:
+	time_until_new_path -= delta
+	if time_until_new_path <= 0 and target:
+		time_until_new_path = new_path_poll_rate_seconds
+		nav_agent.set_target_position(target.global_transform.origin)
+		
 	if target:
 		var next_location : Vector3 = nav_agent.get_next_path_position()
 		user.input_direction = input_move_towards(next_location)
@@ -17,11 +27,6 @@ func handle_physics(delta: float) -> void:
 		user.input_direction = Vector2.ZERO
 		user.mouse_direction = Vector2.ZERO
 	
-
-func _on_target_update_timer_timeout():
-	if !target:
-		return
-	nav_agent.set_target_position(target.global_transform.origin)
 	
 func look_towards(pos: Vector3, delta: float) -> void:
 	var local_pos : Vector3 = user.to_local(pos)

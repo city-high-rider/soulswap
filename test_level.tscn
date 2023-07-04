@@ -114,6 +114,9 @@ ghost = NodePath("RollerGhost")
 
 [node name="RollerGhost" parent="Roller" instance=ExtResource("2_cw06x")]
 
+[node name="Pursue" parent="Roller/RollerGhost/StateMachine" index="0" node_paths=PackedStringArray("target")]
+target = NodePath("../../../../Husk")
+
 [node name="PopupArea" parent="." instance=ExtResource("5_rnba8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.730784, 2.29698)
 message = "Press F to possess an enemy that you're looking at."
