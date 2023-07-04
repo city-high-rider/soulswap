@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cuna3v5lattg1"]
+[gd_scene load_steps=12 format=3 uid="uid://cuna3v5lattg1"]
 
 [ext_resource type="PackedScene" uid="uid://bb3ty1kswqumk" path="res://shells/player_body.tscn" id="1_0ans4"]
 [ext_resource type="PackedScene" uid="uid://danr4y7gq7sch" path="res://ghosts/player_ghost.tscn" id="2_6lav1"]
 [ext_resource type="PackedScene" uid="uid://cviymy0k6qspe" path="res://ghosts/roller_ghost.tscn" id="2_cw06x"]
 [ext_resource type="PackedScene" uid="uid://djmr5rbqoq33n" path="res://shells/roller_body.tscn" id="4_kohc7"]
 [ext_resource type="PackedScene" uid="uid://cht1nvmsvv4nx" path="res://interactive/popup_area.tscn" id="5_rnba8"]
+[ext_resource type="PackedScene" uid="uid://bqsvtustc0gp6" path="res://ghosts/roller_ghost_strafe.tscn" id="5_yqtay"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obdej"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -110,9 +111,11 @@ ghost = NodePath("PlayerGhost")
 
 [node name="Roller" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("4_kohc7")]
 transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -4.38906, 1.17479, 3.98114)
-ghost = NodePath("RollerGhost")
+ghost = NodePath("RollerGhost2")
 
 [node name="RollerGhost" parent="Roller" instance=ExtResource("2_cw06x")]
+
+[node name="RollerGhost2" parent="Roller" instance=ExtResource("5_yqtay")]
 
 [node name="PopupArea" parent="." instance=ExtResource("5_rnba8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.730784, 2.29698)

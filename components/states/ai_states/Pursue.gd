@@ -1,4 +1,5 @@
 extends AiState
+class_name AiPursuitState
 # This is a state that just makes the enemy beeline towards the player.
 
 # Link to the navigation agent that we are using.
