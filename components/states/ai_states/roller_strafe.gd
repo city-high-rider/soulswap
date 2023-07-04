@@ -28,7 +28,7 @@ func handle_physics(delta: float) -> void:
 		time_until_change_direction = change_direction_time
 		current_strafe_direction *= -1
 		
-	user.mouse_direction = look_towards_y(target.global_transform.origin, rad_to_deg(PI/2), delta)
+	user.mouse_direction = look_towards_y(target.global_transform.origin, 3* PI/2, delta)
 	user.input_direction = Vector2(current_strafe_direction, 0)
 
 	if user.global_transform.origin.distance_to(target.global_transform.origin) > break_strafe_distance:

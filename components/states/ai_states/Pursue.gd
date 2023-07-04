@@ -23,7 +23,7 @@ func handle_physics(delta: float) -> void:
 		var next_location : Vector3 = nav_agent.get_next_path_position()
 		user.input_direction = input_move_towards(next_location)
 		# Let's look at the player while we're at it.
-		user.mouse_direction = look_towards_y(target.global_transform.origin, rad_to_deg(TAU), delta)
+		user.mouse_direction = look_towards_y(target.global_transform.origin, PI, delta)
 	else:
 		user.input_direction = Vector2.ZERO
 		user.mouse_direction = Vector2.ZERO

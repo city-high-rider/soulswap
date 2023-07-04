@@ -7,10 +7,11 @@ class_name AiState
 
 # This function takes a vector3 in global space amd returns mouse inputs that will move the 
 # body towards facing this point on the y-axis by some speed.
+# this function works in radians, by the way.
 func look_towards_y(pos: Vector3, rotation_speed: float, delta: float) -> Vector2:
 	var local_pos : Vector3 = user.to_local(pos)
 	var y_angle : float = Vector3.FORWARD.angle_to(local_pos * Vector3(1, 0, 1)) * sign(local_pos.x)
-	return Vector2(sign(y_angle) * min(delta * rotation_speed, abs(rad_to_deg(y_angle))),0)
+	return Vector2(sign(y_angle) * min(delta * rotation_speed, abs(y_angle)),0)
 
 
 # This function takes a position in global space, and tells us which directional inputs will move

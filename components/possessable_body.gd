@@ -46,8 +46,8 @@ func _on_ghost_emitted_output(action: String, payload) -> void:
 func _physics_process(delta: float) -> void:
 	state_machine.handle_physics(delta)
 	# Look around using the ghost's mouse direction.
-	rotate_y(deg_to_rad(-ghost.mouse_direction.x))
-	head.rotate_x(deg_to_rad(-ghost.mouse_direction.y))
+	rotate_y(-ghost.mouse_direction.x)
+	head.rotate_x(-ghost.mouse_direction.y)
 	head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 
 
