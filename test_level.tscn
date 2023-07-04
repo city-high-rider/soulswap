@@ -70,7 +70,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015959, 2.83621, 6.55967)
 size = Vector3(2, 2.72386, 0.458561)
 
 [node name="wall3" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 2.17844, 9.7473)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.26658, 2.17844, 9.7473)
 size = Vector3(32.6723, 4.09761, 0.458561)
 
 [node name="wall4" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
@@ -113,9 +113,6 @@ transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 
 ghost = NodePath("RollerGhost")
 
 [node name="RollerGhost" parent="Roller" instance=ExtResource("2_cw06x")]
-
-[node name="Pursue" parent="Roller/RollerGhost/StateMachine" index="0" node_paths=PackedStringArray("target")]
-target = NodePath("../../../../Husk")
 
 [node name="PopupArea" parent="." instance=ExtResource("5_rnba8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.730784, 2.29698)
