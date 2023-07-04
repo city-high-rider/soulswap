@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://cuna3v5lattg1"]
 
-[ext_resource type="PackedScene" uid="uid://bb3ty1kswqumk" path="res://player/player_body.tscn" id="1_0ans4"]
+[ext_resource type="PackedScene" uid="uid://bb3ty1kswqumk" path="res://shells/player_body.tscn" id="1_0ans4"]
 [ext_resource type="PackedScene" uid="uid://danr4y7gq7sch" path="res://ghosts/player_ghost.tscn" id="2_6lav1"]
 [ext_resource type="PackedScene" uid="uid://cviymy0k6qspe" path="res://ghosts/roller_ghost.tscn" id="2_cw06x"]
-[ext_resource type="PackedScene" uid="uid://djmr5rbqoq33n" path="res://roller_body.tscn" id="4_kohc7"]
+[ext_resource type="PackedScene" uid="uid://djmr5rbqoq33n" path="res://shells/roller_body.tscn" id="4_kohc7"]
 [ext_resource type="PackedScene" uid="uid://cht1nvmsvv4nx" path="res://interactive/popup_area.tscn" id="5_rnba8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obdej"]

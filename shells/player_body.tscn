@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://components/health_component.gd" id="3_fdlml"]
 [ext_resource type="PackedScene" uid="uid://s4xxvp4y718y" path="res://components/player_head.tscn" id="4_5j8mo"]
 [ext_resource type="Script" path="res://components/states/state_machine.gd" id="5_rv6ym"]
-[ext_resource type="Script" path="res://player/ground_move.gd" id="6_r13xo"]
-[ext_resource type="Script" path="res://player/fall.gd" id="7_wkdio"]
+[ext_resource type="Script" path="res://components/states/ground_move.gd" id="6_hq8e1"]
+[ext_resource type="Script" path="res://components/states/fall.gd" id="7_8j2pb"]
 [ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="8_b0uty"]
 [ext_resource type="PackedScene" uid="uid://dvlfw4kqxil1t" path="res://components/UI/player_ui.tscn" id="8_sm05t"]
 [ext_resource type="Script" path="res://components/states/Label.gd" id="10_0b1sr"]
@@ -42,11 +42,11 @@ script = ExtResource("5_rv6ym")
 initial_state = NodePath("move")
 
 [node name="move" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall_state")]
-script = ExtResource("6_r13xo")
+script = ExtResource("6_hq8e1")
 fall_state = NodePath("../fall")
 
 [node name="fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("move_state")]
-script = ExtResource("7_wkdio")
+script = ExtResource("7_8j2pb")
 move_state = NodePath("../move")
 gravity = -18.0
 acceleration = 10.0

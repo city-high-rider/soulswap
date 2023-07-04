@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ghosts/roller_ai.gd" id="1_j4dip"]
 [ext_resource type="Script" path="res://components/states/state_machine.gd" id="2_1sc4g"]
-[ext_resource type="Script" path="res://ghosts/Pursue.gd" id="3_sj3wq"]
+[ext_resource type="Script" path="res://components/states/ai_states/Pursue.gd" id="3_x1wha"]
 
 [node name="RollerGhost" type="Node3D" node_paths=PackedStringArray("state_machine")]
 script = ExtResource("1_j4dip")
@@ -15,5 +15,5 @@ script = ExtResource("2_1sc4g")
 initial_state = NodePath("Pursue")
 
 [node name="Pursue" type="Node" parent="StateMachine" node_paths=PackedStringArray("nav_agent")]
-script = ExtResource("3_sj3wq")
+script = ExtResource("3_x1wha")
 nav_agent = NodePath("../../NavigationAgent3D")
