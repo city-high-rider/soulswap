@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj0q80a3l2fjp"]
+
+[sub_resource type="GDScript" id="GDScript_2jgn6"]
+script/source = "extends Node3D
+class_name CombatEncounter
+
+# This class is for a wave-based combat encounter.
+
+# Which area triggers the start of this encounter?
+@export var start_trigger : Area3D
+
+# Which waves does this combat encounter have? they will be spawned top-down.
+var waves : Array[CombatWave] = get_children().filter(func(child): true if child is CombatWave else false)
+"
+
+[node name="CombatEncounter" type="Node3D"]
+script = SubResource("GDScript_2jgn6")
