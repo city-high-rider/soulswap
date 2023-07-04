@@ -23,6 +23,7 @@ func _ready() -> void:
 	ghost.emitted_output.connect(_on_ghost_emitted_output)
 	state_machine.init(self)
 	if ghost is PlayerGhost:
+		PlayerInfo.current_player_shell = self
 		UI.show()
 		head.make_current()
 	else:
@@ -61,16 +62,17 @@ func change_ghost(new_ghost: Ghost) -> void:
 	ghost = new_ghost.duplicate()
 	ghost.emitted_output.connect(_on_ghost_emitted_output)
 	add_child(ghost)
-
 	
 	# Show or hide the UI
 	if ghost is PlayerGhost:
+		PlayerInfo.current_player_shell = self
 		UI.show()
+		# Set our camera as the current one.
+		head.make_current()
 	else:
 		UI.hide()
 	
-	# Set our camera as the current one.
-	head.make_current()
+
 	
 	print_tree_pretty()
 	print_debug(ghost)

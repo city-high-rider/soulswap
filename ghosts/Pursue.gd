@@ -4,8 +4,8 @@ extends State
 # Link to the navigation agent that we are using.
 @export var nav_agent : NavigationAgent3D
 
-# What's our target? Hard coded for now
-@export var target : Shell
+# What's our target?
+var target : Shell
 
 # How often should we request a new path?
 @export var new_path_poll_rate_seconds : float = 0.4
@@ -26,6 +26,7 @@ func handle_physics(delta: float) -> void:
 	else:
 		user.input_direction = Vector2.ZERO
 		user.mouse_direction = Vector2.ZERO
+		target = PlayerInfo.current_player_shell
 	
 	
 func look_towards(pos: Vector3, delta: float) -> void:
