@@ -122,5 +122,4 @@ message = "Press F to possess an enemy that you're looking at."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.219558, -0.030674, -0.134823)
 shape = SubResource("BoxShape3D_j1146")
 
-[editable path="Roller/RollerGhost"]
 [editable path="PopupArea"]
