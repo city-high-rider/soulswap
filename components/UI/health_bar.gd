@@ -10,9 +10,12 @@ class_name HealthBar
 
 func _ready() -> void:
 	calibrate()
+	health.health_changed.connect(_on_health_changed)
 
 # Set the bar's max value and value to match the component.
 func calibrate() -> void:
 	bar.max_value = health.max_health
 	bar.value = health.current_health
 	
+func _on_health_changed(new_health) -> void:
+	bar.value = new_health
