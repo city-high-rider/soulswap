@@ -1,7 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdqf5sm42j8vl"]
+[gd_scene load_steps=15 format=3 uid="uid://bdqf5sm42j8vl"]
 
 [ext_resource type="Texture2D" uid="uid://cqcakiodhwri1" path="res://addons/kenney_particle_pack/star_06.png" id="1_1u4a3"]
 [ext_resource type="Script" path="res://components/body_parts/machine_gun.gd" id="1_kqkdi"]
+[ext_resource type="Script" path="res://components/hitbox.gd" id="3_uihti"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="4_eguk2"]
+[ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="5_if8i7"]
 
 [sub_resource type="Curve" id="Curve_upc4u"]
 _data = [Vector2(0, 0.854545), 0.0, 0.0, 0, 0, Vector2(0.248804, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -46,6 +49,9 @@ bottom_radius = 0.06
 height = 0.2
 radial_segments = 6
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_vfhq3"]
+size = Vector3(0.208968, 0.313255, 0.634438)
+
 [node name="MachineGun" type="Node3D"]
 script = ExtResource("1_kqkdi")
 
@@ -82,3 +88,56 @@ amount = 25
 lifetime = 2.5
 process_material = SubResource("ParticleProcessMaterial_328js")
 draw_pass_1 = SubResource("CylinderMesh_15cbd")
+
+[node name="HitboxArea" type="Area3D" parent="."]
+
+[node name="Hitbox" type="CollisionShape3D" parent="HitboxArea" node_paths=PackedStringArray("health_component")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0978166)
+shape = SubResource("BoxShape3D_vfhq3")
+script = ExtResource("3_uihti")
+health_component = NodePath("../HealthComponent")
+
+[node name="HealthComponent" type="Node" parent="HitboxArea"]
+script = ExtResource("4_eguk2")
+max_health = 10
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" parent="UI" node_paths=PackedStringArray("health") instance=ExtResource("5_if8i7")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -456.0
+offset_top = -40.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+health = NodePath("../../HitboxArea/HealthComponent")
+
+[node name="AmmoCount" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -223.0
+offset_top = -75.0
+offset_right = -183.0
+offset_bottom = -52.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Ammo:"
+horizontal_alignment = 1
+
+[connection signal="died" from="HitboxArea/HealthComponent" to="." method="_on_health_component_died"]
