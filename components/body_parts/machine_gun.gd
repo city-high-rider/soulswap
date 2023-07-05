@@ -27,6 +27,9 @@ var time_until_next_poll : float = hit_poll_period_s
 # Which hitscan manager should we call to?
 @export var hitscan_manager : HitscanManager
 
+# Which tracers should we use?
+@export var tracer_scene : PackedScene
+
 var firing_time_left : float = firing_time_sec
 
 var is_broken : bool = false
@@ -46,7 +49,7 @@ func _physics_process(delta: float) -> void:
 		stop_shooting()
 	
 	if time_until_next_poll <= 0:
-		hitscan_manager.check_hit(hit_damage)
+		hitscan_manager.check_hit(hit_damage, tracer_scene, barrel_point.global_transform.origin)
 		
 # Start the shooting effects
 func start_shooting() -> void:

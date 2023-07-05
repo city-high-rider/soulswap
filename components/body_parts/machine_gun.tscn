@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://bdqf5sm42j8vl"]
+[gd_scene load_steps=16 format=3 uid="uid://bdqf5sm42j8vl"]
 
 [ext_resource type="Texture2D" uid="uid://cqcakiodhwri1" path="res://addons/kenney_particle_pack/star_06.png" id="1_1u4a3"]
 [ext_resource type="Script" path="res://components/body_parts/machine_gun.gd" id="1_kqkdi"]
+[ext_resource type="PackedScene" uid="uid://d3vfx22o0he3a" path="res://components/bullet_tracer.tscn" id="2_xwwb5"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="3_uihti"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="4_eguk2"]
 [ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="5_if8i7"]
@@ -54,6 +55,7 @@ size = Vector3(0.21985, 0.432274, 0.750673)
 
 [node name="MachineGun" type="Node3D"]
 script = ExtResource("1_kqkdi")
+tracer_scene = ExtResource("2_xwwb5")
 
 [node name="Mesh" type="CSGCombiner3D" parent="."]
 
@@ -91,11 +93,13 @@ draw_pass_1 = SubResource("CylinderMesh_15cbd")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="HealthBar" parent="UI" node_paths=PackedStringArray("health") instance=ExtResource("5_if8i7")]
 layout_mode = 1
