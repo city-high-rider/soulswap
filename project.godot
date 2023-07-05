@@ -64,4 +64,6 @@ primary_action={
 
 [layer_names]
 
+3d_physics/layer_1="World"
 3d_physics/layer_2="Hitboxes"
+3d_physics/layer_3="Shells"

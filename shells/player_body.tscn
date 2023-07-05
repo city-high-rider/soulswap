@@ -21,6 +21,8 @@ height = 2.22502
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_oresp"]
 
 [node name="PossessableBody" type="CharacterBody3D" node_paths=PackedStringArray("health", "head", "ghost", "state_machine", "UI")]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_i6q6v")
 health = NodePath("HealthComponent")
 head = NodePath("head")
