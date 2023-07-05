@@ -18,6 +18,8 @@ func _process(_delta: float) -> void:
 		input_direction = move_input
 	else:
 		input_direction = Vector2.ZERO
+		
+	primary_depressed = Input.is_action_pressed("primary_action")
 	
 	
 func _input(event: InputEvent) -> void:

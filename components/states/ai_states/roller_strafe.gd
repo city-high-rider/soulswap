@@ -23,6 +23,8 @@ func enter() -> void:
 	target = PlayerInfo.current_player_shell
 
 func handle_physics(delta: float) -> void:
+	if !is_instance_valid(target):
+		target = PlayerInfo.current_player_shell
 	time_until_change_direction -= delta
 	if time_until_change_direction <= 0:
 		time_until_change_direction = change_direction_time

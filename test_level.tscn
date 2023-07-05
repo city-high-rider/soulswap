@@ -110,6 +110,7 @@ transform = Transform3D(0.66769, 0, 0.74444, 0, 1, 0, -0.74444, 0, 0.66769, 4.11
 ghost = NodePath("PlayerGhost")
 
 [node name="PlayerGhost" parent="Husk" instance=ExtResource("2_6lav1")]
+mouse_sensitivity = null
 
 [node name="Roller" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("4_kohc7")]
 transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -4.38906, 1.17479, 3.98114)

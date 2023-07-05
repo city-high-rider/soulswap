@@ -20,3 +20,6 @@ var input_direction : Vector2 = Vector2.ZERO
 # Which direction are we moving the mouse in? This can be (and is, in the player controller) multiplied
 # by some sensitivity.
 var mouse_direction : Vector2 = Vector2.ZERO
+
+# Are we holding down the primary action? Usually this is firing bound to mouse one.
+var primary_depressed : bool = false

@@ -11,7 +11,7 @@ extends Node3D
 @onready var barrel_point : Marker3D = $BarrelPoint
 
 # Where should we show the player the current ammo?
-@onready var ammo_counter : Label3D = $UI/AmmoCount
+@onready var ammo_counter : Label = $UI/AmmoCount
 
 # Since this is functionally like a laser gun, instead of measuring how many
 # bullets we have left, we mesure how much longer we can fire the gun.
