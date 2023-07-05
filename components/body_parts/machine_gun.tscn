@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bdqf5sm42j8vl"]
+
+[node name="MachineGun" type="Node3D"]
+
+[node name="Mesh" type="CSGCombiner3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Mesh"]
+size = Vector3(0.158057, 0.308963, 0.418144)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0641855, -0.209912)
+radius = 0.0560575
+height = 0.428407
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.0772779, -0.209912)
+radius = 0.0560575
+height = 0.428407

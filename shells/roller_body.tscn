@@ -36,6 +36,7 @@ mesh = SubResource("SphereMesh_wy4oy")
 
 [node name="Camera3D" parent="." instance=ExtResource("4_cgkt8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00973982, 0)
+current = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_58uat")
