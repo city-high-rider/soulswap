@@ -19,7 +19,7 @@ func handle_physics(delta: float) -> void:
 		time_until_new_path = new_path_poll_rate_seconds
 		nav_agent.set_target_position(target.global_transform.origin)
 		
-	if target:
+	if is_instance_valid(target):
 		var next_location : Vector3 = nav_agent.get_next_path_position()
 		user.input_direction = input_move_towards(next_location)
 		# Let's look at the player while we're at it.

@@ -36,6 +36,7 @@ func _on_ghost_emitted_output(action: String, payload) -> void:
 		"possess":
 			if head.look_ray.get_collider() is Shell:
 				var new_host : Shell = head.look_ray.get_collider()
+				PlayerInfo.current_player_shell = new_host
 				set_physics_process(false)
 				new_host.call_deferred("change_ghost", ghost)
 				queue_free()
