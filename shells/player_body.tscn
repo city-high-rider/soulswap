@@ -20,7 +20,7 @@ height = 2.22502
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_oresp"]
 
-[node name="PossessableBody" type="CharacterBody3D" node_paths=PackedStringArray("health", "head", "ghost", "state_machine", "UI")]
+[node name="PossessableBody" type="CharacterBody3D" node_paths=PackedStringArray("health", "head", "ghost", "state_machine")]
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_i6q6v")
@@ -28,7 +28,6 @@ health = NodePath("HealthComponent")
 head = NodePath("head")
 ghost = NodePath("")
 state_machine = NodePath("StateMachine")
-UI = NodePath("PlayerUI")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_vsk44")
@@ -62,8 +61,9 @@ gravity = -18.0
 acceleration = 10.0
 friction = 3.0
 
-[node name="PlayerUI" parent="." node_paths=PackedStringArray("body_info") instance=ExtResource("8_sm05t")]
+[node name="PlayerUI" parent="." node_paths=PackedStringArray("body_info", "parent_shell") instance=ExtResource("8_sm05t")]
 body_info = NodePath("BodyInformation")
+parent_shell = NodePath("..")
 
 [node name="HealthBar" parent="PlayerUI" node_paths=PackedStringArray("health") instance=ExtResource("8_b0uty")]
 layout_mode = 1

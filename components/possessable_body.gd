@@ -16,18 +16,16 @@ class_name Shell
 # Which state machine is this body using? It will govern how our body moves, falls, etc.
 @export var state_machine : StateMachine
 
-# What's the UI node? We hide this when the body is not being used by a player.
-@export var UI : PlayerUI
+# We cal this signal when the body has been possessed by a player ghost. That way UI elements can show themselves etc.
+signal player_possessed
 
 func _ready() -> void:
 	ghost.emitted_output.connect(_on_ghost_emitted_output)
 	state_machine.init(self)
 	if ghost is PlayerGhost:
 		PlayerInfo.current_player_shell = self
-		UI.show()
+		emit_signal("player_possessed")
 		head.make_current()
-	else:
-		UI.hide()
 
 # If only we had ADTs like in Haskell or Elm...
 func _on_ghost_emitted_output(action: String, payload) -> void:
@@ -40,8 +38,6 @@ func _on_ghost_emitted_output(action: String, payload) -> void:
 				set_physics_process(false)
 				new_host.call_deferred("change_ghost", ghost)
 				queue_free()
-		"toggle_info":
-			UI.toggle_body_info()
 			
 
 func _physics_process(delta: float) -> void:
@@ -67,11 +63,9 @@ func change_ghost(new_ghost: Ghost) -> void:
 	# Show or hide the UI
 	if ghost is PlayerGhost:
 		PlayerInfo.current_player_shell = self
-		UI.show()
+		emit_signal("player_possessed")
 		# Set our camera as the current one.
 		head.make_current()
-	else:
-		UI.hide()
 	
 
 	
