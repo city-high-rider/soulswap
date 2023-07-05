@@ -5,8 +5,12 @@
 
 [node name="CharacterBody3D" instance=ExtResource("1_0ff50")]
 
-[node name="MachineGun" parent="Camera3D" index="1" instance=ExtResource("2_4hpnr")]
+[node name="MachineGun" parent="Camera3D" index="1" node_paths=PackedStringArray("hitscan_manager") instance=ExtResource("2_4hpnr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.531638, 0, 0)
+hitscan_manager = NodePath("../HitscanManager")
 
-[node name="MachineGun2" parent="Camera3D" index="2" instance=ExtResource("2_4hpnr")]
+[node name="MachineGun2" parent="Camera3D" index="2" node_paths=PackedStringArray("hitscan_manager") instance=ExtResource("2_4hpnr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.540012, 0, 0)
+hitscan_manager = NodePath("../HitscanManager")
+
+[editable path="Camera3D"]

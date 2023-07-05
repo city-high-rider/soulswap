@@ -17,4 +17,6 @@ func check_hit(damage: float) -> bool:
 	
 	if collider is Hitbox:
 		collider.take_damage(damage)
+		return true
+		
 	return false
