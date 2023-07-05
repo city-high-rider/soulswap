@@ -6,13 +6,13 @@ class_name MoveState
 # for other, more specific states that DO have transitions!
 
 # How fast do we accelerate?
-@export var acceleration : float = 22
+@export var acceleration : float = 50
 
 # What's our top speed?
-@export var top_speed : float = 6
+@export var top_speed : float = 6.5
 
 # This determines how fast we slow down.
-@export var friction : float = 10
+@export var friction : float = 20
 
 func handle_physics(delta: float) -> void:
 	# Accelerate in input direction.
@@ -22,8 +22,8 @@ func handle_physics(delta: float) -> void:
 	user.velocity.x = clamp(user.velocity.x, -top_speed, top_speed)
 	user.velocity.z = clamp(user.velocity.z, -top_speed, top_speed)
 	
-	# apply friction
-	user.velocity = user.velocity.move_toward(Vector3.ZERO, delta * friction)
+	# apply friction. Don't touch the vertical component, though.
+	user.velocity = user.velocity.move_toward(Vector3(0, user.velocity.y, 0), delta * friction)
 	user.move_and_slide()
 	
 

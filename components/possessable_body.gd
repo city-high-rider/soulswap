@@ -23,7 +23,9 @@ func _ready() -> void:
 	ghost.emitted_output.connect(_on_ghost_emitted_output)
 	state_machine.init(self)
 	if ghost is PlayerGhost:
+		PlayerInfo.current_player_shell = self
 		UI.show()
+		head.make_current()
 	else:
 		UI.hide()
 
@@ -34,17 +36,19 @@ func _on_ghost_emitted_output(action: String, payload) -> void:
 		"possess":
 			if head.look_ray.get_collider() is Shell:
 				var new_host : Shell = head.look_ray.get_collider()
+				PlayerInfo.current_player_shell = new_host
 				set_physics_process(false)
 				new_host.call_deferred("change_ghost", ghost)
 				queue_free()
 		"toggle_info":
 			UI.toggle_body_info()
+			
 
 func _physics_process(delta: float) -> void:
 	state_machine.handle_physics(delta)
 	# Look around using the ghost's mouse direction.
-	rotate_y(deg_to_rad(-ghost.mouse_direction.x))
-	head.rotate_x(deg_to_rad(-ghost.mouse_direction.y))
+	rotate_y(-ghost.mouse_direction.x)
+	head.rotate_x(-ghost.mouse_direction.y)
 	head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 
 
@@ -62,12 +66,14 @@ func change_ghost(new_ghost: Ghost) -> void:
 	
 	# Show or hide the UI
 	if ghost is PlayerGhost:
+		PlayerInfo.current_player_shell = self
 		UI.show()
+		# Set our camera as the current one.
+		head.make_current()
 	else:
 		UI.hide()
 	
-	# Set our camera as the current one.
-	head.make_current()
+
 	
 	print_tree_pretty()
 	print_debug(ghost)

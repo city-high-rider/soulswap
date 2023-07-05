@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqsvtustc0gp6"]
+
+[ext_resource type="Script" path="res://ghosts/roller_ai.gd" id="1_t5bcj"]
+[ext_resource type="Script" path="res://components/states/state_machine.gd" id="2_sg0ts"]
+[ext_resource type="Script" path="res://components/states/ai_states/roller_strafe_pursue.gd" id="3_68i45"]
+[ext_resource type="Script" path="res://components/states/ai_states/roller_strafe.gd" id="4_eq8wl"]
+
+[node name="RollerGhost" type="Node3D" node_paths=PackedStringArray("state_machine")]
+script = ExtResource("1_t5bcj")
+state_machine = NodePath("StateMachine")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_sg0ts")
+initial_state = NodePath("Pursue")
+
+[node name="Pursue" type="Node" parent="StateMachine" node_paths=PackedStringArray("strafe_state", "nav_agent")]
+script = ExtResource("3_68i45")
+strafe_state = NodePath("../Strafe")
+nav_agent = NodePath("../../NavigationAgent3D")
+
+[node name="Strafe" type="Node" parent="StateMachine" node_paths=PackedStringArray("pursuit_state")]
+script = ExtResource("4_eq8wl")
+pursuit_state = NodePath("../Pursue")
+
+[connection signal="target_reached" from="NavigationAgent3D" to="StateMachine/Pursue" method="_on_navigation_agent_3d_target_reached"]

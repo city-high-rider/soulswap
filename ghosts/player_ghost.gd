@@ -22,7 +22,7 @@ func _process(_delta: float) -> void:
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		mouse_direction = Vector2(event.relative.x, event.relative.y) * mouse_sensitivity
+		mouse_direction = Vector2(deg_to_rad(event.relative.x), deg_to_rad(event.relative.y)) * mouse_sensitivity
 		
 	if Input.is_action_just_pressed("possess"):
 		emit_signal("emitted_output", "possess", null)

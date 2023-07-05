@@ -17,7 +17,7 @@ signal switched_state(new_state: String)
 
 
 # Function for switching states.
-func swtich_state(new_state: State) -> void:
+func switch_state(new_state: State) -> void:
 	if current_state:
 		current_state.exit()
 	current_state = new_state
