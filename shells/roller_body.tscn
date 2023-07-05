@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://djmr5rbqoq33n"]
+[gd_scene load_steps=15 format=3 uid="uid://djmr5rbqoq33n"]
 
 [ext_resource type="Script" path="res://components/possessable_body.gd" id="1_l07wf"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_dg4nn"]
@@ -12,7 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://clsubmog0dnfk" path="res://components/UI/body_information.tscn" id="7_yux01"]
 [ext_resource type="Script" path="res://components/states/Label.gd" id="11_2adfa"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_0uvj3"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_uwm6i"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tc0vi"]
+radius = 0.551679
 
 [sub_resource type="SphereMesh" id="SphereMesh_wy4oy"]
 
@@ -23,10 +26,15 @@ head = NodePath("Camera3D")
 state_machine = NodePath("StateMachine")
 UI = NodePath("PlayerUI")
 
-[node name="Hitbox" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
-shape = SubResource("SphereShape3D_0uvj3")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_uwm6i")
+
+[node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
 script = ExtResource("2_dg4nn")
 health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("SphereShape3D_tc0vi")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_ogw27")

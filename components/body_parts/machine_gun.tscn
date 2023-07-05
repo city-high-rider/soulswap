@@ -49,8 +49,8 @@ bottom_radius = 0.06
 height = 0.2
 radial_segments = 6
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_vfhq3"]
-size = Vector3(0.208968, 0.313255, 0.634438)
+[sub_resource type="BoxShape3D" id="BoxShape3D_s3b4k"]
+size = Vector3(0.21985, 0.432274, 0.750673)
 
 [node name="MachineGun" type="Node3D"]
 script = ExtResource("1_kqkdi")
@@ -89,18 +89,6 @@ lifetime = 2.5
 process_material = SubResource("ParticleProcessMaterial_328js")
 draw_pass_1 = SubResource("CylinderMesh_15cbd")
 
-[node name="HitboxArea" type="Area3D" parent="."]
-
-[node name="Hitbox" type="CollisionShape3D" parent="HitboxArea" node_paths=PackedStringArray("health_component")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0978166)
-shape = SubResource("BoxShape3D_vfhq3")
-script = ExtResource("3_uihti")
-health_component = NodePath("../HealthComponent")
-
-[node name="HealthComponent" type="Node" parent="HitboxArea"]
-script = ExtResource("4_eguk2")
-max_health = 10
-
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -122,7 +110,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 0
-health = NodePath("../../HitboxArea/HealthComponent")
+health = NodePath("../../HealthComponent")
 
 [node name="AmmoCount" type="Label" parent="UI"]
 layout_mode = 1
@@ -140,4 +128,16 @@ grow_vertical = 0
 text = "Ammo:"
 horizontal_alignment = 1
 
-[connection signal="died" from="HitboxArea/HealthComponent" to="." method="_on_health_component_died"]
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_eguk2")
+max_health = 10
+
+[node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("3_uihti")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.102348)
+shape = SubResource("BoxShape3D_s3b4k")
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
