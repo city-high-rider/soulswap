@@ -7,10 +7,15 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.581344, 0)
 script = ExtResource("1_o6kiu")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="PossessRay" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -20)
-collide_with_areas = true
+collision_mask = 4
 
-[node name="HitscanManager" type="Node" parent="." node_paths=PackedStringArray("raycast")]
+[node name="HitscanManager" type="Node3D" parent="." node_paths=PackedStringArray("raycast")]
 script = ExtResource("2_ijohn")
-raycast = NodePath("../RayCast3D")
+raycast = NodePath("GunRay")
+
+[node name="GunRay" type="RayCast3D" parent="HitscanManager"]
+target_position = Vector3(0, 0, -50)
+collision_mask = 7
+collide_with_areas = true

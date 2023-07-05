@@ -122,14 +122,12 @@ ghost = NodePath("RollerGhost2")
 
 [node name="GunRoller" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("7_8x0cu")]
 transform = Transform3D(-0.990859, 0, -0.134903, 0, 1, 0, 0.134903, 0, -0.990859, -4.21475, 0.557481, -2.76105)
-collision_layer = 1
 ghost = NodePath("DummyGhost")
 
 [node name="DummyGhost" parent="GunRoller" instance=ExtResource("6_cxcap")]
 
 [node name="GunRoller2" parent="." node_paths=PackedStringArray("ghost") instance=ExtResource("7_8x0cu")]
 transform = Transform3D(-0.990859, 0, -0.134903, 0, 1, 0, 0.134903, 0, -0.990859, -2.23792, 0.557481, -2.76105)
-collision_layer = 1
 ghost = NodePath("DummyGhost")
 
 [node name="DummyGhost" parent="GunRoller2" instance=ExtResource("6_cxcap")]

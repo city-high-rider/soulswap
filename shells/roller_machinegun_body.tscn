@@ -15,7 +15,7 @@ hitscan_manager = NodePath("../HitscanManager")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.540012, 0, 0)
 hitscan_manager = NodePath("../HitscanManager")
 
-[node name="UI" parent="Camera3D/MachineGun2" index="5"]
+[node name="UI" parent="Camera3D/MachineGun2" index="4"]
 offset_left = 1.0
 offset_top = -85.0
 offset_right = 1.0

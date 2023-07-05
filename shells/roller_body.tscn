@@ -21,6 +21,7 @@ radius = 0.551679
 
 [node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("health", "head", "state_machine", "UI")]
 collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_l07wf")
 health = NodePath("HealthComponent")
 head = NodePath("Camera3D")
@@ -31,6 +32,8 @@ UI = NodePath("PlayerUI")
 shape = SubResource("SphereShape3D_uwm6i")
 
 [node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("2_dg4nn")
 health_component = NodePath("../HealthComponent")
 
