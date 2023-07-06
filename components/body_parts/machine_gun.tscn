@@ -90,16 +90,15 @@ lifetime = 2.5
 process_material = SubResource("ParticleProcessMaterial_328js")
 draw_pass_1 = SubResource("CylinderMesh_15cbd")
 
-[node name="HealthComponent" type="Node" parent="."]
+[node name="GunHealth" type="Node" parent="."]
 script = ExtResource("4_eguk2")
-max_health = 10
 
 [node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
 script = ExtResource("3_uihti")
-health_component = NodePath("../HealthComponent")
+health_component = NodePath("../GunHealth")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.102348)
 shape = SubResource("BoxShape3D_s3b4k")
 
-[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="died" from="GunHealth" to="." method="_on_health_component_died"]

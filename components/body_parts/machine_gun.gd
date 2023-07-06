@@ -46,6 +46,7 @@ func _physics_process(delta: float) -> void:
 	
 	if time_until_next_poll <= 0:
 		hitscan_manager.check_hit(hit_damage, tracer_scene, barrel_point.global_transform.origin)
+		time_until_next_poll = hit_poll_period_s
 		
 # Start the shooting effects
 func start_shooting() -> void:

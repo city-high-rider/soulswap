@@ -24,5 +24,5 @@ func calibrate() -> void:
 	bar.value = health.current_health
 	
 	
-func _on_health_changed(new_health) -> void:
+func _on_health_changed(new_health: int) -> void:
 	bar.value = new_health
