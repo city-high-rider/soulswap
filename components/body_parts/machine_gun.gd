@@ -41,7 +41,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if is_shooting:
 		firing_time_left = max(0, firing_time_left - delta)
-		ammo_counter.text = "Ammo left: " + str(snapped((firing_time_left / firing_time_sec), 0.01))
 		
 		time_until_next_poll = max(0, time_until_next_poll - delta)
 	
@@ -69,4 +68,3 @@ func stop_shooting() -> void:
 func _on_health_component_died():
 	is_broken = true
 	stop_shooting()
-	ammo_counter.text = "BROKEN!"
