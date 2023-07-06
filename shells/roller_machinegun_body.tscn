@@ -16,37 +16,35 @@ hitscan_manager = NodePath("../HitscanManager")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.540012, 0, 0)
 hitscan_manager = NodePath("../HitscanManager")
 
-[node name="GunHp1" parent="PlayerUI" index="4" node_paths=PackedStringArray("health") instance=ExtResource("4_ajw38")]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerUI" index="4"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -456.0
-offset_top = -40.0
-offset_right = 0.0
-offset_bottom = 0.0
+offset_left = -286.0
+offset_top = -64.0
 grow_horizontal = 0
 grow_vertical = 0
-health = NodePath("../../Camera3D/MachineGun2/HealthComponent")
-text = "Left gun"
 
-[node name="GunHp2" parent="PlayerUI" index="5" node_paths=PackedStringArray("health") instance=ExtResource("4_ajw38")]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -457.0
-offset_top = -83.0
-offset_right = -1.0
-offset_bottom = -43.0
-grow_horizontal = 0
-grow_vertical = 0
-health = NodePath("../../Camera3D/MachineGun/HealthComponent")
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUI/VBoxContainer" index="0"]
+layout_mode = 2
+
+[node name="GunHp2" parent="PlayerUI/VBoxContainer/HBoxContainer" index="0" node_paths=PackedStringArray("health") instance=ExtResource("4_ajw38")]
+layout_mode = 2
+size_flags_horizontal = 3
+health = NodePath("../../../../Camera3D/MachineGun/HealthComponent")
 text = "Right gun"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlayerUI/VBoxContainer" index="1"]
+layout_mode = 2
+
+[node name="GunHp1" parent="PlayerUI/VBoxContainer/HBoxContainer2" index="0" node_paths=PackedStringArray("health") instance=ExtResource("4_ajw38")]
+layout_mode = 2
+size_flags_horizontal = 3
+health = NodePath("../../../../Camera3D/MachineGun2/HealthComponent")
+text = "Left gun"
 
 [editable path="Camera3D"]
 [editable path="Camera3D/MachineGun"]
