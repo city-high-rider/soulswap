@@ -2,18 +2,19 @@
 
 [ext_resource type="Script" path="res://components/UI/health_bar.gd" id="1_1w0vr"]
 
-[node name="HealthBar" type="HBoxContainer"]
-offset_left = 25.0
-offset_top = 568.0
-offset_right = 481.0
-offset_bottom = 608.0
+[node name="HBoxContainer" type="HBoxContainer"]
+offset_right = 215.0
+offset_bottom = 27.0
 script = ExtResource("1_1w0vr")
 
-[node name="Label" type="Label" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
-text = "Health
-"
+
+[node name="Label" type="Label" parent="PanelContainer"]
+layout_mode = 2
+text = "Health:"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4

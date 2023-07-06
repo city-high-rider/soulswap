@@ -1,4 +1,3 @@
-@tool
 extends HBoxContainer
 class_name HealthBar
 
@@ -6,7 +5,7 @@ class_name HealthBar
 # Link to the actual bar child.
 @onready var bar : ProgressBar = $ProgressBar
 
-@onready var label : Label = $Label
+@onready var label : Label = $PanelContainer/Label
 
 # Which health component are we tracking?
 @export var health : HealthComponent

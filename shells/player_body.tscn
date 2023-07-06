@@ -65,17 +65,15 @@ friction = 3.0
 body_info = NodePath("BodyInformation")
 parent_shell = NodePath("..")
 
-[node name="HealthBar" parent="PlayerUI" node_paths=PackedStringArray("health") instance=ExtResource("8_b0uty")]
+[node name="HealthBar" parent="PlayerUI" instance=ExtResource("8_b0uty")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 0.0
 offset_top = -27.0
-offset_right = 456.0
+offset_right = 395.0
 offset_bottom = 0.0
 grow_vertical = 0
-health = NodePath("../../HealthComponent")
 
 [node name="Label" type="Label" parent="PlayerUI"]
 layout_mode = 0
