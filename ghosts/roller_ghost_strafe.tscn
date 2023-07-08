@@ -5,9 +5,8 @@
 [ext_resource type="Script" path="res://components/states/ai_states/roller_strafe_pursue.gd" id="3_68i45"]
 [ext_resource type="Script" path="res://components/states/ai_states/roller_strafe.gd" id="4_eq8wl"]
 
-[node name="RollerGhost" type="Node3D" node_paths=PackedStringArray("state_machine")]
+[node name="RollerGhost" type="Node3D"]
 script = ExtResource("1_t5bcj")
-state_machine = NodePath("StateMachine")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 

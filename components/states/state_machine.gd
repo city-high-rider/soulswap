@@ -15,7 +15,6 @@ var current_state : State
 
 signal switched_state(new_state: String)
 
-
 # Function for switching states.
 func switch_state(new_state: State) -> void:
 	if current_state:
@@ -35,6 +34,8 @@ func init(new_user: Node) -> void:
 
 # function that should be called on the user's physics process
 func handle_physics(delta: float) -> void:
+	if !is_instance_valid(current_state):
+		return
 	current_state.handle_physics(delta)
 	
 # function that should be called on the user's process

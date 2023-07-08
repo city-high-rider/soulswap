@@ -20,12 +20,7 @@ class_name Shell
 signal player_possessed
 
 func _ready() -> void:
-	ghost.emitted_output.connect(_on_ghost_emitted_output)
-	state_machine.init(self)
-	if ghost is PlayerGhost:
-		PlayerInfo.current_player_shell = self
-		emit_signal("player_possessed")
-		head.make_current()
+	change_ghost(ghost)
 
 # If only we had ADTs like in Haskell or Elm...
 func _on_ghost_emitted_output(action: String, payload) -> void:
@@ -35,9 +30,9 @@ func _on_ghost_emitted_output(action: String, payload) -> void:
 			if head.possess_ray.get_collider() is Shell:
 				var new_host : Shell = head.possess_ray.get_collider()
 				PlayerInfo.current_player_shell = new_host
-				set_physics_process(false)
+#				set_physics_process(false)
 				new_host.call_deferred("change_ghost", ghost)
-				queue_free()
+#				queue_free()
 			
 
 func _physics_process(delta: float) -> void:
@@ -50,15 +45,17 @@ func _physics_process(delta: float) -> void:
 
 func change_ghost(new_ghost: Ghost) -> void:
 	# first, get rid of the current ghost.
-	if ghost:
-		ghost.emitted_output.disconnect(_on_ghost_emitted_output)
+	if ghost != new_ghost:
 		remove_child(ghost)
 		ghost.queue_free()
 	
 	# then, attach the new one.
-	ghost = new_ghost.duplicate()
-	ghost.emitted_output.connect(_on_ghost_emitted_output)
-	add_child(ghost)
+	new_ghost.reparent(self, false)
+	ghost = new_ghost
+	if !ghost.emitted_output.is_connected(_on_ghost_emitted_output):
+		ghost.emitted_output.connect(_on_ghost_emitted_output)
+	# Re-inisitalise the state machine so that the ghost is updated.
+	state_machine.init(self)
 	
 	# Show or hide the UI
 	if ghost is PlayerGhost:
@@ -66,8 +63,3 @@ func change_ghost(new_ghost: Ghost) -> void:
 		emit_signal("player_possessed")
 		# Set our camera as the current one.
 		head.make_current()
-	
-
-	
-	print_tree_pretty()
-	print_debug(ghost)
