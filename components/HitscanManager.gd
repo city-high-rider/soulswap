@@ -23,5 +23,7 @@ func check_hit(damage: float, tracer: PackedScene, barrel_pos: Vector3) -> bool:
 	var hit_pos : Vector3 = raycast.get_collision_point()
 	add_child(new_tracer)
 	new_tracer.global_transform.origin = barrel_pos + (hit_pos - barrel_pos) / 2
-		
+	new_tracer.mesh.height = barrel_pos.distance_to(hit_pos)
+	new_tracer.look_at(hit_pos)
+	new_tracer.rotate_x(PI/2)
 	return false
