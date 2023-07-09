@@ -6,6 +6,7 @@ extends Node3D
 
 @onready var muzzle_flash : GPUParticles3D = $MuzzleFlash
 @onready var shells : GPUParticles3D = $Shells
+@onready var gunfire : AudioStreamPlayer3D = $Gunfire
 
 # Where should we start drawing the tracer from?
 @onready var barrel_point : Marker3D = $BarrelPoint

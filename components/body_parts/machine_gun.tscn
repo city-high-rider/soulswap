@@ -101,4 +101,6 @@ health_component = NodePath("../GunHealth")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.102348)
 shape = SubResource("BoxShape3D_s3b4k")
 
+[node name="Gunfire" type="AudioStreamPlayer3D" parent="."]
+
 [connection signal="died" from="GunHealth" to="." method="_on_health_component_died"]
