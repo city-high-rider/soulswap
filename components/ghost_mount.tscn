@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdkxxjxaklh5d"]
+
+[ext_resource type="Script" path="res://components/GhostMount.gd" id="1_sptrm"]
+
+[node name="GhostMount" type="Node3D"]
+script = ExtResource("1_sptrm")
