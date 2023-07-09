@@ -9,7 +9,14 @@ class_name PlayerUI
 # The text field for pop-ups
 @onready var popup_text : TextBox = $TextBox
 
-var is_body_info_showing : bool = true
+# Which body does this UI belong to?
+@export var parent_shell : Shell
+
+func _ready() -> void:
+	hide()
+	parent_shell.player_possessed.connect(on_possess)
+
+var is_body_info_showing : bool = false
 
 func toggle_body_info() -> void:
 	if is_body_info_showing:
@@ -18,3 +25,9 @@ func toggle_body_info() -> void:
 		body_info.show()
 	is_body_info_showing = !is_body_info_showing
 
+
+func on_possess() -> void:
+	show()
+	toggle_body_info()
+	await get_tree().create_timer(2).timeout
+	toggle_body_info()

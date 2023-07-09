@@ -1,10 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://s4xxvp4y718y"]
+[gd_scene load_steps=3 format=3 uid="uid://s4xxvp4y718y"]
 
 [ext_resource type="Script" path="res://components/player_head.gd" id="1_o6kiu"]
+[ext_resource type="Script" path="res://components/HitscanManager.gd" id="2_ijohn"]
 
 [node name="Camera3D" type="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.581344, 0)
 script = ExtResource("1_o6kiu")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="PossessRay" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -20)
+collision_mask = 4
+
+[node name="HitscanManager" type="Node3D" parent="." node_paths=PackedStringArray("raycast")]
+script = ExtResource("2_ijohn")
+raycast = NodePath("GunRay")
+
+[node name="GunRay" type="RayCast3D" parent="HitscanManager"]
+target_position = Vector3(0, 0, -50)
+collision_mask = 7
+collide_with_areas = true

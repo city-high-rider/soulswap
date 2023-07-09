@@ -4,9 +4,8 @@
 [ext_resource type="Script" path="res://components/states/state_machine.gd" id="2_1sc4g"]
 [ext_resource type="Script" path="res://components/states/ai_states/Pursue.gd" id="3_x1wha"]
 
-[node name="RollerGhost" type="Node3D" node_paths=PackedStringArray("state_machine")]
+[node name="RollerGhost" type="Node3D"]
 script = ExtResource("1_j4dip")
-state_machine = NodePath("StateMachine")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 

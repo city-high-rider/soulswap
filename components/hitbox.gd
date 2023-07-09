@@ -1,4 +1,4 @@
-extends CollisionShape3D
+extends Area3D
 class_name Hitbox
 
 # This is a hitbox for anything that needs to receive damage from an in-game source.

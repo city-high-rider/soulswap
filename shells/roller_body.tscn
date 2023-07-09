@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://djmr5rbqoq33n"]
+[gd_scene load_steps=15 format=3 uid="uid://djmr5rbqoq33n"]
 
 [ext_resource type="Script" path="res://components/possessable_body.gd" id="1_l07wf"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_dg4nn"]
@@ -12,21 +12,32 @@
 [ext_resource type="PackedScene" uid="uid://clsubmog0dnfk" path="res://components/UI/body_information.tscn" id="7_yux01"]
 [ext_resource type="Script" path="res://components/states/Label.gd" id="11_2adfa"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_0uvj3"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_uwm6i"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tc0vi"]
+radius = 0.551679
 
 [sub_resource type="SphereMesh" id="SphereMesh_wy4oy"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("health", "head", "state_machine", "UI")]
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("health", "head", "state_machine")]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_l07wf")
 health = NodePath("HealthComponent")
 head = NodePath("Camera3D")
 state_machine = NodePath("StateMachine")
-UI = NodePath("PlayerUI")
 
-[node name="Hitbox" type="CollisionShape3D" parent="." node_paths=PackedStringArray("health_component")]
-shape = SubResource("SphereShape3D_0uvj3")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_uwm6i")
+
+[node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("2_dg4nn")
 health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("SphereShape3D_tc0vi")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_ogw27")
@@ -36,6 +47,7 @@ mesh = SubResource("SphereMesh_wy4oy")
 
 [node name="Camera3D" parent="." instance=ExtResource("4_cgkt8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00973982, 0)
+current = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_58uat")
@@ -50,8 +62,9 @@ script = ExtResource("7_e74kk")
 move_state = NodePath("../move")
 gravity = -10.0
 
-[node name="PlayerUI" parent="." node_paths=PackedStringArray("body_info") instance=ExtResource("7_hxkvw")]
+[node name="PlayerUI" parent="." node_paths=PackedStringArray("body_info", "parent_shell") instance=ExtResource("7_hxkvw")]
 body_info = NodePath("BodyInformation")
+parent_shell = NodePath("..")
 
 [node name="BodyInformation" parent="PlayerUI" instance=ExtResource("7_yux01")]
 layout_mode = 1
@@ -63,7 +76,6 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 0.0
 offset_top = -40.0
 offset_right = 456.0
 offset_bottom = 0.0
