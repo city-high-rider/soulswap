@@ -96,8 +96,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.30299, 17.9029)
 operation = 2
 size = Vector3(4.65079, 15.7742, 3.74762)
 
-[node name="Husk" parent="." instance=ExtResource("1_0ans4")]
-transform = Transform3D(0.66769, 0, 0.74444, 0, 1, 0, -0.74444, 0, 0.66769, 4.11029, 1.29377, 3.62496)
-
 [node name="CharacterBody3D" parent="." instance=ExtResource("5_jly20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.33632, 0.92823, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.33632, 0, 0)
+health = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":Resource("res:

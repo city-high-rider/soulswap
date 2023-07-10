@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://crknobkg2vxyr"]
+[gd_scene load_steps=6 format=3 uid="uid://crknobkg2vxyr"]
 
 [ext_resource type="PackedScene" uid="uid://djmr5rbqoq33n" path="res://shells/roller_body.tscn" id="1_0ff50"]
 [ext_resource type="PackedScene" uid="uid://bdqf5sm42j8vl" path="res://components/body_parts/machine_gun.tscn" id="2_4hpnr"]
 [ext_resource type="Script" path="res://shells/roller_machinegun_body.gd" id="2_yxl5a"]
 [ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="4_ajw38"]
+[ext_resource type="PackedScene" uid="uid://bqsvtustc0gp6" path="res://ghosts/roller_ghost_strafe.tscn" id="5_84bdt"]
 
 [node name="CharacterBody3D" instance=ExtResource("1_0ff50")]
 script = ExtResource("2_yxl5a")
@@ -45,6 +46,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 health = NodePath("../../../Camera3D/MachineGun/GunHealth")
 text = "Right gun"
+
+[node name="GhostMount" parent="." index="7" node_paths=PackedStringArray("ghost")]
+ghost = NodePath("RollerGhost")
+
+[node name="RollerGhost" parent="GhostMount" index="0" instance=ExtResource("5_84bdt")]
 
 [editable path="Camera3D"]
 [editable path="Camera3D/MachineGun"]

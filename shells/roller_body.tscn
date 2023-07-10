@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://djmr5rbqoq33n"]
+[gd_scene load_steps=16 format=3 uid="uid://djmr5rbqoq33n"]
 
 [ext_resource type="Script" path="res://components/possessable_body.gd" id="1_l07wf"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_dg4nn"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dvlfw4kqxil1t" path="res://components/UI/player_ui.tscn" id="7_hxkvw"]
 [ext_resource type="PackedScene" uid="uid://clsubmog0dnfk" path="res://components/UI/body_information.tscn" id="7_yux01"]
 [ext_resource type="Script" path="res://components/states/Label.gd" id="11_2adfa"]
+[ext_resource type="PackedScene" uid="uid://bdkxxjxaklh5d" path="res://components/ghost_mount.tscn" id="12_lxbcx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uwm6i"]
 
@@ -19,13 +20,13 @@ radius = 0.551679
 
 [sub_resource type="SphereMesh" id="SphereMesh_wy4oy"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("health", "head", "state_machine")]
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("health", "head", "ghost_mount")]
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_l07wf")
 health = NodePath("HealthComponent")
 head = NodePath("Camera3D")
-state_machine = NodePath("StateMachine")
+ghost_mount = NodePath("GhostMount")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_uwm6i")
@@ -87,5 +88,8 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("11_2adfa")
+
+[node name="GhostMount" parent="." node_paths=PackedStringArray("shell") instance=ExtResource("12_lxbcx")]
+shell = NodePath("..")
 
 [connection signal="switched_state" from="StateMachine" to="PlayerUI/Label" method="_on_state_machine_switched_state"]

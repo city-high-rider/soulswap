@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bb3ty1kswqumk"]
+[gd_scene load_steps=17 format=3 uid="uid://bb3ty1kswqumk"]
 
 [ext_resource type="Script" path="res://components/possessable_body.gd" id="1_i6q6v"]
 [ext_resource type="PackedScene" uid="uid://bfm48yun2gt84" path="res://components/hitbox.tscn" id="2_trean"]
+[ext_resource type="PackedScene" uid="uid://bdkxxjxaklh5d" path="res://components/ghost_mount.tscn" id="3_dv2l2"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="3_fdlml"]
 [ext_resource type="PackedScene" uid="uid://s4xxvp4y718y" path="res://components/player_head.tscn" id="4_5j8mo"]
+[ext_resource type="PackedScene" uid="uid://danr4y7gq7sch" path="res://ghosts/player_ghost.tscn" id="4_7id50"]
 [ext_resource type="Script" path="res://components/states/state_machine.gd" id="5_rv6ym"]
 [ext_resource type="Script" path="res://components/states/ground_move.gd" id="6_hq8e1"]
 [ext_resource type="Script" path="res://components/states/fall.gd" id="7_8j2pb"]
@@ -20,13 +22,13 @@ height = 2.22502
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_oresp"]
 
-[node name="PossessableBody" type="CharacterBody3D" node_paths=PackedStringArray("health", "head", "state_machine")]
+[node name="PossessableBody" type="CharacterBody3D" node_paths=PackedStringArray("health", "head", "ghost_mount")]
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_i6q6v")
 health = NodePath("HealthComponent")
 head = NodePath("head")
-state_machine = NodePath("StateMachine")
+ghost_mount = NodePath("GhostMount")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_vsk44")
@@ -39,6 +41,12 @@ shape = SubResource("CapsuleShape3D_gptev")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_oresp")
+
+[node name="GhostMount" parent="." node_paths=PackedStringArray("ghost", "shell") instance=ExtResource("3_dv2l2")]
+ghost = NodePath("PlayerGhost")
+shell = NodePath("..")
+
+[node name="PlayerGhost" parent="GhostMount" instance=ExtResource("4_7id50")]
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_fdlml")
@@ -86,4 +94,5 @@ layout_mode = 1
 shell_name = "Husk"
 shell_description = "A weak shell that isn't good at much, other than being a temporary host until you find a better vessel."
 
+[connection signal="ghost_changed" from="GhostMount" to="." method="_on_ghost_mount_ghost_changed"]
 [connection signal="switched_state" from="StateMachine" to="PlayerUI/Label" method="_on_state_machine_switched_state"]
