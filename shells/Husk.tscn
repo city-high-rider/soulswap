@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bw42rj1kwnyl"]
+[gd_scene load_steps=10 format=3 uid="uid://bw42rj1kwnyl"]
 
 [ext_resource type="PackedScene" uid="uid://dbuqn5jxrvv0k" path="res://shells/shell.tscn" id="1_1y6hf"]
 [ext_resource type="PackedScene" uid="uid://bbvuowxymf0du" path="res://components/states/state_machine.tscn" id="2_ct4e5"]
 [ext_resource type="Script" path="res://components/states/ground_move.gd" id="3_6tk6h"]
 [ext_resource type="PackedScene" uid="uid://danr4y7gq7sch" path="res://ghosts/player_ghost.tscn" id="3_dmt8y"]
 [ext_resource type="Script" path="res://components/states/fall.gd" id="4_4pnjg"]
+[ext_resource type="Script" path="res://components/states/body_state_machine.gd" id="4_xympu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vxp60"]
 
@@ -34,7 +35,10 @@ ghost = NodePath("PlayerGhost")
 
 [node name="PlayerGhost" parent="GhostMount" index="0" instance=ExtResource("3_dmt8y")]
 
-[node name="StateMachine" parent="." index="7" instance=ExtResource("2_ct4e5")]
+[node name="StateMachine" parent="." index="7" node_paths=PackedStringArray("ghost_mount", "initial_state") instance=ExtResource("2_ct4e5")]
+script = ExtResource("4_xympu")
+ghost_mount = NodePath("../GhostMount")
+initial_state = NodePath("Move")
 
 [node name="Move" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("fall_state")]
 script = ExtResource("3_6tk6h")

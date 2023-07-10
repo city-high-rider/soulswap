@@ -41,7 +41,3 @@ func handle_physics(delta: float) -> void:
 # function that should be called on the user's process
 func handle_process(delta: float) -> void:
 	current_state.handle_process(delta)
-	
-# function that handles the ghost's input.
-func handle_ghost_output(action: String, payload) -> void:
-	current_state.handle_ghost_output(action, payload)
