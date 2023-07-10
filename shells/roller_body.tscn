@@ -64,8 +64,9 @@ script = ExtResource("7_e74kk")
 move_state = NodePath("../move")
 gravity = -10.0
 
-[node name="PlayerUI" parent="." node_paths=PackedStringArray("body_info") instance=ExtResource("7_hxkvw")]
+[node name="PlayerUI" parent="." node_paths=PackedStringArray("body_info", "ghost_mount") instance=ExtResource("7_hxkvw")]
 body_info = NodePath("BodyInformation")
+ghost_mount = NodePath("../GhostMount")
 
 [node name="BodyInformation" parent="PlayerUI" instance=ExtResource("7_yux01")]
 layout_mode = 1
