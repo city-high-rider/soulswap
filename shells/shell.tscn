@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbuqn5jxrvv0k"]
+
+[ext_resource type="Script" path="res://components/possessable_body.gd" id="1_m747a"]
+[ext_resource type="Script" path="res://components/hitbox.gd" id="2_of3k4"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="3_n7hl0"]
+[ext_resource type="Script" path="res://components/UI/UI.gd" id="4_bjhy8"]
+[ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="5_qbng0"]
+[ext_resource type="Script" path="res://components/GhostMount.gd" id="6_fdg0a"]
+
+[node name="Shell" type="CharacterBody3D" node_paths=PackedStringArray("health", "head", "ghost_mount")]
+script = ExtResource("1_m747a")
+health = NodePath("HealthComponent")
+head = NodePath("")
+ghost_mount = NodePath("GhostMount")
+
+[node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("2_of3k4")
+health_component = NodePath("../HealthComponent")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_n7hl0")
+
+[node name="PlayerUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_bjhy8")
+
+[node name="MainHpBar" parent="PlayerUI" node_paths=PackedStringArray("health") instance=ExtResource("5_qbng0")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -38.0
+offset_right = 336.0
+offset_bottom = 0.0
+grow_vertical = 0
+health = NodePath("../../HealthComponent")
+
+[node name="GhostMount" type="Node3D" parent="." node_paths=PackedStringArray("shell")]
+script = ExtResource("6_fdg0a")
+shell = NodePath("..")

@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://cuna3v5lattg1"]
+[gd_scene load_steps=6 format=3 uid="uid://cuna3v5lattg1"]
 
 [ext_resource type="PackedScene" uid="uid://bb3ty1kswqumk" path="res://shells/player_body.tscn" id="1_0ans4"]
-[ext_resource type="PackedScene" uid="uid://crknobkg2vxyr" path="res://shells/roller_machinegun_body.tscn" id="5_jly20"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obdej"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -98,6 +97,3 @@ size = Vector3(4.65079, 15.7742, 3.74762)
 
 [node name="Husk" parent="." instance=ExtResource("1_0ans4")]
 transform = Transform3D(0.66769, 0, 0.74444, 0, 1, 0, -0.74444, 0, 0.66769, 4.11029, 1.29377, 3.62496)
-
-[node name="CharacterBody3D" parent="." instance=ExtResource("5_jly20")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.33632, 0.92823, 0)

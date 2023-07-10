@@ -9,7 +9,7 @@ class_name PlayerUI
 # The text field for pop-ups
 @onready var popup_text : TextBox = $TextBox
 
-# Which body does this UI belong to?
+# Ghost mount point, so that we can detect when we are possessed by a player.
 @export var parent_shell : Shell
 
 func _ready() -> void:
