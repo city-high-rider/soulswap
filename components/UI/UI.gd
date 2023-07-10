@@ -6,15 +6,12 @@ class_name PlayerUI
 # Which margin container has the body info?
 @export var body_info : MarginContainer
 
-# The text field for pop-ups
-@onready var popup_text : TextBox = $TextBox
-
-# Which body does this UI belong to?
-@export var parent_shell : Shell
+# Ghost mount point, so that we can detect when we are possessed by a player.
+@export var ghost_mount : GhostMount
 
 func _ready() -> void:
 	hide()
-	parent_shell.player_possessed.connect(on_possess)
+	ghost_mount.ghost_changed.connect(on_possess)
 
 var is_body_info_showing : bool = false
 
@@ -26,7 +23,9 @@ func toggle_body_info() -> void:
 	is_body_info_showing = !is_body_info_showing
 
 
-func on_possess() -> void:
+func on_possess(_new_ghost: Ghost, is_player: bool) -> void:
+	if !is_player:
+		return
 	show()
 	toggle_body_info()
 	await get_tree().create_timer(2).timeout

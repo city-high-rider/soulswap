@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cuna3v5lattg1"]
 
-[ext_resource type="PackedScene" uid="uid://bw42rj1kwnyl" path="res://shells/Husk.tscn" id="1_cbce8"]
-[ext_resource type="PackedScene" uid="uid://crknobkg2vxyr" path="res://shells/roller_machinegun_body.tscn" id="2_mowec"]
+[ext_resource type="PackedScene" uid="uid://bb3ty1kswqumk" path="res://shells/player_body.tscn" id="1_0ans4"]
+[ext_resource type="PackedScene" uid="uid://crknobkg2vxyr" path="res://shells/roller_machinegun_body.tscn" id="5_jly20"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obdej"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -96,8 +96,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.30299, 17.9029)
 operation = 2
 size = Vector3(4.65079, 15.7742, 3.74762)
 
-[node name="Husk" parent="." instance=ExtResource("1_cbce8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.83718, 2.28248, 0)
-
-[node name="CharacterBody3D" parent="." instance=ExtResource("2_mowec")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.854055, 0.659721, 0)
+[node name="CharacterBody3D" parent="." instance=ExtResource("5_jly20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.33632, 0, 0)
+health = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":Resource("res:

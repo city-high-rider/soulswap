@@ -30,7 +30,6 @@ signal died
 # method for taking damage
 func take_damage(damage: int) -> void:
 	current_health = max(0, current_health - damage)
-	print_debug("took " + str(damage) + " damage, new hp is " + str(current_health))
 	if current_health <= 0:
 		emit_signal("died")
 	else:

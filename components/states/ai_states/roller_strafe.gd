@@ -20,7 +20,11 @@ var current_strafe_direction : int = 1
 var time_until_change_direction : float = change_direction_time
 
 func enter() -> void:
+	user.primary_depressed = true
 	target = PlayerInfo.current_player_shell
+	
+func exit() -> void:
+	user.primary_depressed = false
 
 func handle_physics(delta: float) -> void:
 	if !is_instance_valid(target):
@@ -32,6 +36,7 @@ func handle_physics(delta: float) -> void:
 		
 	user.mouse_direction = look_towards_y(target.global_transform.origin, 3* PI/2, delta)
 	user.input_direction = Vector2(current_strafe_direction, 0)
+	
 
 	if user.global_transform.origin.distance_to(target.global_transform.origin) > break_strafe_distance:
 		state_machine.switch_state(pursuit_state)
