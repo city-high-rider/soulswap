@@ -33,6 +33,5 @@ func _physics_process(delta: float) -> void:
 func change_ghost(new_ghost: Ghost) -> void:
 	ghost_mount.change_ghost(new_ghost)
 
-
 func _on_ghost_mount_ghost_changed(new_ghost, is_player):
 	new_ghost.emitted_output.connect(_on_ghost_emitted_output)

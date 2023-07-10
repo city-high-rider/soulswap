@@ -9,7 +9,14 @@ class_name BodyStateMachine
 # What is our current ghost?
 func _ready() -> void:
 	ghost_mount.ghost_changed.connect(_on_ghost_changed)
+	init(ghost_mount.shell)
+	
+	for state in get_children().filter(func(c): return c is ShellState):
+		state.ghost = ghost_mount.ghost
 	
 func _on_ghost_changed(new_ghost: Ghost, _is_player: bool) -> void:
-	for state in get_children().filter(func(c): true if c is ShellState else false):
+	for state in get_children().filter(func(c): return c is ShellState):
 		state.ghost = new_ghost
+		
+func _physics_process(delta: float) -> void:
+	handle_physics(delta)

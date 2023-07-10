@@ -96,4 +96,4 @@ operation = 2
 size = Vector3(4.65079, 15.7742, 3.74762)
 
 [node name="Husk" parent="." instance=ExtResource("1_cbce8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.83718, 1.28248, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.83718, 2.28248, 0)
