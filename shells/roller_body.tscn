@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_dg4nn"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="3_ogw27"]
 [ext_resource type="PackedScene" uid="uid://s4xxvp4y718y" path="res://components/player_head.tscn" id="4_cgkt8"]
+[ext_resource type="Script" path="res://components/states/body_state_machine.gd" id="5_1d88r"]
 [ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="5_18nsp"]
-[ext_resource type="Script" path="res://components/states/state_machine.gd" id="5_58uat"]
 [ext_resource type="Script" path="res://components/states/shell_states/ground_move.gd" id="6_m3maw"]
 [ext_resource type="Script" path="res://components/states/shell_states/fall.gd" id="7_e74kk"]
 [ext_resource type="PackedScene" uid="uid://dvlfw4kqxil1t" path="res://components/UI/player_ui.tscn" id="7_hxkvw"]
@@ -50,8 +50,9 @@ mesh = SubResource("SphereMesh_wy4oy")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00973982, 0)
 current = true
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("5_58uat")
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("ghost_mount", "initial_state")]
+script = ExtResource("5_1d88r")
+ghost_mount = NodePath("../GhostMount")
 initial_state = NodePath("move")
 
 [node name="move" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall_state")]
@@ -63,9 +64,8 @@ script = ExtResource("7_e74kk")
 move_state = NodePath("../move")
 gravity = -10.0
 
-[node name="PlayerUI" parent="." node_paths=PackedStringArray("body_info", "parent_shell") instance=ExtResource("7_hxkvw")]
+[node name="PlayerUI" parent="." node_paths=PackedStringArray("body_info") instance=ExtResource("7_hxkvw")]
 body_info = NodePath("BodyInformation")
-parent_shell = NodePath("..")
 
 [node name="BodyInformation" parent="PlayerUI" instance=ExtResource("7_yux01")]
 layout_mode = 1
