@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cuna3v5lattg1"]
 
-[ext_resource type="PackedScene" uid="uid://bb3ty1kswqumk" path="res://shells/player_body.tscn" id="1_0ans4"]
+[ext_resource type="PackedScene" uid="uid://bw42rj1kwnyl" path="res://shells/Husk.tscn" id="1_cbce8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obdej"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -95,5 +95,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.30299, 17.9029)
 operation = 2
 size = Vector3(4.65079, 15.7742, 3.74762)
 
-[node name="Husk" parent="." instance=ExtResource("1_0ans4")]
-transform = Transform3D(0.66769, 0, 0.74444, 0, 1, 0, -0.74444, 0, 0.66769, 4.11029, 1.29377, 3.62496)
+[node name="Husk" parent="." instance=ExtResource("1_cbce8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.83718, 1.28248, 0)

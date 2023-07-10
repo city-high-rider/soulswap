@@ -13,9 +13,6 @@ class_name Shell
 # Where is our ghost located?
 @export var ghost_mount : GhostMount
 
-# We cal this signal when the body has been possessed by a player ghost. That way UI elements can show themselves etc.
-signal player_possessed
-
 # If only we had ADTs like in Haskell or Elm...
 func _on_ghost_emitted_output(action: String, payload) -> void:
 	match action:
