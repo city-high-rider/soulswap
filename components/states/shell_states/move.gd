@@ -1,4 +1,4 @@
-extends State
+extends ShellState
 class_name MoveState
 
 # this state is for simple moving around. It is intended to have only general behaviour
@@ -25,7 +25,3 @@ func handle_physics(delta: float) -> void:
 	# apply friction. Don't touch the vertical component, though.
 	user.velocity = user.velocity.move_toward(Vector3(0, user.velocity.y, 0), delta * friction)
 	user.move_and_slide()
-	
-
-func handle_ghost_output(action: String, payload) -> void:
-	pass
