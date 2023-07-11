@@ -19,6 +19,8 @@ func _ready() -> void:
 	if ghost_mount.ghost:
 		ghost_mount.ghost.emitted_output.connect(_on_ghost_emitted_output)	
 	
+	health.died.connect(_on_death)
+	
 # If only we had ADTs like in Haskell or Elm...
 func _on_ghost_emitted_output(action: String, payload) -> void:
 	match action:
@@ -43,3 +45,6 @@ func _on_ghost_mount_ghost_changed(new_ghost, is_player):
 	new_ghost.emitted_output.connect(_on_ghost_emitted_output)
 	if is_player:
 		head.make_current()
+
+func _on_death() -> void:
+	set_physics_process(false)
