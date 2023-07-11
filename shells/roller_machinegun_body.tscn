@@ -50,7 +50,8 @@ text = "Right gun"
 [node name="GhostMount" parent="." index="7" node_paths=PackedStringArray("ghost")]
 ghost = NodePath("RollerGhost")
 
-[node name="RollerGhost" parent="GhostMount" index="0" instance=ExtResource("5_84bdt")]
+[node name="RollerGhost" parent="GhostMount" index="0" node_paths=PackedStringArray("ghost_mount") instance=ExtResource("5_84bdt")]
+ghost_mount = NodePath("..")
 
 [editable path="Camera3D"]
 [editable path="Camera3D/MachineGun"]

@@ -8,6 +8,10 @@ class_name Ghost
 # For example, strafing left will be sent as "moving", (-1, 0)
 signal emitted_output(action: String, payload)
 
+# What is the ghost mount that we are connected to? This lets us get signals from the
+# shell, such as if we died, hit something, etc.
+@export var ghost_mount : GhostMount
+
 # Sometimes, especially for something that needs to be snappy like movement, we need to rely on
 # polling instead of just sending signals. This is because signals are not tied to framerate, so you
 # get really weird behaviour like accelerating faster if you shake your mouse. However, we can't use

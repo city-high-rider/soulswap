@@ -33,7 +33,8 @@ shell_description = "Decaying body on the verge of death. You better find someth
 [node name="GhostMount" parent="." index="5" node_paths=PackedStringArray("ghost")]
 ghost = NodePath("PlayerGhost")
 
-[node name="PlayerGhost" parent="GhostMount" index="0" instance=ExtResource("3_dmt8y")]
+[node name="PlayerGhost" parent="GhostMount" index="0" node_paths=PackedStringArray("ghost_mount") instance=ExtResource("3_dmt8y")]
+ghost_mount = NodePath("..")
 
 [node name="StateMachine" parent="." index="7" node_paths=PackedStringArray("ghost_mount", "initial_state") instance=ExtResource("2_ct4e5")]
 script = ExtResource("4_xympu")
