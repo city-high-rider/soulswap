@@ -20,11 +20,10 @@ radius = 0.551679
 
 [sub_resource type="SphereMesh" id="SphereMesh_wy4oy"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("health", "head", "ghost_mount")]
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("head", "ghost_mount")]
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_l07wf")
-health = NodePath("HealthComponent")
 head = NodePath("Camera3D")
 ghost_mount = NodePath("GhostMount")
 
@@ -93,4 +92,5 @@ script = ExtResource("11_2adfa")
 [node name="GhostMount" parent="." node_paths=PackedStringArray("shell") instance=ExtResource("12_lxbcx")]
 shell = NodePath("..")
 
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="switched_state" from="StateMachine" to="PlayerUI/Label" method="_on_state_machine_switched_state"]

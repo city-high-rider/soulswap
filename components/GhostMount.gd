@@ -34,6 +34,7 @@ func change_ghost(new_ghost: Ghost) -> void:
 	
 	# then, attach the new one.
 	new_ghost.reparent(self, false)
+	new_ghost.ghost_mount = self
 	ghost = new_ghost
 	
 	
