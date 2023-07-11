@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://bu57v5cln1y64"]
+
+[ext_resource type="Script" path="res://interactive/checkpoint.gd" id="1_uf1ik"]
+[ext_resource type="Texture2D" uid="uid://dsligvtxga0r3" path="res://addons/kenney_particle_pack/star_07.png" id="2_1dvdi"]
+
+[sub_resource type="Curve" id="Curve_hiuex"]
+_data = [Vector2(0, 0.873684), 0.0, 0.0, 0, 0, Vector2(0.521739, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_u7dk5"]
+curve = SubResource("Curve_hiuex")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nytx6"]
+gravity = Vector3(0, -1, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.5
+scale_curve = SubResource("CurveTexture_u7dk5")
+turbulence_enabled = true
+turbulence_noise_strength = 6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xxpx"]
+transparency = 1
+albedo_color = Color(0.505882, 1, 1, 1)
+albedo_texture = ExtResource("2_1dvdi")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_qkr26"]
+material = SubResource("StandardMaterial3D_6xxpx")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2fkmd"]
+size = Vector3(2.09406, 1, 2.06391)
+
+[node name="Checkpoint" type="Node3D"]
+script = ExtResource("1_uf1ik")
+
+[node name="Lantern" type="CSGCombiner3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Lantern"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.901085, -1.15514)
+size = Vector3(0.348215, 2.93949, 0.328407)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Lantern"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99482, -0.595937)
+size = Vector3(0.348215, 0.25091, 0.79467)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Lantern"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74629, -0.373633)
+radius = 0.0464748
+height = 0.234395
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Lantern"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41672, -0.381112)
+size = Vector3(0.405567, 0.464371, 0.383577)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Lantern/CSGBox3D3"]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_nytx6")
+draw_pass_1 = SubResource("QuadMesh_qkr26")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_2fkmd")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
