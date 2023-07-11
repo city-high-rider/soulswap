@@ -5,6 +5,9 @@ class_name PlayerGhost
 # What's our mouse sensitivity?
 @export var mouse_sensitivity : float = 0.1
 
+# Reference to the death screen GUI.
+@onready var death_screen : Control = $DeathScreen
+
 func _ready() -> void:
 	# capture the mouse in the middle of the screen
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -34,3 +37,6 @@ func _input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("jump"):
 		emit_signal("emitted_output", "jump", null)
+
+func on_shell_death() -> void:
+	death_screen.show()

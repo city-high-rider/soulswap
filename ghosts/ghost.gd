@@ -8,8 +8,8 @@ class_name Ghost
 # For example, strafing left will be sent as "moving", (-1, 0)
 signal emitted_output(action: String, payload)
 
-# What is the ghost mount that we are connected to? This lets us get signals from the
-# shell, such as if we died, hit something, etc.
+# What is the ghost mount that we are connected to? This lets us get information about
+# the shell.
 @export var ghost_mount : GhostMount
 
 # Sometimes, especially for something that needs to be snappy like movement, we need to rely on

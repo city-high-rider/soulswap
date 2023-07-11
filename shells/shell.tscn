@@ -53,3 +53,4 @@ shell = NodePath("..")
 [node name="Head" parent="." instance=ExtResource("7_bqgx2")]
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="died" from="HealthComponent" to="GhostMount" method="_on_health_component_died"]
