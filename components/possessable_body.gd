@@ -10,11 +10,18 @@ class_name Shell
 ## Where is our ghost located?
 @export var ghost_mount : GhostMount
 
+## Current saved data 
+var current_save : ShellCheckpointSave = ShellCheckpointSave.new()
+
 func _ready() -> void:
 	if ghost_mount.ghost is PlayerGhost:
 		head.make_current()
 	if ghost_mount.ghost:
 		ghost_mount.ghost.emitted_output.connect(_on_ghost_emitted_output)
+		
+	CheckpointManager.checkpoint_activated.connect(save_data)
+	CheckpointManager.load_checkpoint.connect(load_data)
+	save_data()
 	
 # If only we had ADTs like in Haskell or Elm...
 func _on_ghost_emitted_output(action: String, payload) -> void:
@@ -43,3 +50,9 @@ func _on_ghost_mount_ghost_changed(new_ghost, is_player):
 
 func _on_health_component_died() -> void:
 	set_physics_process(false)
+
+func save_data() -> void:
+	current_save.saved_global_transform = global_transform
+
+func load_data() -> void:
+	global_transform = current_save.saved_global_transform
