@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PlayerInfo="*res://PlayerInfo.gd"
-CheckpointManager="*res://interactive/checkpoint_manager.gd"
+PlayerInfo="*res://globals/PlayerInfo.gd"
+CheckpointManager="*res://globals/checkpoint_manager.gd"
 
 [input]
 
