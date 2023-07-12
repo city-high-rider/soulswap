@@ -92,5 +92,4 @@ script = ExtResource("11_2adfa")
 [node name="GhostMount" parent="." node_paths=PackedStringArray("shell") instance=ExtResource("12_lxbcx")]
 shell = NodePath("..")
 
-[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="switched_state" from="StateMachine" to="PlayerUI/Label" method="_on_state_machine_switched_state"]

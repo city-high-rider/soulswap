@@ -48,9 +48,6 @@ func _on_ghost_mount_ghost_changed(new_ghost, is_player):
 	if is_player:
 		head.make_current()
 
-func _on_health_component_died() -> void:
-	set_physics_process(false)
-
 func save_data() -> void:
 	current_save.saved_global_transform = global_transform
 

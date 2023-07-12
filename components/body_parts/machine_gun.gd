@@ -33,8 +33,13 @@ var firing_time_left : float = firing_time_sec
 var is_broken : bool = false
 var is_shooting : bool = false
 
+var current_save : GunSave = GunSave.new()
+
 func _ready() -> void:
 	is_broken = false
+	CheckpointManager.checkpoint_activated.connect(save_data)
+	CheckpointManager.load_checkpoint.connect(load_data)
+	save_data()
 
 func _physics_process(delta: float) -> void:
 	if is_shooting:
@@ -67,3 +72,12 @@ func stop_shooting() -> void:
 func _on_health_component_died():
 	is_broken = true
 	stop_shooting()
+	
+
+func save_data() -> void:
+	current_save.is_broken = is_broken
+	current_save.saved_ammo = firing_time_left
+
+func load_data() -> void:
+	is_broken = current_save.is_broken
+	firing_time_left = current_save.saved_ammo
