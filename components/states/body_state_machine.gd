@@ -1,12 +1,10 @@
 extends StateMachine
+## this is a state machine that is used to control bodies using the input of a ghost.
 class_name BodyStateMachine
 
-# this is a state machine that is used to control bodies using the input of a ghost.
-
-# Which mount is the ghost connected to?
+## Which mount is the ghost connected to?
 @export var ghost_mount : GhostMount
 
-# What is our current ghost?
 func _ready() -> void:
 	ghost_mount.ghost_changed.connect(_on_ghost_changed)
 	ghost_mount.ghost_emitted_output.connect(handle_ghost_input)
