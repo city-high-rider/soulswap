@@ -15,6 +15,8 @@ func _ready() -> void:
 	
 	for state in get_children().filter(func(c): return c is ShellState):
 		state.ghost = ghost_mount.ghost
+		
+	CheckpointManager.load_checkpoint.connect(checkpoint_load)
 	
 func _on_ghost_changed(new_ghost: Ghost, _is_player: bool) -> void:
 	for state in get_children().filter(func(c): return c is ShellState):
@@ -28,3 +30,6 @@ func handle_ghost_input(action: String, payload) -> void:
 
 func _on_health_component_died() -> void:
 	switch_state(down_state)
+
+func checkpoint_load() -> void:
+	switch_state(initial_state)

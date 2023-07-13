@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://djmr5rbqoq33n"]
+[gd_scene load_steps=17 format=3 uid="uid://djmr5rbqoq33n"]
 
 [ext_resource type="Script" path="res://components/possessable_body.gd" id="1_l07wf"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_dg4nn"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://components/states/shell_states/fall.gd" id="7_e74kk"]
 [ext_resource type="PackedScene" uid="uid://dvlfw4kqxil1t" path="res://components/UI/player_ui.tscn" id="7_hxkvw"]
 [ext_resource type="PackedScene" uid="uid://clsubmog0dnfk" path="res://components/UI/body_information.tscn" id="7_yux01"]
+[ext_resource type="Script" path="res://components/states/shell_states/down.gd" id="8_g74hl"]
 [ext_resource type="Script" path="res://components/states/Label.gd" id="11_2adfa"]
 [ext_resource type="PackedScene" uid="uid://bdkxxjxaklh5d" path="res://components/ghost_mount.tscn" id="12_lxbcx"]
 
@@ -49,9 +50,10 @@ mesh = SubResource("SphereMesh_wy4oy")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00973982, 0)
 current = true
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("ghost_mount", "initial_state")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("ghost_mount", "down_state", "initial_state")]
 script = ExtResource("5_1d88r")
 ghost_mount = NodePath("../GhostMount")
+down_state = NodePath("Down")
 initial_state = NodePath("move")
 
 [node name="move" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall_state")]
@@ -62,6 +64,9 @@ fall_state = NodePath("../fall")
 script = ExtResource("7_e74kk")
 move_state = NodePath("../move")
 gravity = -10.0
+
+[node name="Down" type="Node" parent="StateMachine"]
+script = ExtResource("8_g74hl")
 
 [node name="PlayerUI" parent="." node_paths=PackedStringArray("body_info", "ghost_mount") instance=ExtResource("7_hxkvw")]
 body_info = NodePath("BodyInformation")
@@ -92,4 +97,5 @@ script = ExtResource("11_2adfa")
 [node name="GhostMount" parent="." node_paths=PackedStringArray("shell") instance=ExtResource("12_lxbcx")]
 shell = NodePath("..")
 
+[connection signal="died" from="HealthComponent" to="StateMachine" method="_on_health_component_died"]
 [connection signal="switched_state" from="StateMachine" to="PlayerUI/Label" method="_on_state_machine_switched_state"]

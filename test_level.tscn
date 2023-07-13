@@ -99,8 +99,6 @@ size = Vector3(4.65079, 15.7742, 3.74762)
 
 [node name="Husk" parent="." instance=ExtResource("1_cbce8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.83718, 2.28248, 0)
-collision_layer = 1
-collision_mask = 1
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_mowec")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.854055, 0.659721, 0)

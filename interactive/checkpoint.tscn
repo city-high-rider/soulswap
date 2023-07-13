@@ -62,6 +62,7 @@ process_material = SubResource("ParticleProcessMaterial_nytx6")
 draw_pass_1 = SubResource("QuadMesh_qkr26")
 
 [node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0914145, 0)
 collision_layer = 0
 collision_mask = 4
 

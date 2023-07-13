@@ -8,7 +8,7 @@ class_name Checkpoint
 signal checkpoint_activated(player: Shell)
 
 func _on_area_3d_body_entered(body) -> void:
-	if body == PlayerInfo.current_player_shell :
+	if body == PlayerInfo.current_player_shell:
 		checkpoint_activated.emit(body)
 		CheckpointManager.checkpoint_activated.emit()
 		# Change this later - it's not good to have a direct reference to the particles.
