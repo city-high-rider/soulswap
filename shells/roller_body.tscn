@@ -46,8 +46,9 @@ script = ExtResource("3_ogw27")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_wy4oy")
 
-[node name="Camera3D" parent="." instance=ExtResource("4_cgkt8")]
+[node name="Camera3D" parent="." node_paths=PackedStringArray("ghost_mount") instance=ExtResource("4_cgkt8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00973982, 0)
+ghost_mount = NodePath("../GhostMount")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("ghost_mount", "down_state", "initial_state")]
 script = ExtResource("5_1d88r")

@@ -37,6 +37,9 @@ ghost = NodePath("PlayerGhost")
 [node name="PlayerGhost" parent="GhostMount" index="0" node_paths=PackedStringArray("ghost_mount") instance=ExtResource("3_dmt8y")]
 ghost_mount = NodePath("..")
 
+[node name="Head" parent="." index="6" node_paths=PackedStringArray("ghost_mount")]
+ghost_mount = NodePath("../GhostMount")
+
 [node name="StateMachine" parent="." index="7" node_paths=PackedStringArray("ghost_mount", "down_state", "initial_state") instance=ExtResource("2_ct4e5")]
 script = ExtResource("4_xympu")
 ghost_mount = NodePath("../GhostMount")

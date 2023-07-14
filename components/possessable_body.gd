@@ -14,25 +14,10 @@ class_name Shell
 var current_save : ShellCheckpointSave = ShellCheckpointSave.new()
 
 func _ready() -> void:
-	if ghost_mount.ghost is PlayerGhost:
-		head.make_current()
-	if ghost_mount.ghost:
-		ghost_mount.ghost.emitted_output.connect(_on_ghost_emitted_output)
-		
 	CheckpointManager.checkpoint_activated.connect(save_data)
 	CheckpointManager.load_checkpoint.connect(load_data)
 	save_data()
-	
-# If only we had ADTs like in Haskell or Elm...
-func _on_ghost_emitted_output(action: String, payload) -> void:
-	match action:
-		"possess":
-			if head.possess_ray.get_collider() is Shell:
-				var new_host : Shell = head.possess_ray.get_collider()
-				set_physics_process(false)
-				new_host.call_deferred("change_ghost", ghost_mount.ghost)
-				queue_free()
-			
+
 
 func _physics_process(delta: float) -> void:
 	# Look around using the ghost's mouse direction.
@@ -42,11 +27,6 @@ func _physics_process(delta: float) -> void:
 
 func change_ghost(new_ghost: Ghost) -> void:
 	ghost_mount.change_ghost(new_ghost)
-
-func _on_ghost_mount_ghost_changed(new_ghost, is_player):
-	new_ghost.emitted_output.connect(_on_ghost_emitted_output)
-	if is_player:
-		head.make_current()
 
 func save_data() -> void:
 	current_save.saved_global_transform = global_transform
