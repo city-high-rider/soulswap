@@ -21,6 +21,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# Look around using the ghost's mouse direction.
+	if !ghost_mount.ghost:
+		return
 	rotate_y(-ghost_mount.ghost.mouse_direction.x)
 	head.rotate_x(-ghost_mount.ghost.mouse_direction.y)
 	head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
