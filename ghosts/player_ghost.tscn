@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://danr4y7gq7sch"]
+[gd_scene load_steps=4 format=3 uid="uid://danr4y7gq7sch"]
 
 [ext_resource type="Script" path="res://ghosts/player_ghost.gd" id="1_8tcsk"]
 [ext_resource type="PackedScene" uid="uid://gwfv6m72meua" path="res://components/UiScreens/death_screen.tscn" id="2_ovwii"]
+[ext_resource type="Script" path="res://components/UiScreens/death_screen.gd" id="3_sos6l"]
 
 [node name="PlayerGhost" type="Node"]
 script = ExtResource("1_8tcsk")
 
 [node name="DeathScreen" parent="." instance=ExtResource("2_ovwii")]
 visible = false
+script = ExtResource("3_sos6l")
