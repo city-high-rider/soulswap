@@ -29,6 +29,6 @@ func save_state() -> void:
 
 func load_state() -> void:
 	is_used = saved_state
-	if !is_used:
+	if !is_used and spawned_entity:
 		spawned_entity.queue_free()
 		spawned_entity = null
