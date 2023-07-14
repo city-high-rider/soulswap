@@ -18,8 +18,8 @@ func _ready() -> void:
 	CheckpointManager.load_checkpoint.connect(load_state)
 
 func spawn() -> void:
-	if spawned_entity:
-		spawned_entity.queue_free()
+	if is_used:
+		return
 	spawned_entity = enemy.instantiate()
 	add_child(spawned_entity)
 	is_used = true
