@@ -22,6 +22,7 @@ func spawn() -> void:
 		spawned_entity.queue_free()
 	spawned_entity = enemy.instantiate()
 	add_child(spawned_entity)
+	is_used = true
 
 func save_state() -> void:
 	saved_state = is_used
@@ -30,3 +31,4 @@ func load_state() -> void:
 	is_used = saved_state
 	if !is_used:
 		spawned_entity.queue_free()
+		spawned_entity = null
