@@ -22,6 +22,7 @@ func _on_ghost_emitted_output(action: String, payload) -> void:
 			if possess_ray.get_collider() is Shell:
 				var new_host : Shell = possess_ray.get_collider()
 				new_host.change_ghost(ghost_mount.ghost)
+				print_debug(str(ghost_mount.shell) + " possessing " + str(new_host))
 
 func _on_ghost_mount_ghost_changed(new_ghost, is_player):
 	if is_player:
