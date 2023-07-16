@@ -26,20 +26,21 @@ func _ready() -> void:
 func change_ghost(new_ghost: Ghost) -> void:
 	print_debug("changing " + str(ghost) + " for " + str(new_ghost))
 	# first, get rid of the current ghost.
-	if ghost != new_ghost:
+	if ghost && ghost != new_ghost:
 		remove_child(ghost)
 		ghost.queue_free()
 	
 	# Deal with signals.
-	if ghost.emitted_output.is_connected(_on_ghost_emitted_output):
+	if ghost && ghost.emitted_output.is_connected(_on_ghost_emitted_output):
 		ghost.emitted_output.disconnect(_on_ghost_emitted_output)
-	if !new_ghost.emitted_output.is_connected(_on_ghost_emitted_output):
+	if new_ghost && !new_ghost.emitted_output.is_connected(_on_ghost_emitted_output):
 		new_ghost.emitted_output.connect(_on_ghost_emitted_output)
 	
 	# then, attach the new one.
-	new_ghost.reparent(self, false)
-	new_ghost.ghost_mount = self
-	ghost = new_ghost
+	if new_ghost:
+		new_ghost.reparent(self, false)
+		new_ghost.ghost_mount = self
+		ghost = new_ghost
 	
 	
 	# Check if it is a player ghost
@@ -55,9 +56,6 @@ func get_ghost_inputs() -> GhostInput:
 
 func clear_ghost() -> void:
 	ghost_cleared.emit()
-	if ghost:
-		remove_child(ghost)
-		ghost.emitted_output.disconnect(_on_ghost_emitted_output)
 	ghost = null
 	
 

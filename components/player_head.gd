@@ -19,7 +19,7 @@ func _ready() -> void:
 	ghost_mount.ghost_changed.connect(_on_ghost_mount_ghost_changed)
 
 func _physics_process(delta: float) -> void:
-	possess_cooldown = max(0, possess_cooldown)
+	possess_cooldown = max(0, possess_cooldown - delta)
 	
 func _on_ghost_emitted_output(action: String, payload) -> void:
 	match action:
@@ -27,6 +27,7 @@ func _on_ghost_emitted_output(action: String, payload) -> void:
 			if possess_ray.get_collider() is Shell and possess_cooldown == 0:
 				var new_host : Shell = possess_ray.get_collider()
 				new_host.change_ghost(ghost_mount.ghost)
+				new_host.head.possess_cooldown = 1
 				possess_cooldown = 1
 				ghost_mount.clear_ghost()
 
