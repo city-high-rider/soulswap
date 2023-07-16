@@ -30,3 +30,7 @@ func on_possess(_new_ghost: Ghost, is_player: bool) -> void:
 	toggle_body_info()
 	await get_tree().create_timer(2).timeout
 	toggle_body_info()
+
+
+func _on_ghost_mount_ghost_cleared():
+	hide()

@@ -100,3 +100,4 @@ shell = NodePath("..")
 [connection signal="died" from="HealthComponent" to="StateMachine" method="_on_health_component_died"]
 [connection signal="died" from="HealthComponent" to="GhostMount" method="_on_health_component_died"]
 [connection signal="switched_state" from="StateMachine" to="PlayerUI/Label" method="_on_state_machine_switched_state"]
+[connection signal="ghost_cleared" from="GhostMount" to="PlayerUI" method="_on_ghost_mount_ghost_cleared"]
