@@ -6,6 +6,7 @@
 
 [node name="PlayerGhost" type="Node"]
 script = ExtResource("1_8tcsk")
+mouse_sensitivity = null
 
 [node name="DeathScreen" parent="." instance=ExtResource("2_ovwii")]
 visible = false

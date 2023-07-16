@@ -16,7 +16,7 @@ class_name MoveState
 
 func handle_physics(delta: float) -> void:
 	# Accelerate in input direction.
-	var input_direction : Vector2 = ghost_mount.ghost.input_direction if is_instance_valid(ghost_mount.ghost) else Vector2.ZERO
+	var input_direction : Vector2 = ghost_mount.get_ghost_inputs().input_direction
 	user.velocity = user.velocity.move_toward(user.velocity + user.transform.basis * Vector3(input_direction.x, 0, -input_direction.y), acceleration * delta)
 	
 	# Make sure that we don't go too fast!

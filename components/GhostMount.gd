@@ -21,6 +21,7 @@ func _ready() -> void:
 	change_ghost(ghost)
 
 func change_ghost(new_ghost: Ghost) -> void:
+	print_debug("changing " + str(ghost) + " for " + str(new_ghost))
 	# first, get rid of the current ghost.
 	if ghost != new_ghost:
 		remove_child(ghost)
@@ -44,6 +45,11 @@ func change_ghost(new_ghost: Ghost) -> void:
 		emit_signal("ghost_changed", ghost, true)
 	else:
 		emit_signal("ghost_changed", ghost, false)
+
+
+func get_ghost_inputs() -> GhostInput:
+	return GhostInput.new() if !ghost else ghost.current_inputs
+
 
 func _on_ghost_emitted_output(action: String, payload) -> void:
 	emit_signal("ghost_emitted_output", action, payload)

@@ -10,19 +10,26 @@ class_name PlayerHead
 
 @onready var possess_ray : RayCast3D = $PossessRay
 
+var possess_cooldown : float = 0
+
 func _ready() -> void:
 	if ghost_mount.ghost is PlayerGhost:
 		make_current()
 	ghost_mount.ghost_emitted_output.connect(_on_ghost_emitted_output)
 	ghost_mount.ghost_changed.connect(_on_ghost_mount_ghost_changed)
 
+func _physics_process(delta: float) -> void:
+	possess_cooldown = max(0, possess_cooldown)
+	
 func _on_ghost_emitted_output(action: String, payload) -> void:
 	match action:
 		"possess":
-			if possess_ray.get_collider() is Shell:
+			if possess_ray.get_collider() is Shell and possess_cooldown == 0:
 				var new_host : Shell = possess_ray.get_collider()
 				new_host.change_ghost(ghost_mount.ghost)
-				print_debug(str(ghost_mount.shell) + " possessing " + str(new_host))
+#				new_host.head.possess_cooldown = 1
+				possess_cooldown = 1
+				ghost_mount.ghost = null
 
 func _on_ghost_mount_ghost_changed(new_ghost, is_player):
 	if is_player:

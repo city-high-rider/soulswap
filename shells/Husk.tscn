@@ -35,6 +35,7 @@ shell_description = "Decaying body on the verge of death. You better find someth
 ghost = NodePath("PlayerGhost")
 
 [node name="PlayerGhost" parent="GhostMount" index="0" node_paths=PackedStringArray("ghost_mount") instance=ExtResource("3_dmt8y")]
+mouse_sensitivity = null
 ghost_mount = NodePath("..")
 
 [node name="Head" parent="." index="6" node_paths=PackedStringArray("ghost_mount")]

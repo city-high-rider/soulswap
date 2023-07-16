@@ -18,14 +18,16 @@ func handle_physics(delta: float) -> void:
 	if time_until_new_path <= 0 and target:
 		time_until_new_path = new_path_poll_rate_seconds
 		nav_agent.set_target_position(target.global_transform.origin)
+	
+	var user_inputs : GhostInput = user.current_inputs	
 		
 	if is_instance_valid(target):
 		var next_location : Vector3 = nav_agent.get_next_path_position()
-		user.input_direction = input_move_towards(next_location)
+		user_inputs.input_direction = input_move_towards(next_location)
 		# Let's look at the player while we're at it.
-		user.mouse_direction = look_towards_y(target.global_transform.origin, PI, delta)
+		user_inputs.mouse_direction = look_towards_y(target.global_transform.origin, PI, delta)
 	else:
-		user.input_direction = Vector2.ZERO
-		user.mouse_direction = Vector2.ZERO
+		user_inputs.input_direction = Vector2.ZERO
+		user_inputs.mouse_direction = Vector2.ZERO
 		target = PlayerInfo.current_player_shell
 

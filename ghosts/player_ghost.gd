@@ -14,20 +14,20 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	# We set this to zero, so that the mouse doesn't drift when we stop looking around.
-	mouse_direction = Vector2.ZERO
+	current_inputs.mouse_direction = Vector2.ZERO
 	
 	var move_input: Vector2 = Input.get_vector("left", "right", "back", "forward")
 	if move_input:
-		input_direction = move_input
+		current_inputs.input_direction = move_input
 	else:
-		input_direction = Vector2.ZERO
+		current_inputs.input_direction = Vector2.ZERO
 		
-	primary_depressed = Input.is_action_pressed("primary_action")
+	current_inputs.primary_depressed = Input.is_action_pressed("primary_action")
 	
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		mouse_direction = Vector2(deg_to_rad(event.relative.x), deg_to_rad(event.relative.y)) * mouse_sensitivity
+		current_inputs.mouse_direction = Vector2(deg_to_rad(event.relative.x), deg_to_rad(event.relative.y)) * mouse_sensitivity
 		
 	if Input.is_action_just_pressed("possess"):
 		emit_signal("emitted_output", "possess", null)

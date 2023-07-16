@@ -8,7 +8,7 @@ extends Shell
 
 func _physics_process(delta: float) -> void:
 	super(delta)
-	if ghost_mount.ghost.primary_depressed:
+	if ghost_mount.get_ghost_inputs().primary_depressed:
 		machine_gun_1.start_shooting()
 		machine_gun_2.start_shooting()
 	else:
