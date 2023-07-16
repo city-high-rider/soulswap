@@ -27,9 +27,8 @@ func _on_ghost_emitted_output(action: String, payload) -> void:
 			if possess_ray.get_collider() is Shell and possess_cooldown == 0:
 				var new_host : Shell = possess_ray.get_collider()
 				new_host.change_ghost(ghost_mount.ghost)
-#				new_host.head.possess_cooldown = 1
 				possess_cooldown = 1
-				ghost_mount.ghost = null
+				ghost_mount.clear_ghost()
 
 func _on_ghost_mount_ghost_changed(new_ghost, is_player):
 	if is_player:

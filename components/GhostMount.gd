@@ -17,6 +17,9 @@ signal ghost_changed(new_ghost: Ghost, is_player: bool)
 ## Emit this signal when the ghost outputs anything
 signal ghost_emitted_output(action: String, payload)
 
+## Emit this signal when the ghost leaves the body
+signal ghost_cleared
+
 func _ready() -> void:
 	change_ghost(ghost)
 
@@ -50,11 +53,20 @@ func change_ghost(new_ghost: Ghost) -> void:
 func get_ghost_inputs() -> GhostInput:
 	return GhostInput.new() if !ghost else ghost.current_inputs
 
+func clear_ghost() -> void:
+	ghost_cleared.emit()
+	if ghost:
+		remove_child(ghost)
+		ghost.emitted_output.disconnect(_on_ghost_emitted_output)
+	ghost = null
+	
 
 func _on_ghost_emitted_output(action: String, payload) -> void:
 	emit_signal("ghost_emitted_output", action, payload)
 
 
 func _on_health_component_died() -> void:
+	if !ghost:
+		return
 	if ghost.has_method("on_shell_death"):
 		ghost.on_shell_death()
