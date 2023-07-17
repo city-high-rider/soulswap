@@ -20,11 +20,11 @@ var current_strafe_direction : int = 1
 var time_until_change_direction : float = change_direction_time
 
 func enter() -> void:
-	user.primary_depressed = true
+	user.current_inputs.primary_depressed = true
 	target = PlayerInfo.current_player_shell
 	
 func exit() -> void:
-	user.primary_depressed = false
+	user.current_inputs.primary_depressed = false
 
 func handle_physics(delta: float) -> void:
 	if !is_instance_valid(target):
@@ -33,9 +33,9 @@ func handle_physics(delta: float) -> void:
 	if time_until_change_direction <= 0:
 		time_until_change_direction = change_direction_time
 		current_strafe_direction *= -1
-		
-	user.mouse_direction = look_towards_y(target.global_transform.origin, 3* PI/2, delta)
-	user.input_direction = Vector2(current_strafe_direction, 0)
+	var user_inputs : GhostInput = user.current_inputs
+	user_inputs.mouse_direction = look_towards_y(target.global_transform.origin, 3* PI/2, delta)
+	user_inputs.input_direction = Vector2(current_strafe_direction, 0)
 	
 
 	if user.global_transform.origin.distance_to(target.global_transform.origin) > break_strafe_distance:

@@ -21,7 +21,7 @@ radius = 0.551679
 
 [sub_resource type="SphereMesh" id="SphereMesh_wy4oy"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("head", "ghost_mount")]
+[node name="CharacterBody3D2" type="CharacterBody3D" node_paths=PackedStringArray("head", "ghost_mount")]
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_l07wf")
@@ -46,9 +46,9 @@ script = ExtResource("3_ogw27")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_wy4oy")
 
-[node name="Camera3D" parent="." instance=ExtResource("4_cgkt8")]
+[node name="Camera3D" parent="." node_paths=PackedStringArray("ghost_mount") instance=ExtResource("4_cgkt8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00973982, 0)
-current = true
+ghost_mount = NodePath("../GhostMount")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("ghost_mount", "down_state", "initial_state")]
 script = ExtResource("5_1d88r")
@@ -98,4 +98,6 @@ script = ExtResource("11_2adfa")
 shell = NodePath("..")
 
 [connection signal="died" from="HealthComponent" to="StateMachine" method="_on_health_component_died"]
+[connection signal="died" from="HealthComponent" to="GhostMount" method="_on_health_component_died"]
 [connection signal="switched_state" from="StateMachine" to="PlayerUI/Label" method="_on_state_machine_switched_state"]
+[connection signal="ghost_cleared" from="GhostMount" to="PlayerUI" method="_on_ghost_mount_ghost_cleared"]
