@@ -12,5 +12,8 @@ signal emitted_output(action: String, payload)
 ## the shell.
 @export var ghost_mount : GhostMount
 
+## How should we modify the shell we are possessing?
+@export var possess_modifiers : PossessionModifier = PossessionModifier.new()
+
 # Our current input.
 var current_inputs : GhostInput = GhostInput.new()
