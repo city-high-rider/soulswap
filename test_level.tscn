@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bw42rj1kwnyl" path="res://shells/Husk.tscn" id="1_cbce8"]
 [ext_resource type="PackedScene" uid="uid://crknobkg2vxyr" path="res://shells/roller_machinegun_body.tscn" id="2_mowec"]
-[ext_resource type="PackedScene" uid="uid://7uvref8n6ipy" path="res://interactive/trigger_spawner.tscn" id="3_5mhk1"]
+[ext_resource type="PackedScene" uid="uid://cg16rkn3dhfno" path="res://interactive/trigger_spawner.tscn" id="3_5mhk1"]
 [ext_resource type="PackedScene" uid="uid://bu57v5cln1y64" path="res://interactive/checkpoint.tscn" id="3_l65ao"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obdej"]

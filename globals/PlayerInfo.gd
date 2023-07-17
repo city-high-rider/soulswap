@@ -15,6 +15,7 @@ var last_saved_player_shell : Shell
 func _ready() -> void:
 	CheckpointManager.checkpoint_activated.connect(save_data)
 	CheckpointManager.load_checkpoint.connect(load_data)
+	save_data()
 	
 
 func save_data() -> void:

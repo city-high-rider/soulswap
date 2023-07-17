@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://7uvref8n6ipy"]
+[gd_scene load_steps=3 format=3 uid="uid://cg16rkn3dhfno"]
 
 [ext_resource type="Script" path="res://interactive/trigger_spawner.gd" id="1_u1gpo"]
-[ext_resource type="PackedScene" uid="uid://br42dtyoaodv8" path="res://interactive/enemy_spawner.tscn" id="2_f71c2"]
+[ext_resource type="PackedScene" path="res://interactive/enemy_spawner.tscn" id="2_f71c2"]
 
 [node name="TriggerSpawner" type="Node3D"]
 script = ExtResource("1_u1gpo")
