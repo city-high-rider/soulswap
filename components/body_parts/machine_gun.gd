@@ -11,22 +11,25 @@ extends Node3D
 # Where should we start drawing the tracer from?
 @onready var barrel_point : Marker3D = $BarrelPoint
 
-# Since this is functionally like a laser gun, instead of measuring how many
-# bullets we have left, we mesure how much longer we can fire the gun.
+## Since this is functionally like a laser gun, instead of measuring how many
+## bullets we have left, we mesure how much longer we can fire the gun.
 @export var firing_time_sec : float = 10
 
-# How often do we check for a hit?
+## How often do we check for a hit?
 @export var hit_poll_period_s : float = 0.15
 var time_until_next_poll : float = hit_poll_period_s
 
-# How much damage per hit?
+## How much damage per hit?
 @export var hit_damage : float = 2
 
-# Which hitscan manager should we call to?
+## Which hitscan manager should we call to?
 @export var hitscan_manager : HitscanManager
 
-# Which tracers should we use?
+## Which tracers should we use?
 @export var tracer_scene : PackedScene
+
+## Which ghost mount is ours?
+@export var ghost_mount : GhostMount
 
 var firing_time_left : float = firing_time_sec
 
@@ -51,8 +54,13 @@ func _physics_process(delta: float) -> void:
 		stop_shooting()
 	
 	if time_until_next_poll <= 0:
-		hitscan_manager.check_hit(hit_damage, tracer_scene, barrel_point.global_transform.origin)
+		hitscan_manager.check_hit(hit_damage * ghost_mount.get_ghost_modifiers().base_damage_multiplier, tracer_scene, barrel_point.global_transform.origin)
 		time_until_next_poll = hit_poll_period_s
+		
+	if ghost_mount.get_ghost_inputs().primary_depressed:
+		start_shooting()
+	else:
+		stop_shooting()
 		
 # Start the shooting effects
 func start_shooting() -> void:

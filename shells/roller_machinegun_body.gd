@@ -8,10 +8,4 @@ extends Shell
 
 func _physics_process(delta: float) -> void:
 	super(delta)
-	if ghost_mount.get_ghost_inputs().primary_depressed:
-		machine_gun_1.start_shooting()
-		machine_gun_2.start_shooting()
-	else:
-		machine_gun_1.stop_shooting()
-		machine_gun_2.stop_shooting()
 		
