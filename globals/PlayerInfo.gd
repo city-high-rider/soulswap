@@ -7,3 +7,19 @@ extends Node
 
 # Which body is the player currently controlling?
 var current_player_shell : Shell
+
+
+# Which body was the player controlling when they hit the checkpoint?
+var last_saved_player_shell : Shell
+
+func _ready() -> void:
+	CheckpointManager.checkpoint_activated.connect(save_data)
+	CheckpointManager.load_checkpoint.connect(load_data)
+	
+
+func save_data() -> void:
+	last_saved_player_shell = current_player_shell
+
+func load_data() -> void:
+	last_saved_player_shell.ghost_mount.change_ghost(current_player_shell.ghost_mount.ghost)
+	current_player_shell = last_saved_player_shell
