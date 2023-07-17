@@ -49,13 +49,16 @@ func change_ghost(new_ghost: Ghost) -> void:
 		emit_signal("ghost_changed", ghost, true)
 	else:
 		emit_signal("ghost_changed", ghost, false)
-
+	
 
 func get_ghost_inputs() -> GhostInput:
 	return GhostInput.new() if !ghost else ghost.current_inputs
 
+
+# TODO: Make this not suck
 func clear_ghost() -> void:
 	ghost_cleared.emit()
+	ghost.emitted_output.disconnect(_on_ghost_emitted_output)
 	ghost = null
 	
 
