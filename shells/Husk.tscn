@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bw42rj1kwnyl"]
+[gd_scene load_steps=13 format=3 uid="uid://bw42rj1kwnyl"]
 
 [ext_resource type="PackedScene" uid="uid://dbuqn5jxrvv0k" path="res://shells/shell.tscn" id="1_1y6hf"]
 [ext_resource type="PackedScene" uid="uid://bbvuowxymf0du" path="res://components/states/state_machine.tscn" id="2_ct4e5"]
 [ext_resource type="PackedScene" uid="uid://danr4y7gq7sch" path="res://ghosts/player_ghost.tscn" id="3_dmt8y"]
+[ext_resource type="Script" path="res://ghosts/possession_modifier.gd" id="3_qoy1w"]
 [ext_resource type="Script" path="res://components/states/body_state_machine.gd" id="4_xympu"]
 [ext_resource type="Script" path="res://components/states/shell_states/ground_move.gd" id="5_5qu6g"]
 [ext_resource type="Script" path="res://components/states/shell_states/fall.gd" id="6_8y3kh"]
@@ -15,6 +16,11 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_srfwc"]
 radius = 0.554326
 height = 2.03961
+
+[sub_resource type="Resource" id="Resource_peb1a"]
+script = ExtResource("3_qoy1w")
+max_health_multiplier = 10.0
+base_damage_multiplier = 1.0
 
 [node name="Husk" instance=ExtResource("1_1y6hf")]
 
@@ -36,6 +42,7 @@ ghost = NodePath("PlayerGhost")
 
 [node name="PlayerGhost" parent="GhostMount" index="0" node_paths=PackedStringArray("ghost_mount") instance=ExtResource("3_dmt8y")]
 ghost_mount = NodePath("..")
+possess_modifiers = SubResource("Resource_peb1a")
 
 [node name="Head" parent="." index="6" node_paths=PackedStringArray("ghost_mount")]
 ghost_mount = NodePath("../GhostMount")

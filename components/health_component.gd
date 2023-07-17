@@ -37,6 +37,7 @@ signal died
 func _ready() -> void:
 	CheckpointManager.checkpoint_activated.connect(save_health)
 	CheckpointManager.load_checkpoint.connect(load_health)
+	current_health = max_health
 	save_health()
 
 # method for taking damage
