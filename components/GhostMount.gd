@@ -53,7 +53,6 @@ func change_ghost(new_ghost: Ghost) -> void:
 
 func get_ghost_inputs() -> GhostInput:
 	return GhostInput.new() if !ghost else ghost.current_inputs
-	
 
 func get_ghost_modifiers() -> PossessionModifier:
 	return PossessionModifier.new() if !ghost else ghost.possess_modifiers

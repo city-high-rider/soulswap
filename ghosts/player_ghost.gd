@@ -9,7 +9,12 @@ class_name PlayerGhost
 @onready var death_screen : Control = $DeathScreen
 
 # The amount of style points the player has
-var style_points : int = 20
+var style_points : int = 20:
+	set(value):
+		style_changed.emit(value)
+		style_points = value
+
+signal style_changed(new_style: float)
 
 var saved_style_pts : int = style_points
 

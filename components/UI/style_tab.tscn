@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bohbcugaop32e"]
+[gd_scene load_steps=3 format=3 uid="uid://bohbcugaop32e"]
+
+[ext_resource type="Script" path="res://components/UI/style_tab.gd" id="1_xbsuy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0300v"]
 bg_color = Color(0.6, 0.6, 0.6, 0.709804)
@@ -11,6 +13,7 @@ anchor_right = 1.0
 offset_left = -260.0
 offset_bottom = 429.0
 grow_horizontal = 0
+script = ExtResource("1_xbsuy")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

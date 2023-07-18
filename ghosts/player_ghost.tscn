@@ -4,14 +4,12 @@
 [ext_resource type="Script" path="res://ghosts/possession_modifier.gd" id="2_g7o7f"]
 [ext_resource type="PackedScene" uid="uid://gwfv6m72meua" path="res://components/UiScreens/death_screen.tscn" id="2_ovwii"]
 [ext_resource type="Script" path="res://components/UiScreens/death_screen.gd" id="3_sos6l"]
+[ext_resource type="PackedScene" uid="uid://bohbcugaop32e" path="res://components/UI/style_tab.tscn" id="5_eh0bf"]
 
 [sub_resource type="Resource" id="Resource_2k5th"]
 script = ExtResource("2_g7o7f")
 max_health_multiplier = 10.0
 base_damage_multiplier = 10.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0300v"]
-bg_color = Color(0.6, 0.6, 0.6, 0.709804)
 
 [node name="PlayerGhost" type="Node"]
 script = ExtResource("1_8tcsk")
@@ -21,31 +19,6 @@ possess_modifiers = SubResource("Resource_2k5th")
 visible = false
 script = ExtResource("3_sos6l")
 
-[node name="StyleTab" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -260.0
-offset_bottom = 429.0
-grow_horizontal = 0
+[node name="StyleTab" parent="." instance=ExtResource("5_eh0bf")]
 
-[node name="PanelContainer" type="PanelContainer" parent="StyleTab"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0300v")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="StyleTab/PanelContainer"]
-layout_mode = 2
-
-[node name="Logs" type="VBoxContainer" parent="StyleTab/PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="TotalStyle" type="Label" parent="StyleTab/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "STYLE: "
+[connection signal="style_changed" from="." to="StyleTab" method="_on_player_ghost_style_changed"]
