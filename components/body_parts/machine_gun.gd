@@ -80,6 +80,8 @@ func stop_shooting() -> void:
 func _on_health_component_died():
 	is_broken = true
 	stop_shooting()
+	if ghost_mount.shell != PlayerInfo.current_player_shell:
+		StyleManager.award_player_style(StyleManager.STYLE_FOR_BREAKING_WEAKPOINT)
 	
 
 func save_data() -> void:
