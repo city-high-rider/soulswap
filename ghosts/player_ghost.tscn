@@ -12,7 +12,6 @@ base_damage_multiplier = 10.0
 
 [node name="PlayerGhost" type="Node"]
 script = ExtResource("1_8tcsk")
-mouse_sensitivity = null
 possess_modifiers = SubResource("Resource_2k5th")
 
 [node name="DeathScreen" parent="." instance=ExtResource("2_ovwii")]

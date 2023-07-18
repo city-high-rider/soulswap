@@ -58,6 +58,9 @@ func get_ghost_inputs() -> GhostInput:
 func get_ghost_modifiers() -> PossessionModifier:
 	return PossessionModifier.new() if !ghost else ghost.possess_modifiers
 
+func get_ghost_style() -> int:
+	return 0 if !ghost or !"style_points" in ghost else ghost.style_points
+
 
 # TODO: Make this not suck
 func clear_ghost() -> void:
