@@ -7,32 +7,31 @@ class_name HealthComponent
 @export var max_health : int = 100:
 	set(value):
 		# make sure that we emit signals if we change the max health
-		max_health = value
+		max_health = max(1, value)
 		emit_signal("max_health_changed", value)
-	get:
-		return max_health
 
 # how much health do we currently have?
 var current_health : int = max_health:
 	set(value):
 		# again, make sure that the signals are emitted if we change health
-		current_health = value
-		emit_signal("health_changed", value) 
-	get:
-		return current_health
+		current_health = clamp(value, 0, max_health)
+		emit_signal("health_changed", current_health)
+		if current_health <= 0:
+			died.emit()
 
 var saved_health : HealthComponentSave = HealthComponentSave.new()
 
 # Here are some signals for connecting to bodies and other stuff
 
-## Emitted when health is changed.
+## Emitted when health is changed. Source is what caused the max health to change. 
+## This is usually a reference to an attacker.
 signal health_changed(new_health: int)
 
 ## Emitted when max health is changed.
 signal max_health_changed(new_max_health: int)
 
 ## Emitted when health reaches zero.
-signal died
+signal died(cause)
 
 func _ready() -> void:
 	CheckpointManager.checkpoint_activated.connect(save_health)
@@ -40,9 +39,9 @@ func _ready() -> void:
 	current_health = max_health
 	save_health()
 
-# method for taking damage
+
 func take_damage(damage: int) -> void:
-	current_health = max(0, current_health - damage)
+	current_health = clamp(current_health - damage, 0, max_health)
 	if current_health <= 0:
 		emit_signal("died")
 	else:
