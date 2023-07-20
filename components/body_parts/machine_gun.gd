@@ -77,13 +77,6 @@ func stop_shooting() -> void:
 	is_shooting = false
 
 
-func _on_health_component_died():
-	is_broken = true
-	stop_shooting()
-	if ghost_mount.shell != PlayerInfo.current_player_shell:
-		StyleManager.award_player_style(StyleManager.STYLE_FOR_BREAKING_WEAKPOINT)
-	
-
 func save_data() -> void:
 	current_save.is_broken = is_broken
 	current_save.saved_ammo = firing_time_left
@@ -91,3 +84,10 @@ func save_data() -> void:
 func load_data() -> void:
 	is_broken = current_save.is_broken
 	firing_time_left = current_save.saved_ammo
+
+
+func _on_gun_health_killed(source):
+	is_broken = true
+	stop_shooting()
+	if source is Shell and source.ghost_mount.ghost.has_method("award_style"):
+		source.ghost_mount.ghost.award_style(StyleManager.STYLE_FOR_BREAKING_WEAKPOINT, "+ WEAKPOINT BREAK")

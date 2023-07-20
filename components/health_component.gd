@@ -37,6 +37,10 @@ signal died(cause)
 ## carries additional information
 signal took_damage(new_health: int, source)
 
+## Emitted when the health reaches zero due to something. Similar to died, but has information
+## about the source.
+signal killed(source)
+
 
 func _ready() -> void:
 	CheckpointManager.checkpoint_activated.connect(save_health)
@@ -49,6 +53,7 @@ func take_damage(damage: int, source) -> void:
 	current_health = clamp(current_health - damage, 0, max_health)
 	if current_health <= 0:
 		emit_signal("died")
+		killed.emit(source)
 	else:
 		emit_signal("health_changed", current_health)
 		took_damage.emit(current_health, source)
