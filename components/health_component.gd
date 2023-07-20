@@ -50,8 +50,9 @@ func _ready() -> void:
 
 
 func take_damage(damage: int, source) -> void:
+	var is_already_dead : bool = current_health <= 0
 	current_health = clamp(current_health - damage, 0, max_health)
-	if current_health <= 0:
+	if current_health <= 0 and !is_already_dead:
 		emit_signal("died")
 		killed.emit(source)
 	else:
