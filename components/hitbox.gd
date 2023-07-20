@@ -12,6 +12,6 @@ class_name Hitbox
 @export var damage_multiplier : float = 1
 
 # function that is called when we take damgae.
-func take_damage(amount: float) -> void:
+func take_damage(amount: float, source) -> void:
 	if health_component:
-		health_component.take_damage(amount * damage_multiplier)
+		health_component.take_damage(amount * damage_multiplier, source)

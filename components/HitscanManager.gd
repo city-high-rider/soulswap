@@ -1,11 +1,14 @@
 extends Node
 class_name HitscanManager
 
-# this is a node that manages hitscan weapons. It is responsible for calling the
-# take_damage function on hitboxes and drawing tracers.
+## this is a node that manages hitscan weapons. It is responsible for calling the
+## take_damage function on hitboxes and drawing tracers.
 
-# which raycast should we use to check for collisions?
+## which raycast should we use to check for collisions?
 @export var raycast : RayCast3D
+
+# Set at runtime by the head.
+var associated_shell : Shell = null
 
 # this function should be called by a hitscan weapon when it fires, to which
 # it will pass its damage. We will check for a hit, and if there is one,
@@ -16,7 +19,7 @@ func check_hit(damage: float, tracer: PackedScene, barrel_pos: Vector3) -> bool:
 		return false
 	
 	if collider is Hitbox:
-		collider.take_damage(damage)
+		collider.take_damage(damage, associated_shell)
 		return true
 		
 	var new_tracer = tracer.instantiate()

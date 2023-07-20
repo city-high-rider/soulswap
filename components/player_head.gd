@@ -17,6 +17,7 @@ func _ready() -> void:
 		make_current()
 	ghost_mount.ghost_emitted_output.connect(_on_ghost_emitted_output)
 	ghost_mount.ghost_changed.connect(_on_ghost_mount_ghost_changed)
+	$HitscanManager.associated_shell = ghost_mount.shell
 
 func _physics_process(delta: float) -> void:
 	possess_cooldown = max(0, possess_cooldown - delta)
