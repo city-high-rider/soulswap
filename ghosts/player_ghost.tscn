@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://danr4y7gq7sch"]
+[gd_scene load_steps=8 format=3 uid="uid://danr4y7gq7sch"]
 
 [ext_resource type="Script" path="res://ghosts/player_ghost.gd" id="1_8tcsk"]
 [ext_resource type="Script" path="res://ghosts/possession_modifier.gd" id="2_g7o7f"]
@@ -11,6 +11,9 @@ script = ExtResource("2_g7o7f")
 max_health_multiplier = 10.0
 base_damage_multiplier = 10.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gojlh"]
+bg_color = Color(0.321569, 0.615686, 0.0941176, 0.882353)
+
 [node name="PlayerGhost" type="Node"]
 script = ExtResource("1_8tcsk")
 possess_modifiers = SubResource("Resource_2k5th")
@@ -20,5 +23,19 @@ visible = false
 script = ExtResource("3_sos6l")
 
 [node name="StyleTab" parent="." instance=ExtResource("5_eh0bf")]
+
+[node name="Crosshair" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gojlh")
 
 [connection signal="style_changed" from="." to="StyleTab" method="_on_player_ghost_style_changed"]
