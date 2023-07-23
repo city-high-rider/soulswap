@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://x1tnvx4dkc4v"]
+
+[ext_resource type="Texture2D" uid="uid://dm4xvfqe22k8y" path="res://addons/kenney_particle_pack/smoke_04.png" id="1_1m70h"]
+[ext_resource type="Script" path="res://interactive/rocket.gd" id="1_2pgdl"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cagxd"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.5
+radial_segments = 6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ohb6e"]
+size = Vector3(0.264022, 0.306118, 0.579228)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ee3fx"]
+direction = Vector3(0, 0, 1)
+spread = 15.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 3.15
+initial_velocity_max = 3.15
+angular_velocity_min = 12.52
+angular_velocity_max = 112.7
+angle_min = -35.0
+angle_max = 30.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mto5o"]
+transparency = 1
+albedo_texture = ExtResource("1_1m70h")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_phy5b"]
+material = SubResource("StandardMaterial3D_mto5o")
+
+[node name="Rocket" type="CharacterBody3D"]
+script = ExtResource("1_2pgdl")
+
+[node name="mesh" type="CSGCombiner3D" parent="."]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_cagxd")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.312728)
+radius = 0.0595549
+height = 0.258246
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ohb6e")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.324035)
+process_material = SubResource("ParticleProcessMaterial_ee3fx")
+draw_pass_1 = SubResource("QuadMesh_phy5b")
