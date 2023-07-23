@@ -27,7 +27,7 @@ mesh = SubResource("CapsuleMesh_3csjl")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 shape = SubResource("CapsuleShape3D_srfwc")
 
-[node name="BodyInformation" parent="PlayerUI" index="1"]
+[node name="BodyInformation" parent="PlayerUI" index="2"]
 shell_name = "Husk"
 shell_description = "Decaying body on the verge of death. You better find something else to possess quickly."
 

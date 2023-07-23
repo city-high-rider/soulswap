@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://cuna3v5lattg1"]
 
 [ext_resource type="PackedScene" uid="uid://bw42rj1kwnyl" path="res://shells/Husk.tscn" id="1_cbce8"]
-[ext_resource type="PackedScene" uid="uid://crknobkg2vxyr" path="res://shells/roller_machinegun_body.tscn" id="2_mowec"]
 [ext_resource type="PackedScene" uid="uid://cg16rkn3dhfno" path="res://interactive/trigger_spawner.tscn" id="3_5mhk1"]
 [ext_resource type="PackedScene" uid="uid://bu57v5cln1y64" path="res://interactive/checkpoint.tscn" id="3_l65ao"]
+[ext_resource type="PackedScene" uid="uid://b3cny3iljmcwh" path="res://shells/roller_machinegun.tscn" id="4_4aj81"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obdej"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -114,26 +114,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30505, 0.761631, -4.09735)
 shape = SubResource("BoxShape3D_20f7g")
 
 [node name="EnemySpawner" parent="TriggerSpawner" index="1"]
-enemy = ExtResource("2_mowec")
-
-[node name="TriggerSpawner2" parent="." instance=ExtResource("3_5mhk1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30505, 0.761631, 11.2898)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerSpawner2/Area3D" index="0"]
-shape = SubResource("BoxShape3D_20f7g")
-
-[node name="EnemySpawner" parent="TriggerSpawner2" index="1"]
-enemy = ExtResource("2_mowec")
-
-[node name="TriggerSpawner3" parent="." instance=ExtResource("3_5mhk1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.57177, 0.761631, 11.2898)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerSpawner3/Area3D" index="0"]
-shape = SubResource("BoxShape3D_20f7g")
-
-[node name="EnemySpawner" parent="TriggerSpawner3" index="1"]
-enemy = ExtResource("2_mowec")
+enemy = ExtResource("4_4aj81")
 
 [editable path="TriggerSpawner"]
-[editable path="TriggerSpawner2"]
-[editable path="TriggerSpawner3"]
