@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 PlayerInfo="*res://globals/PlayerInfo.gd"
 CheckpointManager="*res://globals/checkpoint_manager.gd"
+StyleManager="*res://globals/StyleManager.gd"
 
 [input]
 

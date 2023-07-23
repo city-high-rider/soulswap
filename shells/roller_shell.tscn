@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqtugrbwwuh6u"]
+
+[ext_resource type="PackedScene" uid="uid://dbuqn5jxrvv0k" path="res://shells/shell.tscn" id="1_06s5l"]
+[ext_resource type="Script" path="res://components/states/body_state_machine.gd" id="2_qp1sm"]
+[ext_resource type="Script" path="res://components/states/shell_states/ground_move.gd" id="3_7y0q3"]
+[ext_resource type="Script" path="res://components/states/shell_states/fall.gd" id="4_tfuk2"]
+[ext_resource type="Script" path="res://components/states/shell_states/down.gd" id="5_vloiw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_b2tq5"]
+radius = 0.560861
+
+[sub_resource type="SphereMesh" id="SphereMesh_2w6gs"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_k8ves"]
+
+[node name="Shell" instance=ExtResource("1_06s5l")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
+shape = SubResource("SphereShape3D_b2tq5")
+
+[node name="Head" parent="." index="4" node_paths=PackedStringArray("ghost_mount")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0105973, 0)
+ghost_mount = NodePath("../GhostMount")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="5"]
+mesh = SubResource("SphereMesh_2w6gs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="6"]
+shape = SubResource("SphereShape3D_k8ves")
+
+[node name="BodyStateMachine" type="Node" parent="." index="7" node_paths=PackedStringArray("ghost_mount", "down_state", "initial_state")]
+script = ExtResource("2_qp1sm")
+ghost_mount = NodePath("../GhostMount")
+down_state = NodePath("Down")
+initial_state = NodePath("move")
+
+[node name="move" type="Node" parent="BodyStateMachine" index="0" node_paths=PackedStringArray("fall_state")]
+script = ExtResource("3_7y0q3")
+fall_state = NodePath("../fall")
+
+[node name="fall" type="Node" parent="BodyStateMachine" index="1" node_paths=PackedStringArray("move_state")]
+script = ExtResource("4_tfuk2")
+move_state = NodePath("../move")
+gravity = -10.0
+
+[node name="Down" type="Node" parent="BodyStateMachine" index="2"]
+script = ExtResource("5_vloiw")

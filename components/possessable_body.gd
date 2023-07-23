@@ -10,6 +10,9 @@ class_name Shell
 ## Where is our ghost located?
 @export var ghost_mount : GhostMount
 
+## How hard is this body to possess?
+@export var possess_cost : float = 10
+
 ## Current saved data 
 var current_save : ShellCheckpointSave = ShellCheckpointSave.new()
 
