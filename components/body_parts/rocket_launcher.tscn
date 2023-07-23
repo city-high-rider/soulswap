@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://ojwlvk1tllof"]
+
+[ext_resource type="Script" path="res://components/body_parts/rocket_launcher.gd" id="1_fiomd"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="1_h836e"]
+[ext_resource type="Script" path="res://components/hitbox.gd" id="2_ko2fx"]
+[ext_resource type="PackedScene" uid="uid://x1tnvx4dkc4v" path="res://interactive/rocket.tscn" id="2_yqf4s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l2pvf"]
+size = Vector3(0.523522, 0.665309, 1)
+
+[node name="RocketLauncher" type="Node3D"]
+script = ExtResource("1_fiomd")
+rocket = ExtResource("2_yqf4s")
+
+[node name="mesh" type="CSGCombiner3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="mesh"]
+size = Vector3(0.378048, 0.571508, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="mesh/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.145508)
+operation = 2
+size = Vector3(0.259493, 0.379428, 0.849182)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("1_h836e")
+max_health = 40
+
+[node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("2_ko2fx")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("BoxShape3D_l2pvf")
