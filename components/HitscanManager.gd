@@ -30,3 +30,6 @@ func check_hit(damage: float, tracer: PackedScene, barrel_pos: Vector3) -> bool:
 	new_tracer.look_at(hit_pos)
 	new_tracer.rotate_x(PI/2)
 	return false
+
+func get_look_point():
+	return null if !raycast.is_colliding() else raycast.get_collision_point()
