@@ -1,5 +1,5 @@
 extends CharacterBody3D
 
 func _physics_process(delta: float) -> void:
-	velocity = to_global(Vector3.FORWARD)
+	velocity = -global_transform.basis.z * 5
 	move_and_slide()

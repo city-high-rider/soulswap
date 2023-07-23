@@ -16,7 +16,8 @@ func fire() -> void:
 	var destination : Vector3 = look_point if look_point else to_global(transform.origin + Vector3.FORWARD)
 	
 	var new_rocket = rocket.instantiate()
-	add_child(new_rocket)
+	get_node("/root").add_child(new_rocket)
+	new_rocket.global_transform.origin = global_transform.origin
 	new_rocket.look_at(destination)
 
 
