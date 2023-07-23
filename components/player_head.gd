@@ -12,6 +12,9 @@ class_name PlayerHead
 
 var possess_cooldown : float = 0
 
+## Emit this signal when the crosshair is on an enemy.
+signal aimed_at(shell: Shell)
+
 func _ready() -> void:
 	if ghost_mount.ghost is PlayerGhost:
 		make_current()
@@ -21,7 +24,15 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	possess_cooldown = max(0, possess_cooldown - delta)
+	# We might want to make this run less frequently later.
+	update_aimed_at()
 	
+func update_aimed_at() -> void:
+	if possess_ray.get_collider() is Shell:
+		aimed_at.emit(possess_ray.get_collider())
+	else:
+		aimed_at.emit(null)
+		
 func _on_ghost_emitted_output(action: String, payload) -> void:
 	match action:
 		"possess":
