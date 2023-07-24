@@ -3,7 +3,14 @@ extends CharacterBody3D
 @export var speed : float = 10
 @export var explosion : PackedScene
 
+var despawn_time : float = 10
+
 @onready var raycast : RayCast3D = $RayCast3D
+
+func _ready() -> void:
+	get_tree().create_timer(despawn_time).timeout.connect(queue_free)
+	
+	
 func _physics_process(delta: float) -> void:
 	velocity = -global_transform.basis.z * speed
 	move_and_slide()
