@@ -13,7 +13,7 @@ extends Node3D
 
 func fire() -> void:
 	var look_point = hitscan_manager.get_look_point()
-	var destination : Vector3 = look_point if look_point else to_global(transform.origin + Vector3.FORWARD)
+	var destination : Vector3 = look_point if look_point else -global_transform.basis.z
 	
 	var new_rocket = rocket.instantiate()
 	get_node("/root").add_child(new_rocket)
