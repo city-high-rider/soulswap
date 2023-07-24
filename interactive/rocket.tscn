@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://x1tnvx4dkc4v"]
+[gd_scene load_steps=9 format=3 uid="uid://x1tnvx4dkc4v"]
 
 [ext_resource type="Texture2D" uid="uid://dm4xvfqe22k8y" path="res://addons/kenney_particle_pack/smoke_04.png" id="1_1m70h"]
 [ext_resource type="Script" path="res://interactive/rocket.gd" id="1_2pgdl"]
+[ext_resource type="PackedScene" uid="uid://ytotx0jlnt1y" path="res://interactive/explosion.tscn" id="2_jrc86"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_cagxd"]
 top_radius = 0.15
@@ -37,6 +38,7 @@ material = SubResource("StandardMaterial3D_mto5o")
 [node name="Rocket" type="CharacterBody3D"]
 collision_layer = 0
 script = ExtResource("1_2pgdl")
+explosion = ExtResource("2_jrc86")
 
 [node name="mesh" type="CSGCombiner3D" parent="."]
 
