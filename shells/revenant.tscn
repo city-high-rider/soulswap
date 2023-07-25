@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://citqaeuav6del"]
+
+[ext_resource type="PackedScene" uid="uid://dbuqn5jxrvv0k" path="res://shells/shell.tscn" id="1_1tad4"]
+[ext_resource type="PackedScene" uid="uid://ojwlvk1tllof" path="res://components/body_parts/rocket_launcher.tscn" id="2_awkbc"]
+[ext_resource type="PackedScene" uid="uid://bbvuowxymf0du" path="res://components/states/state_machine.tscn" id="3_w057o"]
+[ext_resource type="Script" path="res://components/states/shell_states/ground_move.gd" id="4_p2g3i"]
+[ext_resource type="Script" path="res://components/states/body_state_machine.gd" id="4_vofwq"]
+[ext_resource type="Script" path="res://components/states/shell_states/fall.gd" id="5_yhnrt"]
+[ext_resource type="Script" path="res://components/states/shell_states/down.gd" id="6_ibufv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qocax"]
+radius = 0.552478
+height = 2.06935
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ws6mh"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cldw3"]
+
+[node name="Shell" instance=ExtResource("1_1tad4")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
+shape = SubResource("CapsuleShape3D_qocax")
+
+[node name="Head" parent="." index="4" node_paths=PackedStringArray("ghost_mount")]
+ghost_mount = NodePath("../GhostMount")
+
+[node name="RocketLauncher" parent="Head" index="2" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("2_awkbc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.792707, 0, 0)
+hitscan_manager = NodePath("../HitscanManager")
+ghost_mount = NodePath("../../GhostMount")
+
+[node name="RocketLauncher2" parent="Head" index="3" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("2_awkbc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.738479, 0, 0)
+hitscan_manager = NodePath("../HitscanManager")
+ghost_mount = NodePath("../../GhostMount")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="5"]
+shape = SubResource("CapsuleShape3D_ws6mh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="6"]
+mesh = SubResource("CapsuleMesh_cldw3")
+
+[node name="StateMachine" parent="." index="7" node_paths=PackedStringArray("ghost_mount", "down_state", "initial_state") instance=ExtResource("3_w057o")]
+script = ExtResource("4_vofwq")
+ghost_mount = NodePath("../GhostMount")
+down_state = NodePath("Down")
+initial_state = NodePath("Move")
+
+[node name="Move" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("fall_state")]
+script = ExtResource("4_p2g3i")
+fall_state = NodePath("../Fall")
+
+[node name="Fall" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("move_state")]
+script = ExtResource("5_yhnrt")
+move_state = NodePath("../Move")
+
+[node name="Down" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("6_ibufv")
+
+[editable path="Head"]

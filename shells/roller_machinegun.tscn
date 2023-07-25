@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3cny3iljmcwh"]
+[gd_scene load_steps=5 format=3 uid="uid://b3cny3iljmcwh"]
 
 [ext_resource type="PackedScene" uid="uid://bqtugrbwwuh6u" path="res://shells/roller_shell.tscn" id="1_36xw1"]
 [ext_resource type="PackedScene" uid="uid://bqsvtustc0gp6" path="res://ghosts/roller_ghost_strafe.tscn" id="2_60i08"]
 [ext_resource type="PackedScene" uid="uid://bdqf5sm42j8vl" path="res://components/body_parts/machine_gun.tscn" id="2_eoyr7"]
 [ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="2_shps3"]
-[ext_resource type="PackedScene" uid="uid://ojwlvk1tllof" path="res://components/body_parts/rocket_launcher.tscn" id="5_5akbt"]
 
 [node name="Shell" instance=ExtResource("1_36xw1")]
 
@@ -44,11 +43,6 @@ ghost_mount = NodePath("../../GhostMount")
 
 [node name="MachineGun2" parent="Head" index="3" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("2_eoyr7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.629007, 0.0105973, 0)
-hitscan_manager = NodePath("../HitscanManager")
-ghost_mount = NodePath("../../GhostMount")
-
-[node name="RocketLauncher" parent="Head" index="4" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("5_5akbt")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.827211, 0)
 hitscan_manager = NodePath("../HitscanManager")
 ghost_mount = NodePath("../../GhostMount")
 
