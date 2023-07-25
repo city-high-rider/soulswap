@@ -11,6 +11,9 @@ class_name PlayerGhost
 # Reference to the style tab.
 @onready var style_tab : Control = $StyleTab
 
+# Reference to popup label
+@onready var popup = $PopupText
+
 # The amount of style points the player has
 var style_points : int = 20:
 	set(value):

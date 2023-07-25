@@ -7,5 +7,5 @@ class_name PopupArea
 @export_multiline var message : String = ""
 
 func _on_body_entered(body):
-	if body is Shell:
-		body.UI.popup_text.set_text(message)
+	if body is Shell and "popup" in body.ghost_mount.ghost:
+		body.ghost_mount.ghost.popup.show_text(message)
