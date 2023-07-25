@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://components/states/shell_states/down.gd" id="5_vloiw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_b2tq5"]
-radius = 0.560861
+radius = 0.589485
 
 [sub_resource type="SphereMesh" id="SphereMesh_2w6gs"]
 

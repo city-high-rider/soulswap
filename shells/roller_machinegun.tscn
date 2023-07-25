@@ -23,13 +23,13 @@ grow_vertical = 0
 [node name="GunHp1" parent="PlayerUI/VBoxContainer" index="0" node_paths=PackedStringArray("health") instance=ExtResource("2_shps3")]
 layout_mode = 2
 size_flags_horizontal = 3
-health = NodePath("../../../MachineGun2/GunHealth")
+health = NodePath("../../../Head/MachineGun2/GunHealth")
 text = "Left gun"
 
 [node name="GunHp2" parent="PlayerUI/VBoxContainer" index="1" node_paths=PackedStringArray("health") instance=ExtResource("2_shps3")]
 layout_mode = 2
 size_flags_horizontal = 3
-health = NodePath("../../../MachineGun/GunHealth")
+health = NodePath("../../../Head/MachineGun/GunHealth")
 text = "Right gun"
 
 [node name="GhostMount" parent="." index="3" node_paths=PackedStringArray("ghost")]
@@ -37,21 +37,21 @@ ghost = NodePath("RollerGhost")
 
 [node name="RollerGhost" parent="GhostMount" index="0" instance=ExtResource("2_60i08")]
 
-[node name="MachineGun" parent="." index="8" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("2_eoyr7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.634191, 0, 0)
-hitscan_manager = NodePath("../Head/HitscanManager")
-ghost_mount = NodePath("../GhostMount")
+[node name="MachineGun" parent="Head" index="2" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("2_eoyr7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.634191, 0.0105973, 0)
+hitscan_manager = NodePath("../HitscanManager")
+ghost_mount = NodePath("../../GhostMount")
 
-[node name="MachineGun2" parent="." index="9" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("2_eoyr7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.629007, 0, 0)
-hitscan_manager = NodePath("../Head/HitscanManager")
-ghost_mount = NodePath("../GhostMount")
+[node name="MachineGun2" parent="Head" index="3" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("2_eoyr7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.629007, 0.0105973, 0)
+hitscan_manager = NodePath("../HitscanManager")
+ghost_mount = NodePath("../../GhostMount")
 
-[node name="RocketLauncher" parent="." index="10" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("5_5akbt")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.816614, 0)
-hitscan_manager = NodePath("../Head/HitscanManager")
-ghost_mount = NodePath("../GhostMount")
+[node name="RocketLauncher" parent="Head" index="4" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("5_5akbt")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.827211, 0)
+hitscan_manager = NodePath("../HitscanManager")
+ghost_mount = NodePath("../../GhostMount")
 
 [editable path="Head"]
-[editable path="MachineGun"]
-[editable path="MachineGun2"]
+[editable path="Head/MachineGun"]
+[editable path="Head/MachineGun2"]
