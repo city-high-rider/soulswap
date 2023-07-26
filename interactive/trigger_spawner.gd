@@ -4,6 +4,13 @@ extends Node3D
 # reference to the spawner
 @onready var spawner : EnemySpawner = $EnemySpawner
 
-func _on_area_3d_body_entered(body):
-	if body == PlayerInfo.current_player_shell:
+## Which area3D triggers this spawner?
+@export var trigger_area : Area3D
+
+func _ready():
+	trigger_area.body_entered.connect(_on_area_body_entered)
+	
+
+func _on_area_body_entered(body):
+	if body is Shell:
 		spawner.spawn()
