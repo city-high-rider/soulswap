@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bw42rj1kwnyl" path="res://shells/Husk.tscn" id="1_cbce8"]
 [ext_resource type="PackedScene" uid="uid://4pb4cmdkvqam" path="res://ghosts/dummy_ghost.tscn" id="3_sgn8s"]
 [ext_resource type="PackedScene" uid="uid://b3cny3iljmcwh" path="res://shells/roller_machinegun.tscn" id="4_4aj81"]
-[ext_resource type="Script" path="res://interactive/popup_area.gd" id="5_0sto5"]
 [ext_resource type="PackedScene" uid="uid://bu57v5cln1y64" path="res://interactive/checkpoint.tscn" id="5_48qpn"]
+[ext_resource type="PackedScene" uid="uid://cht1nvmsvv4nx" path="res://interactive/popup_area.tscn" id="5_d0ven"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obdej"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -24,8 +24,8 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d0qxv"]
 albedo_color = Color(0, 0.823529, 0.729412, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hoiu8"]
-size = Vector3(4.0106, 1, 3.5088)
+[sub_resource type="BoxShape3D" id="BoxShape3D_0wou1"]
+size = Vector3(2.76598, 1.41764, 2.58122)
 
 [node name="test_level" type="Node3D"]
 
@@ -130,45 +130,23 @@ ghost = NodePath("DummyGhost")
 
 [node name="DummyGhost" parent="Shell/GhostMount" index="1" instance=ExtResource("3_sgn8s")]
 
-[node name="PopupArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01732, 0)
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("5_0sto5")
-message = "Press F to possess enemies. This uses STYLE POINTS."
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PopupArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.423902, 0.467461)
-shape = SubResource("BoxShape3D_hoiu8")
-
-[node name="PopupArea2" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.94959, 1.01732, 8.54825)
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("5_0sto5")
-message = "Walk under the checkpoint to save your progress."
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PopupArea2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.423902, 0.467461)
-shape = SubResource("BoxShape3D_hoiu8")
-
-[node name="PopupArea3" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.698493, -2.55218, 15.8255)
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("5_0sto5")
-message = "The only way to get more health and ammo is by possessing a new host."
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PopupArea3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.423902, 0.467461)
-shape = SubResource("BoxShape3D_hoiu8")
-
 [node name="Checkpoint" parent="." instance=ExtResource("5_48qpn")]
 transform = Transform3D(-2.98023e-08, 0, 1, 0, 1, 0, -1, 0, -2.98023e-08, 0.101303, 0.212943, 12.4854)
 
-[connection signal="body_entered" from="PopupArea" to="PopupArea" method="_on_body_entered"]
-[connection signal="body_entered" from="PopupArea2" to="PopupArea2" method="_on_body_entered"]
-[connection signal="body_entered" from="PopupArea3" to="PopupArea3" method="_on_body_entered"]
+[node name="PopupArea" parent="." instance=ExtResource("5_d0ven")]
+message = "Press F to possess the enemy you are looking at. This costs STYLE POINTS."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PopupArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.34813)
+shape = SubResource("BoxShape3D_0wou1")
+
+[node name="PopupArea2" parent="." instance=ExtResource("5_d0ven")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0203912, -2.49868, 14.7412)
+message = "The only way to get more health and ammo is by possessing a new host."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PopupArea2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.34813)
+shape = SubResource("BoxShape3D_0wou1")
 
 [editable path="Shell"]
 [editable path="Shell/Head"]
