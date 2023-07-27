@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cuna3v5lattg1"]
+[gd_scene load_steps=16 format=3 uid="uid://cuna3v5lattg1"]
 
 [ext_resource type="PackedScene" uid="uid://bw42rj1kwnyl" path="res://shells/Husk.tscn" id="1_cbce8"]
 [ext_resource type="PackedScene" uid="uid://4pb4cmdkvqam" path="res://ghosts/dummy_ghost.tscn" id="3_sgn8s"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bu57v5cln1y64" path="res://interactive/checkpoint.tscn" id="5_48qpn"]
 [ext_resource type="PackedScene" uid="uid://cht1nvmsvv4nx" path="res://interactive/popup_area.tscn" id="5_d0ven"]
 [ext_resource type="PackedScene" uid="uid://brhsd0u2va3ch" path="res://interactive/sliding_door.tscn" id="6_uhxoa"]
+[ext_resource type="Script" path="res://interactive/wave_spawner.gd" id="7_0if2o"]
+[ext_resource type="PackedScene" uid="uid://br42dtyoaodv8" path="res://interactive/enemy_spawner.tscn" id="8_6grnl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obdej"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -27,6 +29,9 @@ albedo_color = Color(0, 0.823529, 0.729412, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0wou1"]
 size = Vector3(2.76598, 1.41764, 2.58122)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j8ask"]
+size = Vector3(2.53536, 1, 3.13774)
 
 [node name="test_level" type="Node3D"]
 
@@ -169,8 +174,36 @@ shape = SubResource("BoxShape3D_0wou1")
 transform = Transform3D(1, 0, 0, 0, 0.910783, 0, 0, 0, 1, 5.5377, -3.77132, 15.9063)
 initially_open = true
 
+[node name="Encounter" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.57978, 14.896)
+script = ExtResource("7_0if2o")
+
+[node name="EnemySpawner" parent="Encounter" instance=ExtResource("8_6grnl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99775, 0, -1.35501)
+enemy = ExtResource("4_4aj81")
+
+[node name="EnemySpawner2" parent="Encounter" instance=ExtResource("8_6grnl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99775, 0, 1.08268)
+enemy = ExtResource("4_4aj81")
+
+[node name="EnemySpawner3" parent="Encounter" instance=ExtResource("8_6grnl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99775, 0, 3.80313)
+enemy = ExtResource("4_4aj81")
+
+[node name="Area3D" type="Area3D" parent="Encounter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20674, 0, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Encounter/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.53142, 0.434407, 1.03476)
+shape = SubResource("BoxShape3D_j8ask")
+
 [connection signal="died" from="Shell/HealthComponent" to="Shell/GhostMount" method="_on_health_component_died" flags=18]
 [connection signal="ghost_cleared" from="Shell/GhostMount" to="Shell/PlayerUI" method="_on_ghost_mount_ghost_cleared" flags=18]
+[connection signal="all_enemies_killed" from="Encounter" to="SlidingDoor" method="_on_encounter_all_enemies_killed"]
+[connection signal="body_entered" from="Encounter/Area3D" to="SlidingDoor" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Encounter/Area3D" to="Encounter" method="_on_area_3d_body_entered"]
 
 [editable path="Shell"]
 [editable path="Shell/Head"]

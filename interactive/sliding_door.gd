@@ -27,3 +27,12 @@ func close() -> void:
 	is_open = false
 	animation_player.play("close")
 	
+
+
+func _on_encounter_all_enemies_killed():
+	open()
+
+
+func _on_area_3d_body_entered(body):
+	if body == PlayerInfo.current_player_shell:
+		close()

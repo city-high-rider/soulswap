@@ -2,7 +2,7 @@ extends Node3D
 ## This is a spawner that basically instantiates another scene.
 class_name EnemySpawner
 
-## Which thing should we spawn in?
+## Which thing should we spawn in? This should be a shell.
 @export var enemy : PackedScene
 
 # Has the spawner been used already?
@@ -11,7 +11,9 @@ var is_used : bool = false
 var saved_state : bool = false
 
 # Reference to the spawned enemy.
-var spawned_entity : Node
+var spawned_entity : Shell
+
+signal enemy_died
 
 func _ready() -> void:
 	CheckpointManager.checkpoint_activated.connect(save_state)
@@ -21,6 +23,7 @@ func spawn() -> void:
 	if is_used:
 		return
 	spawned_entity = enemy.instantiate()
+	spawned_entity.died.connect(on_enemy_died)
 	add_child(spawned_entity)
 	is_used = true
 
@@ -30,5 +33,9 @@ func save_state() -> void:
 func load_state() -> void:
 	is_used = saved_state
 	if !is_used and spawned_entity:
+		spawned_entity.died.disconnect(on_enemy_died)
 		spawned_entity.queue_free()
 		spawned_entity = null
+
+func on_enemy_died() -> void:
+	enemy_died.emit()
