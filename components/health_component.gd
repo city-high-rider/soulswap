@@ -16,8 +16,6 @@ var current_health : int = max_health:
 		# again, make sure that the signals are emitted if we change health
 		current_health = clamp(value, 0, max_health)
 		emit_signal("health_changed", current_health)
-		if current_health <= 0:
-			died.emit()
 
 var saved_health : HealthComponentSave = HealthComponentSave.new()
 
@@ -31,7 +29,7 @@ signal health_changed(new_health: int)
 signal max_health_changed(new_max_health: int)
 
 ## Emitted when health reaches zero.
-signal died(cause)
+signal died
 
 ## Emitted when we take damage from a specified source. Similar to health_changed, but
 ## carries additional information
