@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://brhsd0u2va3ch"]
+
+[ext_resource type="PackedScene" uid="uid://bmvo66mg5a8oi" path="res://interactive/slidingDoor.glb" id="1_3s4n2"]
+[ext_resource type="Script" path="res://interactive/sliding_door.gd" id="1_8hp1i"]
+
+[sub_resource type="Animation" id="Animation_j22m3"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("slidingDoor/door:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.114139, 0), Vector3(0, 2.86475, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xo47n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("slidingDoor/door:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.114139, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4x6w7"]
+resource_name = "close"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("slidingDoor/door:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 2.89148, 0), Vector3(0, 0.144429, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5h2q2"]
+_data = {
+"RESET": SubResource("Animation_xo47n"),
+"close": SubResource("Animation_4x6w7"),
+"open": SubResource("Animation_j22m3")
+}
+
+[node name="SlidingDoor" type="Node3D"]
+script = ExtResource("1_8hp1i")
+
+[node name="slidingDoor" parent="." instance=ExtResource("1_3s4n2")]
+
+[node name="door" parent="slidingDoor" index="1"]
+transform = Transform3D(0.3, 0, 0, 0, 1, 0, 0, 0, 1.2, 0, 0.114139, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5h2q2")
+}
+
+[editable path="slidingDoor"]
