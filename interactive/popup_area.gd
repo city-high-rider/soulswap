@@ -10,6 +10,6 @@ class_name PopupArea
 @onready var ping : AudioStreamPlayer3D = $ping
 
 func _on_body_entered(body):
-	if body is Shell and "popup" in body.ghost_mount.ghost:
+	if body is Shell and body.ghost_mount.ghost and "popup" in body.ghost_mount.ghost:
 		body.ghost_mount.ghost.popup.show_text(message)
 		ping.play()
