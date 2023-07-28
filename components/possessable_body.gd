@@ -42,5 +42,7 @@ func load_data() -> void:
 
 # This is used by spawners to check if the shell has died.
 func _on_health_component_died():
-	print_debug("shell " + str(self) + " killed")
+	hide()
+	if !self == PlayerInfo.last_saved_player_shell:
+		queue_free()
 	died.emit()

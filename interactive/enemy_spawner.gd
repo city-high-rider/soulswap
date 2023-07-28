@@ -38,4 +38,5 @@ func load_state() -> void:
 		spawned_entity = null
 
 func on_enemy_died() -> void:
+	spawned_entity = null
 	enemy_died.emit()
