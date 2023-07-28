@@ -17,7 +17,7 @@ func _ready() -> void:
 	for s in spawners:
 		s.enemy_died.connect(on_spawner_enemy_killed)
 	CheckpointManager.checkpoint_activated.connect(save_data)
-	CheckpointManager.checkpoint_activated.connect(load_data)
+	CheckpointManager.load_checkpoint.connect(load_data)
 		
 func on_spawner_enemy_killed():
 	amt_enemies_killed += 1
