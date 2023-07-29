@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://x1tnvx4dkc4v"]
+[gd_scene load_steps=10 format=3 uid="uid://x1tnvx4dkc4v"]
 
 [ext_resource type="Texture2D" uid="uid://dm4xvfqe22k8y" path="res://addons/kenney_particle_pack/smoke_04.png" id="1_1m70h"]
 [ext_resource type="Script" path="res://interactive/rocket.gd" id="1_2pgdl"]
@@ -35,6 +35,9 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_phy5b"]
 material = SubResource("StandardMaterial3D_mto5o")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_gv85l"]
+radius = 0.242677
+
 [node name="Rocket" type="CharacterBody3D"]
 collision_layer = 0
 script = ExtResource("1_2pgdl")
@@ -59,6 +62,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.324035)
 process_material = SubResource("ParticleProcessMaterial_ee3fx")
 draw_pass_1 = SubResource("QuadMesh_phy5b")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
-target_position = Vector3(0, 0, -0.6)
-collision_mask = 5
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.443233)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_gv85l")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
