@@ -5,7 +5,7 @@ extends Node3D
 
 @onready var explosion_sound : AudioStreamPlayer3D = $AudioStreamPlayer3D
 ## How far should we launch stuff that gets caught in the explosion?
-@export var knockback : float = 6.5
+@export var knockback : float = 8
 func _ready() -> void:
 	animation_player.play("explode")
 	explosion_sound.play()

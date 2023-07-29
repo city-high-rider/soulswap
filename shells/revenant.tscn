@@ -54,7 +54,7 @@ jump_height = 3.7
 [node name="Fall" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("move_state")]
 script = ExtResource("5_yhnrt")
 move_state = NodePath("../Move")
-gravity = -8.0
+gravity = -9.0
 
 [node name="Down" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("6_ibufv")

@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var speed : float = 20
+@export var speed : float = 27
 @export var explosion : PackedScene
 
 var despawn_time : float = 10
