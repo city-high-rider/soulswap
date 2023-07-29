@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://dsj8fh2gl627c"
-path="res://.godot/imported/tu_fire1.wav-e42937a5605ab5b42ac5cbb61080d4ed.sample"
+uid="uid://b8x3sk632ewnh"
+path="res://.godot/imported/rocketfire1.wav-f89589f297c4836ee083fe93e7d3c833.sample"
 
 [deps]
 
-source_file="res://sounds/tu_fire1.wav"
-dest_files=["res://.godot/imported/tu_fire1.wav-e42937a5605ab5b42ac5cbb61080d4ed.sample"]
+source_file="res://sounds/rocketfire1.wav"
+dest_files=["res://.godot/imported/rocketfire1.wav-f89589f297c4836ee083fe93e7d3c833.sample"]
 
 [params]
 

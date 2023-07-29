@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://x1tnvx4dkc4v"]
+[gd_scene load_steps=11 format=3 uid="uid://x1tnvx4dkc4v"]
 
 [ext_resource type="Texture2D" uid="uid://dm4xvfqe22k8y" path="res://addons/kenney_particle_pack/smoke_04.png" id="1_1m70h"]
 [ext_resource type="Script" path="res://interactive/rocket.gd" id="1_2pgdl"]
 [ext_resource type="PackedScene" uid="uid://ytotx0jlnt1y" path="res://interactive/explosion.tscn" id="2_jrc86"]
+[ext_resource type="AudioStream" uid="uid://gam0d6gpfxvl" path="res://sounds/rocket1.wav" id="4_qx2pt"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_cagxd"]
 top_radius = 0.15
@@ -68,4 +69,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.443233)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_gv85l")
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_qx2pt")
+volume_db = -4.0
+autoplay = true
+
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer3D" to="." method="_on_audio_stream_player_3d_finished"]

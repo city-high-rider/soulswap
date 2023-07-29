@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_ko2fx"]
 [ext_resource type="PackedScene" uid="uid://x1tnvx4dkc4v" path="res://interactive/rocket.tscn" id="2_yqf4s"]
 [ext_resource type="Script" path="res://components/audio_queue_3d.gd" id="5_prwi1"]
-[ext_resource type="AudioStream" uid="uid://dsj8fh2gl627c" path="res://sounds/tu_fire1.wav" id="6_rdxnw"]
+[ext_resource type="AudioStream" uid="uid://b8x3sk632ewnh" path="res://sounds/rocketfire1.wav" id="6_77ih1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l2pvf"]
 size = Vector3(0.523522, 0.665309, 1)
@@ -40,4 +40,4 @@ script = ExtResource("5_prwi1")
 depth = 3
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AudioQueue3D"]
-stream = ExtResource("6_rdxnw")
+stream = ExtResource("6_77ih1")
