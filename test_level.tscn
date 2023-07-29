@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cuna3v5lattg1"]
+[gd_scene load_steps=17 format=3 uid="uid://cuna3v5lattg1"]
 
 [ext_resource type="PackedScene" uid="uid://bw42rj1kwnyl" path="res://shells/Husk.tscn" id="1_cbce8"]
 [ext_resource type="PackedScene" uid="uid://4pb4cmdkvqam" path="res://ghosts/dummy_ghost.tscn" id="3_sgn8s"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://brhsd0u2va3ch" path="res://interactive/sliding_door.tscn" id="6_uhxoa"]
 [ext_resource type="Script" path="res://interactive/wave_spawner.gd" id="7_0if2o"]
 [ext_resource type="PackedScene" uid="uid://br42dtyoaodv8" path="res://interactive/enemy_spawner.tscn" id="8_6grnl"]
+[ext_resource type="PackedScene" uid="uid://citqaeuav6del" path="res://shells/revenant.tscn" id="9_nenpd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obdej"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -199,8 +200,30 @@ collision_mask = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.53142, 0.434407, 1.03476)
 shape = SubResource("BoxShape3D_j8ask")
 
-[connection signal="died" from="Shell/HealthComponent" to="Shell/GhostMount" method="_on_health_component_died" flags=18]
-[connection signal="ghost_cleared" from="Shell/GhostMount" to="Shell/PlayerUI" method="_on_ghost_mount_ghost_cleared" flags=18]
+[node name="Shell2" parent="." instance=ExtResource("9_nenpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.12235, -2.88981, 18.6076)
+
+[node name="NavigationRegion3D2" type="NavigationRegion3D" parent="."]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.478, 0, 15.4024)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D2/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.596704, -0.985387, 0.574188)
+size = Vector3(3.65079, 0.43188, 2.29905)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D2/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.5772, -0.985386, 0.565289)
+size = Vector3(3.65079, 0.43188, 2.29905)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D2/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8668, 6.34371, -2.51045)
+size = Vector3(7.58648, 3.77171, 0.417422)
+
+[node name="Checkpoint2" parent="." instance=ExtResource("5_48qpn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7991, -3.07154, 14.5849)
+
 [connection signal="all_enemies_killed" from="Encounter" to="SlidingDoor" method="_on_encounter_all_enemies_killed"]
 [connection signal="body_entered" from="Encounter/Area3D" to="SlidingDoor" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="Encounter/Area3D" to="Encounter" method="_on_area_3d_body_entered"]
