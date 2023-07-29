@@ -13,6 +13,9 @@ extends Node3D
 @export var fire_period_s : float = 1
 var current_fire_cooldown : float = 0
 
+# reference to firing sound
+@onready var fire_sound : AudioQueue3D = $AudioQueue3D
+
 func fire() -> void:
 	if !current_fire_cooldown == 0:
 		return
@@ -24,6 +27,7 @@ func fire() -> void:
 	get_node("/root").add_child(new_rocket)
 	new_rocket.global_transform.origin = global_transform.origin
 	new_rocket.look_at(destination)
+	fire_sound.play_sound()
 
 
 func _physics_process(delta: float) -> void:

@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ojwlvk1tllof"]
+[gd_scene load_steps=8 format=3 uid="uid://ojwlvk1tllof"]
 
 [ext_resource type="Script" path="res://components/body_parts/rocket_launcher.gd" id="1_fiomd"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="1_h836e"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_ko2fx"]
 [ext_resource type="PackedScene" uid="uid://x1tnvx4dkc4v" path="res://interactive/rocket.tscn" id="2_yqf4s"]
+[ext_resource type="Script" path="res://components/audio_queue_3d.gd" id="5_prwi1"]
+[ext_resource type="AudioStream" uid="uid://dsj8fh2gl627c" path="res://sounds/tu_fire1.wav" id="6_rdxnw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l2pvf"]
 size = Vector3(0.523522, 0.665309, 1)
@@ -32,3 +34,10 @@ health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 shape = SubResource("BoxShape3D_l2pvf")
+
+[node name="AudioQueue3D" type="Node3D" parent="."]
+script = ExtResource("5_prwi1")
+depth = 3
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AudioQueue3D"]
+stream = ExtResource("6_rdxnw")
