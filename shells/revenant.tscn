@@ -49,10 +49,12 @@ initial_state = NodePath("Move")
 [node name="Move" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("fall_state")]
 script = ExtResource("4_p2g3i")
 fall_state = NodePath("../Fall")
+jump_height = 3.7
 
 [node name="Fall" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("move_state")]
 script = ExtResource("5_yhnrt")
 move_state = NodePath("../Move")
+gravity = -8.0
 
 [node name="Down" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("6_ibufv")
