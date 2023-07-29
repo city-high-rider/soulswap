@@ -3,10 +3,12 @@ extends Node3D
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var blast_radius : Area3D = $BlastRadius
 
+@onready var explosion_sound : AudioStreamPlayer3D = $AudioStreamPlayer3D
 ## How far should we launch stuff that gets caught in the explosion?
 @export var knockback : float = 6.5
 func _ready() -> void:
 	animation_player.play("explode")
+	explosion_sound.play()
 	await animation_player.animation_finished
 	queue_free()
 
