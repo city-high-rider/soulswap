@@ -21,6 +21,10 @@ height = 2.06935
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 shape = SubResource("CapsuleShape3D_qocax")
 
+[node name="BodyInformation" parent="PlayerUI" index="2"]
+shell_name = "Revenant"
+shell_description = "Armored unit with rocket launchers. try rocket jumping! (Yes, inspired by doom)"
+
 [node name="Head" parent="." index="4" node_paths=PackedStringArray("ghost_mount")]
 ghost_mount = NodePath("../GhostMount")
 
@@ -60,5 +64,7 @@ gravity = -9.0
 
 [node name="Down" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("6_ibufv")
+
+[connection signal="died" from="HealthComponent" to="StateMachine" method="_on_health_component_died"]
 
 [editable path="Head"]
