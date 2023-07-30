@@ -9,10 +9,17 @@ class_name AiState
 # body towards facing this point on the y-axis by some speed.
 # this function works in radians, by the way.
 func look_towards_y(pos: Vector3, rotation_speed: float, delta: float) -> Vector2:
-	var local_pos : Vector3 = user.to_local(pos)
+	var local_pos : Vector3 = user.ghost_mount.shell.to_local(pos)
 	var y_angle : float = Vector3.FORWARD.angle_to(local_pos * Vector3(1, 0, 1)) * sign(local_pos.x)
 	return Vector2(sign(y_angle) * min(delta * rotation_speed, abs(y_angle)),0)
+	
+func look_towards_x(pos: Vector3, rotation_speed: float, delta: float) -> Vector2:
+	var local_pos : Vector3 = user.ghost_mount.shell.head.to_local(pos)
+	var x_angle : float = -Vector3.UP.angle_to(local_pos * Vector3(0, 1, 1)) * sign(local_pos.y)
+	return Vector2(0,sign(x_angle) * min(delta * rotation_speed, abs(x_angle)))
 
+func aim_at(pos: Vector3, pitch_speed: float, yaw_speed: float, delta: float) -> Vector2:
+	return Vector2(look_towards_y(pos, yaw_speed, delta).x, look_towards_x(pos, pitch_speed, delta).y)
 
 # This function takes a position in global space, and tells us which directional inputs will move
 # us in that direction, factoring in where we are looking.
