@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://lervnyrjgjsh" path="res://addons/kenney_particle_pack/spark_04.png" id="1_gohi0"]
 [ext_resource type="Script" path="res://interactive/energy_pellet.gd" id="1_tpuh5"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_c4o5c"]
+radius = 0.250649
+
 [sub_resource type="Curve" id="Curve_ef4md"]
 _data = [Vector2(0, 0.4), 0.0, 0.0, 0, 0, Vector2(0.565217, 0.821053), 0.0, 0.0, 0, 0, Vector2(1, 0.494737), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -38,9 +41,6 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_j620i")
 size = Vector2(0.8, 0.8)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_c4o5c"]
-radius = 0.250649
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yn5fd"]
 transparency = 1
 albedo_color = Color(1, 0.686275, 1, 0.0862745)
@@ -54,8 +54,12 @@ height = 0.1
 radial_segments = 8
 rings = 4
 
-[node name="energy_pellet" type="Node3D"]
+[node name="energy_pellet" type="RigidBody3D"]
+gravity_scale = 0.0
 script = ExtResource("1_tpuh5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_c4o5c")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 amount = 20
