@@ -31,15 +31,12 @@ func close() -> void:
 	animation_player.play("close")
 	
 
-
 func _on_encounter_all_enemies_killed():
 	open()
 
-
-func _on_area_3d_body_entered(body):
-	if body == PlayerInfo.current_player_shell:
-		close()
-
+func _on_encounter_encounter_started():
+	close()
+	
 func save_data() -> void:
 	saved_state = is_open
 
@@ -49,3 +46,5 @@ func load_data() -> void:
 		open()
 	else:
 		close()
+
+

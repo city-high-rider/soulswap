@@ -282,10 +282,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.6284, -2.59507, 17.6081)
 [node name="Shell3" parent="." instance=ExtResource("10_jsy2h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.521103, 4.95184, 7.43138)
 
-[connection signal="died" from="Shell/HealthComponent" to="Shell/GhostMount" method="_on_health_component_died" flags=18]
-[connection signal="ghost_cleared" from="Shell/GhostMount" to="Shell/PlayerUI" method="_on_ghost_mount_ghost_cleared" flags=18]
 [connection signal="all_enemies_killed" from="Encounter" to="SlidingDoor" method="_on_encounter_all_enemies_killed"]
-[connection signal="body_entered" from="Encounter/Area3D" to="SlidingDoor" method="_on_area_3d_body_entered"]
+[connection signal="encounter_started" from="Encounter" to="SlidingDoor" method="_on_encounter_encounter_started"]
 [connection signal="body_entered" from="Encounter/Area3D" to="Encounter" method="_on_area_3d_body_entered"]
 
 [editable path="Shell"]
