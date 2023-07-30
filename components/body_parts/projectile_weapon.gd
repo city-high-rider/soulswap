@@ -19,7 +19,7 @@ var current_fire_cooldown = fire_period_s
 @export var barrel_pos : Marker3D
 
 ## How fast do we shoot the projectile?
-@export var muzzle_speed : float = 30
+@export var muzzle_speed : float = 20
 
 ## Which audio player do we use for gunfire sound?
 @export var gunfire_sound : AudioQueue3D
@@ -33,7 +33,8 @@ func fire():
 	new_projectile.global_transform.origin = global_transform.origin if !barrel_pos else barrel_pos.global_transform.origin
 	var destination : Vector3 = get_destination_point()
 	new_projectile.look_at(destination)
-#	new_projectile.velocity = (destination - new_projectile.global_transform.origin) * muzzle_speed
+	if "linear_velocity" in new_projectile:
+		new_projectile.linear_velocity = (destination - new_projectile.global_transform.origin).normalized() * muzzle_speed
 	if gunfire_sound:
 		gunfire_sound.play_sound()
 	
