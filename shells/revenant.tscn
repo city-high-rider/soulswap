@@ -24,15 +24,17 @@ shape = SubResource("CapsuleShape3D_qocax")
 [node name="Head" parent="." index="4" node_paths=PackedStringArray("ghost_mount")]
 ghost_mount = NodePath("../GhostMount")
 
-[node name="RocketLauncher" parent="Head" index="2" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("2_awkbc")]
+[node name="RocketLauncher" parent="Head" index="2" node_paths=PackedStringArray("ghost_mount", "hitscan_manager") instance=ExtResource("2_awkbc")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.792707, 0, 0)
-hitscan_manager = NodePath("../HitscanManager")
 ghost_mount = NodePath("../../GhostMount")
+hitscan_manager = NodePath("../HitscanManager")
+muzzle_speed = 26.0
 
-[node name="RocketLauncher2" parent="Head" index="3" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("2_awkbc")]
+[node name="RocketLauncher2" parent="Head" index="3" node_paths=PackedStringArray("ghost_mount", "hitscan_manager") instance=ExtResource("2_awkbc")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.738479, 0, 0)
-hitscan_manager = NodePath("../HitscanManager")
 ghost_mount = NodePath("../../GhostMount")
+hitscan_manager = NodePath("../HitscanManager")
+muzzle_speed = 26.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="5"]
 shape = SubResource("CapsuleShape3D_ws6mh")
