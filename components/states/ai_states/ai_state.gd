@@ -8,11 +8,18 @@ class_name AiState
 # This function takes a vector3 in global space amd returns mouse inputs that will move the 
 # body towards facing this point on the y-axis by some speed.
 # this function works in radians, by the way.
+
+# We deal with yaw and pitch separately. In both cases, we get the target position relative to us.
+# then for yaw, we project the position onto the horizontal (XZ plane) and get the angle from our forward direction to that point.
+# We save the sign (direction), and then rotate by whichever is smaller: the angle itself, or the amount our rotation speed lets us rotate. This is to avoid
+# jittering where we constantly over or undershoot the position.
 func look_towards_y(pos: Vector3, rotation_speed: float, delta: float) -> Vector2:
 	var local_pos : Vector3 = user.ghost_mount.shell.to_local(pos)
 	var y_angle : float = Vector3.FORWARD.angle_to(local_pos * Vector3(1, 0, 1)) * sign(local_pos.x)
 	return Vector2(sign(y_angle) * min(delta * rotation_speed, abs(y_angle)),0)
-	
+
+# Pitch is similar, but we project onto the ZY plane. We also need to get the position relative to the
+# shell's *head*, since that is the part that pitches.
 func look_towards_x(pos: Vector3, rotation_speed: float, delta: float) -> Vector2:
 	var local_pos : Vector3 = user.ghost_mount.shell.head.to_local(pos)
 	var x_angle : float = -Vector3.UP.angle_to(local_pos * Vector3(0, 1, 1)) * sign(local_pos.y)
