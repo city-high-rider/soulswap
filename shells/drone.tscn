@@ -20,6 +20,10 @@ possess_cost = 0.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.188357, -0.0493674)
 shape = SubResource("BoxShape3D_yh22a")
 
+[node name="BodyInformation" parent="PlayerUI" index="2"]
+shell_name = "Drone"
+shell_description = "A more advanced aerial drone that can buff allies."
+
 [node name="GhostMount" parent="." index="3" node_paths=PackedStringArray("ghost")]
 ghost = NodePath("DummyGhost")
 
@@ -29,6 +33,12 @@ ghost_mount = NodePath("..")
 [node name="Head" parent="." index="4" node_paths=PackedStringArray("ghost_mount")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.187098, -0.867492)
 ghost_mount = NodePath("../GhostMount")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Head" index="2"]
+light_color = Color(0.580392, 1, 1, 1)
+light_energy = 5.0
+spot_range = 27.397
+spot_angle = 15.7856
 
 [node name="mesh" type="CSGCombiner3D" parent="." index="5"]
 

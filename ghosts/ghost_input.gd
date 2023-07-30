@@ -16,3 +16,9 @@ class_name GhostInput
 
 ## Are we holding down the primary action? Usually this is firing bound to mouse one.
 @export var primary_depressed : bool = false
+
+## Are we holding down the secondary action? 
+@export var secondary_depressed : bool = false
+
+## Are we holding down shift?
+@export var shift_depressed : bool = false

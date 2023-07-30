@@ -42,6 +42,8 @@ func _process(_delta: float) -> void:
 		current_inputs.input_direction = Vector2.ZERO
 		
 	current_inputs.primary_depressed = Input.is_action_pressed("primary_action")
+	current_inputs.secondary_depressed = Input.is_action_pressed("secondary_action")
+	current_inputs.shift_depressed = Input.is_action_pressed("shift")
 	
 	
 func _input(event: InputEvent) -> void:
