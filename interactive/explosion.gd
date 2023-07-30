@@ -20,4 +20,5 @@ func _on_blast_radius_area_entered(area):
 
 func _on_blast_radius_body_entered(body):
 	if body is CharacterBody3D:
-		body.velocity += (body.global_transform.origin - global_transform.origin) * knockback
+		# vector3.up is added so that it's more likely the explosion will launch us UP
+		body.velocity += (body.global_transform.origin - global_transform.origin + Vector3.UP) * knockback
