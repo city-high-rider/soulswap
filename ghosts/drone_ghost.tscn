@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmu0ewqc3l77d"]
+
+[ext_resource type="Script" path="res://ghosts/drone_ghost.gd" id="1_o0u8i"]
+[ext_resource type="Script" path="res://components/states/state_machine.gd" id="1_pgvxq"]
+[ext_resource type="Script" path="res://ghosts/FlyAround.gd" id="2_ffkrn"]
+
+[node name="drone_ghost" type="Node3D"]
+script = ExtResource("1_o0u8i")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_pgvxq")
+initial_state = NodePath("FlyAround")
+
+[node name="FlyAround" type="Node" parent="StateMachine"]
+script = ExtResource("2_ffkrn")

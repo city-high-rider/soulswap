@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cpqfimtyl8vh3"]
 
 [ext_resource type="PackedScene" uid="uid://dbuqn5jxrvv0k" path="res://shells/shell.tscn" id="1_jdhm6"]
-[ext_resource type="PackedScene" uid="uid://4pb4cmdkvqam" path="res://ghosts/dummy_ghost.tscn" id="2_fvu6u"]
+[ext_resource type="PackedScene" uid="uid://cmu0ewqc3l77d" path="res://ghosts/drone_ghost.tscn" id="2_f1wu5"]
 [ext_resource type="Script" path="res://components/states/body_state_machine.gd" id="2_utytf"]
 [ext_resource type="Script" path="res://components/states/shell_states/down.gd" id="3_3wvmm"]
 [ext_resource type="Script" path="res://components/states/shell_states/float.gd" id="3_yp4bi"]
@@ -26,9 +26,9 @@ shell_name = "Drone"
 shell_description = "A more advanced aerial drone that can buff allies."
 
 [node name="GhostMount" parent="." index="3" node_paths=PackedStringArray("ghost")]
-ghost = NodePath("DummyGhost")
+ghost = NodePath("drone_ghost")
 
-[node name="DummyGhost" parent="GhostMount" index="0" node_paths=PackedStringArray("ghost_mount") instance=ExtResource("2_fvu6u")]
+[node name="drone_ghost" parent="GhostMount" index="0" node_paths=PackedStringArray("ghost_mount") instance=ExtResource("2_f1wu5")]
 ghost_mount = NodePath("..")
 
 [node name="Head" parent="." index="4" node_paths=PackedStringArray("ghost_mount")]
