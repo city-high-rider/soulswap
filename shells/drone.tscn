@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cpqfimtyl8vh3"]
+[gd_scene load_steps=9 format=3 uid="uid://cpqfimtyl8vh3"]
 
 [ext_resource type="PackedScene" uid="uid://dbuqn5jxrvv0k" path="res://shells/shell.tscn" id="1_jdhm6"]
 [ext_resource type="PackedScene" uid="uid://4pb4cmdkvqam" path="res://ghosts/dummy_ghost.tscn" id="2_fvu6u"]
 [ext_resource type="Script" path="res://components/states/body_state_machine.gd" id="2_utytf"]
 [ext_resource type="Script" path="res://components/states/shell_states/down.gd" id="3_3wvmm"]
 [ext_resource type="Script" path="res://components/states/shell_states/float.gd" id="3_yp4bi"]
+[ext_resource type="PackedScene" uid="uid://cmjocoje631gc" path="res://components/body_parts/plasma_gun.tscn" id="6_8m3lb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yh22a"]
 size = Vector3(1, 0.605991, 1.72433)
@@ -83,3 +84,10 @@ script = ExtResource("3_yp4bi")
 
 [node name="Down" type="Node" parent="StateMachine" index="1"]
 script = ExtResource("3_3wvmm")
+
+[node name="plasma_gun" parent="." index="8" node_paths=PackedStringArray("ghost_mount", "hitscan_manager") instance=ExtResource("6_8m3lb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.577859, 0)
+ghost_mount = NodePath("../GhostMount")
+hitscan_manager = NodePath("../Head/HitscanManager")
+
+[editable path="Head"]
