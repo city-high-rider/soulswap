@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	
 func get_destination_point() -> Vector3:
 	# If we aren't looking at anything than the destination is in front of the barrel if we have one, or in front of the gun.
-	var backup_point : Vector3 = -global_transform.basis.z if !barrel_pos else -barrel_pos.global_transform.basis.z
+	var backup_point : Vector3 = global_transform.basis.z + global_transform.origin if !barrel_pos else barrel_pos.global_transform.origin + barrel_pos.global_transform.basis.z
 	# If we have a hitscan manager that is colliding, then the collision point is our priority
 	if hitscan_manager and hitscan_manager.get_look_point():
 		return hitscan_manager.get_look_point()

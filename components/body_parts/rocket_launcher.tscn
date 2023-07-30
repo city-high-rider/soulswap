@@ -11,6 +11,7 @@
 size = Vector3(0.523522, 0.665309, 1)
 
 [node name="RocketLauncher" type="Node3D" node_paths=PackedStringArray("barrel_pos", "gunfire_sound")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_dqpec")
 projectile = ExtResource("2_yqf4s")
 fire_period_s = 1.0
