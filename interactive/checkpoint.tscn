@@ -1,9 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://bu57v5cln1y64"]
+[gd_scene load_steps=13 format=3 uid="uid://bu57v5cln1y64"]
 
 [ext_resource type="Script" path="res://interactive/checkpoint.gd" id="1_uf1ik"]
 [ext_resource type="Texture2D" uid="uid://dsligvtxga0r3" path="res://addons/kenney_particle_pack/star_07.png" id="2_1dvdi"]
+[ext_resource type="Material" uid="uid://c78qerjjpjysg" path="res://materials/light_proto.tres" id="2_j2e26"]
 [ext_resource type="AudioStream" uid="uid://b17k3nk28bwae" path="res://sounds/lighting-a-fire-14421.mp3" id="3_hrjk7"]
 [ext_resource type="AudioStream" uid="uid://dh28je1fr2q3c" path="res://sounds/fire-6699.mp3" id="4_kvlsv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p0mq5"]
+transparency = 1
+albedo_color = Color(0.470588, 1, 1, 0.705882)
 
 [sub_resource type="Curve" id="Curve_hiuex"]
 _data = [Vector2(0, 0.873684), 0.0, 0.0, 0, 0, Vector2(0.521739, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -44,6 +49,7 @@ script = ExtResource("1_uf1ik")
 [node name="CSGBox3D" type="CSGBox3D" parent="Lantern"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.901085, -1.15514)
 size = Vector3(0.348215, 2.93949, 0.328407)
+material = ExtResource("2_j2e26")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Lantern"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99482, -0.595937)
@@ -57,6 +63,7 @@ height = 0.234395
 [node name="CSGBox3D3" type="CSGBox3D" parent="Lantern"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41672, -0.381112)
 size = Vector3(0.405567, 0.464371, 0.383577)
+material = SubResource("StandardMaterial3D_p0mq5")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Lantern/CSGBox3D3"]
 emitting = false

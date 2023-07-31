@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqtugrbwwuh6u"]
+[gd_scene load_steps=10 format=3 uid="uid://bqtugrbwwuh6u"]
 
 [ext_resource type="PackedScene" uid="uid://dbuqn5jxrvv0k" path="res://shells/shell.tscn" id="1_06s5l"]
 [ext_resource type="Script" path="res://components/states/body_state_machine.gd" id="2_qp1sm"]
@@ -9,7 +9,11 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_b2tq5"]
 radius = 0.579938
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8bt6j"]
+albedo_color = Color(1, 0.188235, 0.235294, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_2w6gs"]
+material = SubResource("StandardMaterial3D_8bt6j")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_k8ves"]
 
