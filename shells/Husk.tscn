@@ -17,6 +17,7 @@ radius = 0.554326
 height = 2.03961
 
 [node name="Husk" instance=ExtResource("1_1y6hf")]
+possess_cost = 0.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
 shape = SubResource("CapsuleShape3D_vxp60")
