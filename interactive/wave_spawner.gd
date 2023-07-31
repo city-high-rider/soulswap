@@ -15,6 +15,7 @@ var amt_enemies_killed : int = 0
 var enemies_killed_save : int = 0
 
 var encounter_finished : bool = false
+var encounter_finished_save : bool = encounter_finished
 
 func _ready() -> void:
 	spawners = get_children().filter(func(c): return c is EnemySpawner)
@@ -31,9 +32,11 @@ func on_spawner_enemy_killed():
 
 func save_data() -> void:
 	enemies_killed_save = amt_enemies_killed
+	encounter_finished_save = encounter_finished
 	
 func load_data() -> void:
 	amt_enemies_killed = enemies_killed_save
+	encounter_finished = encounter_finished_save
 
 func start() -> void:
 	encounter_started.emit()
