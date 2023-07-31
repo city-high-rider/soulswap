@@ -62,8 +62,8 @@ script = ExtResource("1_tpuh5")
 shape = SubResource("SphereShape3D_c4o5c")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-amount = 20
-trail_lifetime = 0.2
+amount = 50
+lifetime = 0.4
 process_material = SubResource("ParticleProcessMaterial_o6sb1")
 draw_pass_1 = SubResource("QuadMesh_8wxe3")
 
