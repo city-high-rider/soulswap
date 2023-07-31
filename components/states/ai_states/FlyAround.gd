@@ -23,8 +23,20 @@ var destination : Vector3 = Vector3.ZERO
 var time_till_next_point = new_destination_period_s
 var destination_point_moe : float = 3
 
+## Path to swoop attack state
+@export var swoop_state : AiState
+
+## How long should we wait before doing something (attack / buff)?
+@export var action_delay : float = 8
+var cur_action_delay : float = action_delay
+
+func enter() -> void:
+	cur_action_delay = action_delay
+	
 func handle_physics(delta: float) -> void:
 	time_till_next_point = max(time_till_next_point - delta, 0)
+	cur_action_delay = max(cur_action_delay - delta, 0)
+		
 	get_target()
 	if !target:
 		return
@@ -32,6 +44,8 @@ func handle_physics(delta: float) -> void:
 	if time_till_next_point <= 0 or user.global_transform.origin.distance_to(destination) < destination_point_moe:
 		destination = get_new_destination()
 		time_till_next_point = new_destination_period_s
+		if cur_action_delay <= 0:
+			state_machine.switch_state(swoop_state)
 		
 	# Look at the target
 	inputs.mouse_direction = aim_at(target.global_transform.origin, PI/2, PI/2, delta)
