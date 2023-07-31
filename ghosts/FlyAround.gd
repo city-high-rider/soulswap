@@ -10,26 +10,31 @@ var inputs : GhostInput = GhostInput.new()
 var destination : Vector3 = Vector3.ZERO
 
 ## How high should we be above the target?
-@export var desired_elevation : float = 12
+@export var desired_elevation : float = 15
 
 ## What's considered "close enough" for height?
 @export var height_moe : float = 1.5
 
 ## How far away should we fly from the target?
-@export var orbit_radius : float = 12
+@export var orbit_radius : float = 30
 
 ## How long should we wait before picking a new destination point?
 @export var new_destination_period_s : float = 3
 var time_till_next_point = new_destination_period_s
+var destination_point_moe : float = 3
 
 func handle_physics(delta: float) -> void:
 	time_till_next_point = max(time_till_next_point - delta, 0)
+	get_target()
 	if !target:
-		get_target()
+		return
 		
-	if time_till_next_point <= 0:
+	if time_till_next_point <= 0 or user.global_transform.origin.distance_to(destination) < destination_point_moe:
 		destination = get_new_destination()
 		time_till_next_point = new_destination_period_s
+		
+	# Look at the target
+	inputs.mouse_direction = aim_at(target.global_transform.origin, PI/2, PI/2, delta)
 	
 	# Move in direction of destination
 	inputs.input_direction = input_move_towards(destination)
@@ -54,7 +59,7 @@ func get_new_destination() -> Vector3:
 	# Yes, it's possible to hit a wall. but we are usually flying very high above the terrain so it shouldn't
 	# happen often.
 	var random_angle : float = randf_range(0, TAU)
-	return target.global_transform.origin + Vector3(cos(random_angle), desired_elevation, sin(random_angle)) * orbit_radius
+	return target.global_transform.origin + Vector3(cos(random_angle) * orbit_radius, desired_elevation, sin(random_angle) * orbit_radius)
 
 func get_target() -> void:
 	target = PlayerInfo.current_player_shell
