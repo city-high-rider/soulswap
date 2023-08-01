@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 ## This is a node that represents a buff. It should be a child of BuffManager
 class_name ShellBuff
 

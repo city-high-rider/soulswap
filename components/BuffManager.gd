@@ -1,4 +1,5 @@
-extends Node
+# We inherit fron node3d in case any buffs want to add a glow or something in the physical world.
+extends Node3D
 ## This node keeps track of health / damage buffs that are specific to the shell.
 ## It is responsible for modifying health / weapons components when buffs are added / run out.
 class_name BuffManager
