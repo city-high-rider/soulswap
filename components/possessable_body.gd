@@ -39,6 +39,7 @@ func save_data() -> void:
 
 func load_data() -> void:
 	global_transform = current_save.saved_global_transform
+	show()
 
 # This is used by spawners to check if the shell has died.
 func _on_health_component_died():
