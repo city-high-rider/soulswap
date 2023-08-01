@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://duio3m6rufywf"]
+
+[sub_resource type="Gradient" id="Gradient_h8828"]
+colors = PackedColorArray(1, 1, 0.941176, 0.568627, 0.947807, 0.781008, 0.591156, 0.752941)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gydyk"]
+gradient = SubResource("Gradient_h8828")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iy758"]
+direction = Vector3(0, 0, -1)
+gravity = Vector3(0, -5, 0)
+initial_velocity_min = 2.8
+initial_velocity_max = 2.8
+color_ramp = SubResource("GradientTexture1D_gydyk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_htbyb"]
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_w2m4p"]
+material = SubResource("StandardMaterial3D_htbyb")
+size = Vector2(0.08, 0.08)
+
+[node name="impactDecal" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_iy758")
+draw_pass_1 = SubResource("QuadMesh_w2m4p")

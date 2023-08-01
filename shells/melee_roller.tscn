@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpqt58ayx5rpf"]
+
+[ext_resource type="PackedScene" uid="uid://bqtugrbwwuh6u" path="res://shells/roller_shell.tscn" id="1_tgyr6"]
+[ext_resource type="PackedScene" uid="uid://cviymy0k6qspe" path="res://ghosts/roller_ghost.tscn" id="2_s0ab8"]
+
+[node name="RollerMelee" instance=ExtResource("1_tgyr6")]
+
+[node name="RollerGhost" parent="GhostMount" index="0" node_paths=PackedStringArray("ghost_mount") instance=ExtResource("2_s0ab8")]
+ghost_mount = NodePath("..")

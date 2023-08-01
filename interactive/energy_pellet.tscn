@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://b4hsdiiq7w223"]
+
+[ext_resource type="Texture2D" uid="uid://lervnyrjgjsh" path="res://addons/kenney_particle_pack/spark_04.png" id="1_gohi0"]
+[ext_resource type="Script" path="res://interactive/energy_pellet.gd" id="1_tpuh5"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c4o5c"]
+radius = 0.250649
+
+[sub_resource type="Curve" id="Curve_ef4md"]
+_data = [Vector2(0, 0.4), 0.0, 0.0, 0, 0, Vector2(0.565217, 0.821053), 0.0, 0.0, 0, 0, Vector2(1, 0.494737), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_p4241"]
+curve = SubResource("Curve_ef4md")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o6sb1"]
+emission_shape = 1
+emission_sphere_radius = 0.15
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.01
+initial_velocity_max = 0.1
+angle_min = -137.7
+angle_max = 125.2
+scale_curve = SubResource("CurveTexture_p4241")
+turbulence_noise_speed = Vector3(0, 1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j620i"]
+transparency = 1
+albedo_color = Color(0.886275, 0.172549, 0.356863, 1)
+albedo_texture = ExtResource("1_gohi0")
+emission_enabled = true
+emission = Color(0.607843, 0.129412, 0.129412, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_8wxe3"]
+material = SubResource("StandardMaterial3D_j620i")
+size = Vector2(0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yn5fd"]
+transparency = 1
+albedo_color = Color(1, 0.686275, 1, 0.0862745)
+emission_enabled = true
+emission = Color(0.917647, 0.568627, 0.713726, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1c5do"]
+material = SubResource("StandardMaterial3D_yn5fd")
+radius = 0.05
+height = 0.1
+radial_segments = 8
+rings = 4
+
+[node name="energy_pellet" type="RigidBody3D"]
+gravity_scale = 0.0
+script = ExtResource("1_tpuh5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_c4o5c")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 50
+lifetime = 0.4
+process_material = SubResource("ParticleProcessMaterial_o6sb1")
+draw_pass_1 = SubResource("QuadMesh_8wxe3")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_c4o5c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_1c5do")
+
+[node name="Hum" type="AudioStreamPlayer3D" parent="."]
+
+[node name="Fizzle" type="AudioStreamPlayer3D" parent="."]
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

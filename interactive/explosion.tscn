@@ -1,0 +1,126 @@
+[gd_scene load_steps=9 format=3 uid="uid://ytotx0jlnt1y"]
+
+[ext_resource type="Script" path="res://interactive/explosion.gd" id="1_q3uh0"]
+[ext_resource type="AudioStream" uid="uid://bp25hds3bkelj" path="res://sounds/explode5.wav" id="2_1vdcc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4y8km"]
+transparency = 1
+albedo_color = Color(1, 0.258824, 0.364706, 0.435294)
+
+[sub_resource type="SphereMesh" id="SphereMesh_whh65"]
+material = SubResource("StandardMaterial3D_4y8km")
+radius = 0.1
+height = 0.2
+radial_segments = 8
+rings = 8
+
+[sub_resource type="Animation" id="Animation_swuv5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blast:mesh:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blast:mesh:height")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blast:mesh:material:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.258824, 0.364706, 0.435294)]
+}
+
+[sub_resource type="Animation" id="Animation_1r41g"]
+resource_name = "explode"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blast:mesh:radius")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
+"transitions": PackedFloat32Array(0.138697, 1, 0.138697),
+"update": 0,
+"values": [0.5, 2.0, 0.75]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blast:mesh:height")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
+"transitions": PackedFloat32Array(0.138697, 1, 0.138697),
+"update": 0,
+"values": [1.0, 4.0, 1.5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blast:mesh:material:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.7, 1),
+"transitions": PackedFloat32Array(0.5, 1, 1, 0.5),
+"update": 0,
+"values": [Color(1, 0.258824, 0.364706, 0.435294), Color(1, 0.588235, 0.364706, 0.85098), Color(0.4, 0.4, 0.4, 0.521569), Color(0, 0, 0, 0.105882)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rofnb"]
+_data = {
+"RESET": SubResource("Animation_swuv5"),
+"explode": SubResource("Animation_1r41g")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cim07"]
+radius = 2.0
+
+[node name="Explosion" type="Node3D"]
+script = ExtResource("1_q3uh0")
+
+[node name="blast" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_whh65")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rofnb")
+}
+
+[node name="BlastRadius" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlastRadius"]
+shape = SubResource("SphereShape3D_cim07")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_1vdcc")
+
+[connection signal="area_entered" from="BlastRadius" to="." method="_on_blast_radius_area_entered"]
+[connection signal="body_entered" from="BlastRadius" to="." method="_on_blast_radius_body_entered"]

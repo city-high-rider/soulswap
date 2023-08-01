@@ -16,6 +16,8 @@ class_name Shell
 ## Current saved data 
 var current_save : ShellCheckpointSave = ShellCheckpointSave.new()
 
+signal died
+
 func _ready() -> void:
 	CheckpointManager.checkpoint_activated.connect(save_data)
 	CheckpointManager.load_checkpoint.connect(load_data)
@@ -37,3 +39,10 @@ func save_data() -> void:
 
 func load_data() -> void:
 	global_transform = current_save.saved_global_transform
+
+# This is used by spawners to check if the shell has died.
+func _on_health_component_died():
+	hide()
+	if !self == PlayerInfo.last_saved_player_shell and !self == PlayerInfo.current_player_shell:
+		queue_free()
+	died.emit()

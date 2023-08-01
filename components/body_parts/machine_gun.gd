@@ -5,8 +5,9 @@ extends Node3D
 # references to particles etc.
 
 @onready var muzzle_flash : GPUParticles3D = $MuzzleFlash
-@onready var shells : GPUParticles3D = $Shells
-@onready var gunfire : AudioStreamPlayer3D = $Gunfire
+@onready var gunfire : AudioQueue3D = $AudioQueue3D
+@onready var break_sound : AudioStreamPlayer3D = $Break
+@onready var break_particles : GPUParticles3D = $BreakParticles
 
 # Where should we start drawing the tracer from?
 @onready var barrel_point : Marker3D = $BarrelPoint
@@ -16,7 +17,7 @@ extends Node3D
 @export var firing_time_sec : float = 10
 
 ## How often do we check for a hit?
-@export var hit_poll_period_s : float = 0.15
+@export var hit_poll_period_s : float = 0.08
 var time_until_next_poll : float = hit_poll_period_s
 
 ## How much damage per hit?
@@ -56,6 +57,7 @@ func _physics_process(delta: float) -> void:
 	if time_until_next_poll <= 0:
 		hitscan_manager.check_hit(hit_damage * ghost_mount.get_ghost_modifiers().base_damage_multiplier, tracer_scene, barrel_point.global_transform.origin)
 		time_until_next_poll = hit_poll_period_s
+		gunfire.play_sound()
 		
 	if ghost_mount.get_ghost_inputs().primary_depressed:
 		start_shooting()
@@ -67,13 +69,11 @@ func start_shooting() -> void:
 	if is_broken or firing_time_left <= 0:
 		return
 	muzzle_flash.emitting = true
-	shells.emitting = true
 	is_shooting = true
 	
 # Stop the shooting effects
 func stop_shooting() -> void:
 	muzzle_flash.emitting = false
-	shells.emitting = false
 	is_shooting = false
 
 
@@ -89,5 +89,7 @@ func load_data() -> void:
 func _on_gun_health_killed(source):
 	is_broken = true
 	stop_shooting()
+	break_particles.emitting = true
 	if source is Shell and source.ghost_mount.ghost.has_method("award_style"):
 		source.ghost_mount.ghost.award_style(StyleManager.STYLE_FOR_BREAKING_WEAKPOINT, "+ WEAKPOINT BREAK")
+		break_sound.play()

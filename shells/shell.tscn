@@ -18,6 +18,8 @@ head = NodePath("Head")
 ghost_mount = NodePath("GhostMount")
 
 [node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("2_of3k4")
 health_component = NodePath("../HealthComponent")
 
@@ -73,6 +75,7 @@ shell = NodePath("..")
 
 [node name="Head" parent="." instance=ExtResource("7_bqgx2")]
 
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="died" from="HealthComponent" to="GhostMount" method="_on_health_component_died"]
 [connection signal="ghost_cleared" from="GhostMount" to="PlayerUI" method="_on_ghost_mount_ghost_cleared"]
 [connection signal="aimed_at" from="Head" to="PlayerUI/PossessCost" method="_on_head_aimed_at"]

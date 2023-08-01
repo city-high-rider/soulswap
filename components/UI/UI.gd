@@ -28,7 +28,7 @@ func on_possess(_new_ghost: Ghost, is_player: bool) -> void:
 		return
 	show()
 	toggle_body_info()
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(3.5).timeout
 	toggle_body_info()
 
 

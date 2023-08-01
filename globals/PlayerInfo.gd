@@ -22,5 +22,9 @@ func save_data() -> void:
 	last_saved_player_shell = current_player_shell
 
 func load_data() -> void:
-	last_saved_player_shell.ghost_mount.change_ghost(current_player_shell.ghost_mount.ghost)
-	current_player_shell = last_saved_player_shell
+	# last saved player shell isn't actually set correctly initially.. but this will at least 
+	# stop the game from crashing.
+	if last_saved_player_shell:
+		print_debug(str(last_saved_player_shell) + " " + str(current_player_shell))
+		last_saved_player_shell.ghost_mount.change_ghost(current_player_shell.ghost_mount.ghost)
+		current_player_shell = last_saved_player_shell

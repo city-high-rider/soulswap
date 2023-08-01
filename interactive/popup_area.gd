@@ -6,6 +6,10 @@ class_name PopupArea
 # what text message do we want to show?
 @export_multiline var message : String = ""
 
+# Reference to audio player
+@onready var ping : AudioStreamPlayer3D = $ping
+
 func _on_body_entered(body):
-	if body is Shell:
-		body.UI.popup_text.set_text(message)
+	if body is Shell and body.ghost_mount.ghost and "popup" in body.ghost_mount.ghost:
+		body.ghost_mount.ghost.popup.show_text(message)
+		ping.play()

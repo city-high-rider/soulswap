@@ -1,14 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://danr4y7gq7sch"]
+[gd_scene load_steps=9 format=3 uid="uid://danr4y7gq7sch"]
 
 [ext_resource type="Script" path="res://ghosts/player_ghost.gd" id="1_8tcsk"]
 [ext_resource type="Script" path="res://ghosts/possession_modifier.gd" id="2_g7o7f"]
 [ext_resource type="PackedScene" uid="uid://gwfv6m72meua" path="res://components/UiScreens/death_screen.tscn" id="2_ovwii"]
 [ext_resource type="Script" path="res://components/UiScreens/death_screen.gd" id="3_sos6l"]
 [ext_resource type="PackedScene" uid="uid://bohbcugaop32e" path="res://components/UI/style_tab.tscn" id="5_eh0bf"]
+[ext_resource type="Script" path="res://components/UI/PopupLabel.gd" id="6_1cmck"]
 
 [sub_resource type="Resource" id="Resource_2k5th"]
 script = ExtResource("2_g7o7f")
-max_health_multiplier = 10.0
+max_health_multiplier = 1.0
 base_damage_multiplier = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gojlh"]
@@ -37,5 +38,30 @@ offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gojlh")
+
+[node name="PopupText" type="MarginContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -88.0
+offset_right = 257.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("6_1cmck")
+
+[node name="Panel" type="Panel" parent="PopupText"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PopupText"]
+layout_mode = 2
+horizontal_alignment = 1
 
 [connection signal="style_changed" from="." to="StyleTab" method="_on_player_ghost_style_changed"]

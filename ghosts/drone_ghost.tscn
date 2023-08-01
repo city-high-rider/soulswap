@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmu0ewqc3l77d"]
+
+[ext_resource type="Script" path="res://ghosts/drone_ghost.gd" id="1_o0u8i"]
+[ext_resource type="Script" path="res://components/states/state_machine.gd" id="1_pgvxq"]
+[ext_resource type="Script" path="res://components/states/ai_states/FlyAround.gd" id="3_j6mi8"]
+[ext_resource type="Script" path="res://components/states/ai_states/Swoop.gd" id="4_27bo3"]
+
+[node name="drone_ghost" type="Node3D"]
+script = ExtResource("1_o0u8i")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_pgvxq")
+initial_state = NodePath("FlyAround")
+
+[node name="FlyAround" type="Node" parent="StateMachine" node_paths=PackedStringArray("swoop_state")]
+script = ExtResource("3_j6mi8")
+swoop_state = NodePath("../Swoop")
+
+[node name="Swoop" type="Node" parent="StateMachine" node_paths=PackedStringArray("fly_state")]
+script = ExtResource("4_27bo3")
+fly_state = NodePath("../FlyAround")

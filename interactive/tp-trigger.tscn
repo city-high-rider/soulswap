@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdtj1l4cxv5j1"]
+
+[ext_resource type="Script" path="res://interactive/tp-trigger.gd" id="1_svjat"]
+
+[node name="tp-trigger" type="Node3D"]
+script = ExtResource("1_svjat")

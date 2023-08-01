@@ -20,7 +20,6 @@ func check_hit(damage: float, tracer: PackedScene, barrel_pos: Vector3) -> bool:
 	
 	if collider is Hitbox:
 		collider.take_damage(damage, associated_shell)
-		return true
 		
 	var new_tracer = tracer.instantiate()
 	var hit_pos : Vector3 = raycast.get_collision_point()
@@ -29,4 +28,7 @@ func check_hit(damage: float, tracer: PackedScene, barrel_pos: Vector3) -> bool:
 	new_tracer.mesh.height = barrel_pos.distance_to(hit_pos)
 	new_tracer.look_at(hit_pos)
 	new_tracer.rotate_x(PI/2)
-	return false
+	return collider is Hitbox
+
+func get_look_point():
+	return null if !raycast.is_colliding() else raycast.get_collision_point()

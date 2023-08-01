@@ -1,15 +1,26 @@
 extends Node3D
+## This class is a checkpoint that the player can walk through to save their
+## progress.
 class_name Checkpoint
 
-# This class is a checkpoint that the player can walk through to save their
-# progress.
+# Reference to the audio players
+@onready var ignite_audio : AudioStreamPlayer3D = $AudioStreamPlayer3D
+@onready var ambient_audio : AudioStreamPlayer3D = $AudioStreamPlayer3D2
+
+# Reference to the particles
+@onready var particles : GPUParticles3D = $Lantern/CSGBox3D3/GPUParticles3D
 
 # Emit this signal when a player enters the checkpoint.
 signal checkpoint_activated(player: Shell)
 
 func _on_area_3d_body_entered(body) -> void:
 	if body == PlayerInfo.current_player_shell:
+		ignite_audio.play()
 		checkpoint_activated.emit(body)
 		CheckpointManager.checkpoint_activated.emit()
-		# Change this later - it's not good to have a direct reference to the particles.
-		$Lantern/CSGBox3D3/GPUParticles3D.emitting = true
+		particles.set_emitting(true)
+		
+		if ambient_audio.finished.is_connected(ambient_audio.play):
+			return
+		ambient_audio.finished.connect(ambient_audio.play)
+		ambient_audio.play()

@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmjocoje631gc"]
+
+[ext_resource type="Script" path="res://components/body_parts/projectile_weapon.gd" id="1_mdjuc"]
+[ext_resource type="PackedScene" uid="uid://b4hsdiiq7w223" path="res://interactive/energy_pellet.tscn" id="2_ecism"]
+
+[node name="plasma_gun" type="Node3D" node_paths=PackedStringArray("barrel_pos")]
+script = ExtResource("1_mdjuc")
+projectile = ExtResource("2_ecism")
+barrel_pos = NodePath("Marker3D")
+
+[node name="Mesh" type="CSGCombiner3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Mesh"]
+size = Vector3(0.46889, 0.169445, 0.339247)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Mesh/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.344872, 0, 0.104904)
+size = Vector3(0.224101, 0.111661, 0.053013)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Mesh/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.344872, 0, -0.114009)
+size = Vector3(0.224101, 0.111661, 0.053013)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.361954)

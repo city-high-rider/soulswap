@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://cpqfimtyl8vh3"]
+
+[ext_resource type="PackedScene" uid="uid://dbuqn5jxrvv0k" path="res://shells/shell.tscn" id="1_jdhm6"]
+[ext_resource type="PackedScene" uid="uid://cmu0ewqc3l77d" path="res://ghosts/drone_ghost.tscn" id="2_f1wu5"]
+[ext_resource type="Script" path="res://components/states/body_state_machine.gd" id="2_utytf"]
+[ext_resource type="Script" path="res://components/states/shell_states/down.gd" id="3_3wvmm"]
+[ext_resource type="Script" path="res://components/states/shell_states/float.gd" id="3_yp4bi"]
+[ext_resource type="PackedScene" uid="uid://cmjocoje631gc" path="res://components/body_parts/plasma_gun.tscn" id="6_8m3lb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yh22a"]
+size = Vector3(1, 0.605991, 1.72433)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7prr3"]
+size = Vector3(1.08764, 0.654938, 1.58448)
+
+[node name="Shell" instance=ExtResource("1_jdhm6")]
+motion_mode = 1
+possess_cost = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.188357, -0.0493674)
+shape = SubResource("BoxShape3D_yh22a")
+
+[node name="BodyInformation" parent="PlayerUI" index="2"]
+shell_name = "Drone"
+shell_description = "A more advanced aerial drone that can buff allies."
+
+[node name="GhostMount" parent="." index="3" node_paths=PackedStringArray("ghost")]
+ghost = NodePath("drone_ghost")
+
+[node name="drone_ghost" parent="GhostMount" index="0" node_paths=PackedStringArray("ghost_mount") instance=ExtResource("2_f1wu5")]
+ghost_mount = NodePath("..")
+
+[node name="Head" parent="." index="4" node_paths=PackedStringArray("ghost_mount")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.187098, -0.867492)
+ghost_mount = NodePath("../GhostMount")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Head" index="2"]
+light_color = Color(0.580392, 1, 1, 1)
+light_energy = 5.0
+spot_range = 27.397
+spot_angle = 15.7856
+
+[node name="mesh" type="CSGCombiner3D" parent="." index="5"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="mesh" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.180733, 0)
+size = Vector3(0.374694, 0.337595, 1)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="mesh/CSGBox3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.627496)
+radius = 0.380377
+radial_segments = 6
+rings = 3
+
+[node name="CSGBox3D" type="CSGBox3D" parent="mesh/CSGBox3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, -0.270739, 0.517867)
+size = Vector3(0.2831, 0.286257, 0.626742)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="mesh/CSGBox3D/CSGBox3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, -0.334353, 0.128786)
+size = Vector3(0.20335, 0.286257, 0.626742)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="mesh/CSGBox3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.585284, 0, -0.132038)
+size = Vector3(1, 0.0600257, 0.738365)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="mesh/CSGBox3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.583693, 0, -0.132038)
+size = Vector3(1, 0.0600257, 0.738365)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.236378, -0.10459)
+shape = SubResource("BoxShape3D_7prr3")
+
+[node name="StateMachine" type="Node" parent="." index="7" node_paths=PackedStringArray("ghost_mount", "down_state", "initial_state")]
+script = ExtResource("2_utytf")
+ghost_mount = NodePath("../GhostMount")
+down_state = NodePath("Down")
+initial_state = NodePath("float")
+
+[node name="float" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("3_yp4bi")
+
+[node name="Down" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("3_3wvmm")
+
+[node name="plasma_gun" parent="." index="8" node_paths=PackedStringArray("ghost_mount", "hitscan_manager") instance=ExtResource("6_8m3lb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.577859, 0)
+ghost_mount = NodePath("../GhostMount")
+hitscan_manager = NodePath("../Head/HitscanManager")
+
+[editable path="Head"]
