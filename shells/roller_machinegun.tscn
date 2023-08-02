@@ -50,6 +50,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.629007, 0.0105973, 0)
 hitscan_manager = NodePath("../HitscanManager")
 ghost_mount = NodePath("../../GhostMount")
 
+[connection signal="died" from="HealthComponent" to="BodyStateMachine" method="_on_health_component_died" flags=18]
+
 [editable path="Head"]
 [editable path="Head/MachineGun"]
 [editable path="Head/MachineGun2"]
