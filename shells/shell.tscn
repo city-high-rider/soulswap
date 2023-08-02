@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dbuqn5jxrvv0k"]
+[gd_scene load_steps=11 format=3 uid="uid://dbuqn5jxrvv0k"]
 
 [ext_resource type="Script" path="res://components/possessable_body.gd" id="1_m747a"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="2_of3k4"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://clsubmog0dnfk" path="res://components/UI/body_information.tscn" id="6_o76qo"]
 [ext_resource type="PackedScene" uid="uid://s4xxvp4y718y" path="res://components/player_head.tscn" id="7_bqgx2"]
 [ext_resource type="Script" path="res://components/BuffManager.gd" id="10_desn1"]
-[ext_resource type="PackedScene" uid="uid://12nx2ry7mukj" path="res://components/buffs/glow.tscn" id="11_3txyo"]
 
 [node name="Shell" type="CharacterBody3D" node_paths=PackedStringArray("head", "ghost_mount")]
 collision_layer = 4
@@ -80,8 +79,6 @@ shell = NodePath("..")
 [node name="BuffManager" type="Node3D" parent="." node_paths=PackedStringArray("health_components")]
 script = ExtResource("10_desn1")
 health_components = [NodePath("../HealthComponent")]
-
-[node name="glow" parent="BuffManager" instance=ExtResource("11_3txyo")]
 
 [connection signal="died" from="." to="BuffManager" method="_on_shell_died"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
