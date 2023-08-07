@@ -8,6 +8,9 @@ extends AiState
 ## How close should we be to the target before we start descending?
 @export var lower_distance : float = 4
 
+## Which buff are we applying?
+@export var drone_buff : PackedScene
+
 # Target is who we are going to apply the buff to.
 var target : Shell = null
 
@@ -44,6 +47,8 @@ func handle_physics(delta: float) -> void:
 	
 	if abs(target.global_transform.origin.y - user.global_transform.origin.y) <= 5:
 		state_machine.switch_state(fly_state)
+		if "buff_manager" in target and drone_buff:
+			target.buff_manager.apply_buff(drone_buff.instantiate())
 	
 
 
