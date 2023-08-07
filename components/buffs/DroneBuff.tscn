@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://dj78sflnbj6v5"]
+
+[ext_resource type="Texture2D" uid="uid://c0yu8frauafb3" path="res://addons/kenney_particle_pack/smoke_07.png" id="1_a5wgm"]
+[ext_resource type="Script" path="res://components/buffs/DroneBuff.gd" id="1_pcygl"]
+
+[sub_resource type="Curve" id="Curve_4ppxj"]
+_data = [Vector2(0.00966184, 0.547368), 0.0, 0.0, 0, 0, Vector2(0.676328, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.378947), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_p4qpq"]
+curve = SubResource("Curve_4ppxj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hu0ax"]
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.25
+initial_velocity_max = 0.5
+angular_velocity_min = -100.17
+angular_velocity_max = 137.74
+scale_curve = SubResource("CurveTexture_p4qpq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkhgp"]
+transparency = 1
+albedo_color = Color(1, 0.717647, 0.788235, 0.733333)
+albedo_texture = ExtResource("1_a5wgm")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_pmq0f"]
+material = SubResource("StandardMaterial3D_qkhgp")
+size = Vector2(2.5, 2.5)
+
+[node name="DroneBuff" type="Node3D"]
+script = ExtResource("1_pcygl")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0.509804, 1, 1)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_hu0ax")
+draw_pass_1 = SubResource("QuadMesh_pmq0f")
