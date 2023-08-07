@@ -26,6 +26,9 @@ var destination_point_moe : float = 3
 ## Path to swoop attack state
 @export var swoop_state : AiState
 
+## Path to buff state
+@export var buff_state : AiState
+
 ## How long should we wait before doing something (attack / buff)?
 @export var action_delay : float = 8
 var cur_action_delay : float = action_delay
@@ -45,7 +48,7 @@ func handle_physics(delta: float) -> void:
 		destination = get_new_destination()
 		time_till_next_point = new_destination_period_s
 		if cur_action_delay <= 0:
-			state_machine.switch_state(swoop_state)
+			state_machine.switch_state([buff_state,swoop_state].pick_random())
 		
 	# Look at the target
 	inputs.mouse_direction = aim_at(target.global_transform.origin, PI/2, PI/2, delta)
