@@ -11,12 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://s4xxvp4y718y" path="res://components/player_head.tscn" id="7_bqgx2"]
 [ext_resource type="Script" path="res://components/BuffManager.gd" id="10_desn1"]
 
-[node name="Shell" type="CharacterBody3D" node_paths=PackedStringArray("head", "ghost_mount") groups=["shells"]]
+[node name="Shell" type="CharacterBody3D" node_paths=PackedStringArray("head", "ghost_mount", "buff_manager") groups=["shells"]]
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_m747a")
 head = NodePath("Head")
 ghost_mount = NodePath("GhostMount")
+buff_manager = NodePath("BuffManager")
 
 [node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
 collision_layer = 2

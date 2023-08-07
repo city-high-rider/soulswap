@@ -13,6 +13,9 @@ class_name Shell
 ## How hard is this body to possess?
 @export var possess_cost : float = 10
 
+## Reference to buff manager. We don't use this, but other entites might need to
+@export var buff_manager : BuffManager
+
 ## Current saved data 
 var current_save : ShellCheckpointSave = ShellCheckpointSave.new()
 
