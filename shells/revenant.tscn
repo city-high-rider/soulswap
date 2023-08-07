@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://citqaeuav6del"]
+[gd_scene load_steps=12 format=3 uid="uid://citqaeuav6del"]
 
 [ext_resource type="PackedScene" uid="uid://dbuqn5jxrvv0k" path="res://shells/shell.tscn" id="1_1tad4"]
 [ext_resource type="PackedScene" uid="uid://ojwlvk1tllof" path="res://components/body_parts/rocket_launcher.tscn" id="2_awkbc"]
@@ -14,7 +14,11 @@ height = 2.06935
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ws6mh"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbynq"]
+albedo_color = Color(1, 0.145098, 0.282353, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cldw3"]
+material = SubResource("StandardMaterial3D_jbynq")
 
 [node name="Shell" instance=ExtResource("1_1tad4")]
 
