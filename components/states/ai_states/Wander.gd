@@ -12,7 +12,7 @@ var target : Shell = null
 
 ## How long do we wait before shooting again?
 @export var shot_period_s : float = 2
-var current_shot_cooldown : float = shot_period_s
+var current_shot_cooldown : float = shot_period_s + randf_range(0, 1.5)
 
 func enter() -> void:
 	target = get_target()
@@ -30,10 +30,10 @@ func handle_physics(delta: float) -> void:
 	current_shot_cooldown = max(current_shot_cooldown - delta, 0)
 	user.current_inputs.primary_depressed = false
 	
-	var shot_travel_time : float = (target.global_transform.origin - user.global_transform.origin).length() / 10
+	var shot_travel_time : float = (target.global_transform.origin - user.global_transform.origin).length() / 20
 	user.current_inputs.mouse_direction = aim_at(target.global_transform.origin + target.velocity * shot_travel_time, PI/2, PI/2, delta)
 	if current_shot_cooldown <= 0:
-		current_shot_cooldown = shot_period_s
+		current_shot_cooldown = shot_period_s + randf_range(0, 1.8)
 		user.current_inputs.primary_depressed = true
 		
 	
