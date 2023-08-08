@@ -49,3 +49,5 @@ gravity = -10.0
 
 [node name="Down" type="Node" parent="BodyStateMachine" index="2"]
 script = ExtResource("5_vloiw")
+
+[connection signal="died" from="HealthComponent" to="BodyStateMachine" method="_on_health_component_died"]

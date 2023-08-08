@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmu0ewqc3l77d"]
+[gd_scene load_steps=7 format=3 uid="uid://cmu0ewqc3l77d"]
 
 [ext_resource type="Script" path="res://ghosts/drone_ghost.gd" id="1_o0u8i"]
 [ext_resource type="Script" path="res://components/states/state_machine.gd" id="1_pgvxq"]
 [ext_resource type="Script" path="res://components/states/ai_states/FlyAround.gd" id="3_j6mi8"]
 [ext_resource type="Script" path="res://components/states/ai_states/Swoop.gd" id="4_27bo3"]
+[ext_resource type="Script" path="res://components/states/ai_states/Buff.gd" id="5_wn3bd"]
+[ext_resource type="PackedScene" uid="uid://dj78sflnbj6v5" path="res://components/buffs/DroneBuff.tscn" id="6_reqsa"]
 
 [node name="drone_ghost" type="Node3D"]
 script = ExtResource("1_o0u8i")
@@ -12,10 +14,16 @@ script = ExtResource("1_o0u8i")
 script = ExtResource("1_pgvxq")
 initial_state = NodePath("FlyAround")
 
-[node name="FlyAround" type="Node" parent="StateMachine" node_paths=PackedStringArray("swoop_state")]
+[node name="FlyAround" type="Node" parent="StateMachine" node_paths=PackedStringArray("swoop_state", "buff_state")]
 script = ExtResource("3_j6mi8")
 swoop_state = NodePath("../Swoop")
+buff_state = NodePath("../Buff")
 
 [node name="Swoop" type="Node" parent="StateMachine" node_paths=PackedStringArray("fly_state")]
 script = ExtResource("4_27bo3")
 fly_state = NodePath("../FlyAround")
+
+[node name="Buff" type="Node" parent="StateMachine" node_paths=PackedStringArray("fly_state")]
+script = ExtResource("5_wn3bd")
+fly_state = NodePath("../FlyAround")
+drone_buff = ExtResource("6_reqsa")

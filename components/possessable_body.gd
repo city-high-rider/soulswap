@@ -13,6 +13,9 @@ class_name Shell
 ## How hard is this body to possess?
 @export var possess_cost : float = 10
 
+## Reference to buff manager. We don't use this, but other entites might need to
+@export var buff_manager : BuffManager
+
 ## Current saved data 
 var current_save : ShellCheckpointSave = ShellCheckpointSave.new()
 
@@ -39,6 +42,7 @@ func save_data() -> void:
 
 func load_data() -> void:
 	global_transform = current_save.saved_global_transform
+	show()
 
 # This is used by spawners to check if the shell has died.
 func _on_health_component_died():

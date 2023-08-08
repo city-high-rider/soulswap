@@ -77,3 +77,8 @@ func _on_health_component_died() -> void:
 		return
 	if ghost.has_method("on_shell_death"):
 		ghost.on_shell_death()
+
+
+func _on_health_component_took_damage(new_health, source):
+	if ghost and ghost.has_method("on_health_damaged"):
+		ghost.on_health_damaged(new_health, source)
