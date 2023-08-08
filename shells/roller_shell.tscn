@@ -17,7 +17,7 @@ material = SubResource("StandardMaterial3D_8bt6j")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_k8ves"]
 
-[node name="Shell" instance=ExtResource("1_06s5l")]
+[node name="Shell3" instance=ExtResource("1_06s5l")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 shape = SubResource("SphereShape3D_b2tq5")
@@ -49,5 +49,3 @@ gravity = -10.0
 
 [node name="Down" type="Node" parent="BodyStateMachine" index="2"]
 script = ExtResource("5_vloiw")
-
-[connection signal="died" from="HealthComponent" to="BodyStateMachine" method="_on_health_component_died"]
