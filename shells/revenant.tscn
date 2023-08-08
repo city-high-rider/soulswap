@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://citqaeuav6del"]
+[gd_scene load_steps=13 format=3 uid="uid://citqaeuav6del"]
 
 [ext_resource type="PackedScene" uid="uid://dbuqn5jxrvv0k" path="res://shells/shell.tscn" id="1_1tad4"]
 [ext_resource type="PackedScene" uid="uid://ojwlvk1tllof" path="res://components/body_parts/rocket_launcher.tscn" id="2_awkbc"]
+[ext_resource type="PackedScene" uid="uid://dvc16qrehqp2h" path="res://ghosts/revenant_ghost.tscn" id="2_jbdga"]
 [ext_resource type="PackedScene" uid="uid://bbvuowxymf0du" path="res://components/states/state_machine.tscn" id="3_w057o"]
 [ext_resource type="Script" path="res://components/states/shell_states/ground_move.gd" id="4_p2g3i"]
 [ext_resource type="Script" path="res://components/states/body_state_machine.gd" id="4_vofwq"]
@@ -20,7 +21,7 @@ albedo_color = Color(1, 0.145098, 0.282353, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cldw3"]
 material = SubResource("StandardMaterial3D_jbynq")
 
-[node name="Shell" instance=ExtResource("1_1tad4")]
+[node name="Shell4" instance=ExtResource("1_1tad4")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 shape = SubResource("CapsuleShape3D_qocax")
@@ -28,6 +29,12 @@ shape = SubResource("CapsuleShape3D_qocax")
 [node name="BodyInformation" parent="PlayerUI" index="2"]
 shell_name = "Revenant"
 shell_description = "Armored unit with rocket launchers. try rocket jumping! (Yes, inspired by doom)"
+
+[node name="GhostMount" parent="." index="3" node_paths=PackedStringArray("ghost")]
+ghost = NodePath("revenant_ghost")
+
+[node name="revenant_ghost" parent="GhostMount" index="0" node_paths=PackedStringArray("ghost_mount") instance=ExtResource("2_jbdga")]
+ghost_mount = NodePath("..")
 
 [node name="Head" parent="." index="4" node_paths=PackedStringArray("ghost_mount")]
 ghost_mount = NodePath("../GhostMount")

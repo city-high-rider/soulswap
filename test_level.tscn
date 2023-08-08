@@ -167,6 +167,13 @@ transform = Transform3D(-0.983445, 0, -0.181206, 0, 1, 0, 0.181206, 0, -0.983445
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0506618, 1.77996, 1.35028)
 possess_cost = 0.0
 
+[node name="BodyInformation" parent="Shell/PlayerUI" index="2"]
+anchors_preset = 15
+anchor_top = 0.0
+offset_top = 0.0
+offset_right = 0.0
+grow_vertical = 2
+
 [node name="GhostMount" parent="Shell" index="3" node_paths=PackedStringArray("ghost")]
 ghost = NodePath("DummyGhost")
 
@@ -347,6 +354,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.51411, 8.60205, 1.32485)
 [node name="Shell3" parent="." instance=ExtResource("14_twftv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.55887, 0)
 
+[connection signal="died" from="Shell/HealthComponent" to="Shell/GhostMount" method="_on_health_component_died" flags=18]
+[connection signal="took_damage" from="Shell/HealthComponent" to="Shell/GhostMount" method="_on_health_component_took_damage" flags=18]
+[connection signal="ghost_cleared" from="Shell/GhostMount" to="Shell/PlayerUI" method="_on_ghost_mount_ghost_cleared" flags=18]
 [connection signal="all_enemies_killed" from="Encounter" to="SlidingDoor" method="_on_encounter_all_enemies_killed"]
 [connection signal="encounter_started" from="Encounter" to="SlidingDoor" method="_on_encounter_encounter_started"]
 [connection signal="body_entered" from="Encounter/Area3D" to="Encounter" method="_on_area_3d_body_entered"]
