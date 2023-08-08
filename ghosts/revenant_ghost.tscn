@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvc16qrehqp2h"]
+
+[ext_resource type="Script" path="res://components/states/state_machine.gd" id="1_21a0u"]
+
+[node name="revenant_ghost" type="Node3D"]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_21a0u")
+initial_state = NodePath("")
+
+[node name="Node" type="Node" parent="StateMachine"]
