@@ -19,6 +19,21 @@ bg_color = Color(0.321569, 0.615686, 0.0941176, 0.882353)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8667k"]
 bg_color = Color(0.960784, 0.0235294, 0.0470588, 0)
 
+[sub_resource type="Animation" id="Animation_l0fvd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HurtIndicator:theme_override_styles/panel:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.960784, 0.0235294, 0.0470588, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_dfejs"]
 resource_name = "hurt"
 length = 0.2
@@ -34,21 +49,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 0.5, 1),
 "update": 0,
 "values": [Color(0.960784, 0.0235294, 0.0470588, 0), Color(0.960784, 0.0235294, 0.0470588, 0.211765), Color(0.960784, 0.0235294, 0.0470588, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_l0fvd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HurtIndicator:theme_override_styles/panel:bg_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.960784, 0.0235294, 0.0470588, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jnqm8"]
