@@ -1,7 +1,7 @@
 extends Node3D
 ## This is a node that can spawn multiple enemies and emits a signal when it is done.
 ## This is usually used for combat encounters.
-
+class_name WaveSpawner
 
 ## Emit this when all the enemies we can spawn are killed.
 signal all_enemies_killed
