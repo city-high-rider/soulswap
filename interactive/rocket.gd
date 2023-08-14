@@ -5,7 +5,6 @@ extends CharacterBody3D
 
 var despawn_time : float = 10
 
-@onready var detonate_area : Area3D = $Area3D
 @onready var booster_sound : AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 func _ready() -> void:
