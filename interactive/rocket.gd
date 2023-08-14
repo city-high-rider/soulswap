@@ -14,16 +14,18 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	velocity = -global_transform.basis.z * speed
-	move_and_slide()
+	# Move and slide returns true if we collide with something.
+	if move_and_slide():
+		explode()
 
-
-func _on_area_3d_body_entered(body):
+# Spawn an explosion if we have one and delete ourselves
+func explode() -> void:
 	if explosion:
 		var new_explosion = explosion.instantiate()
 		get_node("/root").add_child(new_explosion)
 		new_explosion.global_transform.origin = global_transform.origin
 	queue_free()
-
+	
 # Make sure the sound loops
 func _on_audio_stream_player_3d_finished():
 	booster_sound.play()
