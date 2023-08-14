@@ -6,7 +6,7 @@ extends MoveState
 @export var fall_state : AirState
 
 ## How high do we jump?
-@export_range(0,10,0.1) var jump_height : float = 2
+@export_range(0,20,0.1) var jump_height : float = 2
 
 func handle_physics(delta: float) -> void:
 	super(delta)
