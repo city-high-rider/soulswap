@@ -8,6 +8,7 @@ transparency = 1
 albedo_color = Color(1, 0.258824, 0.364706, 0.435294)
 
 [sub_resource type="SphereMesh" id="SphereMesh_whh65"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_4y8km")
 radius = 0.1
 height = 0.2
@@ -54,6 +55,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_1r41g"]
+resource_local_to_scene = true
 resource_name = "explode"
 tracks/0/type = "value"
 tracks/0/imported = false
