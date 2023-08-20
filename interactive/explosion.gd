@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func _on_blast_radius_area_entered(area):
 	if area is Hitbox:
-		area.take_damage(10, null)
+		area.take_damage(damage, null)
 
 
 func _on_blast_radius_body_entered(body):
