@@ -28,11 +28,11 @@ func take_damage(damage : Damage, source) -> void:
 	var specific_type_multiplier : float = 1
 	match damage.damage_type:
 		damage.DamageType.Kinetic:
-			kinetic_mult
+			specific_type_multiplier = kinetic_mult
 		damage.DamageType.Explosive:
-			explosive_mult
+			specific_type_multiplier = explosive_mult
 		damage.DamageType.Plasma:
-			plasma_mult
+			specific_type_multiplier = plasma_mult
 			
 	if health_component:
 		health_component.take_damage(damage.damage_amount * damage_multiplier * specific_type_multiplier, source)
