@@ -1,7 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://ytotx0jlnt1y"]
+[gd_scene load_steps=11 format=3 uid="uid://ytotx0jlnt1y"]
 
 [ext_resource type="Script" path="res://interactive/explosion.gd" id="1_q3uh0"]
 [ext_resource type="AudioStream" uid="uid://bp25hds3bkelj" path="res://sounds/explode5.wav" id="2_1vdcc"]
+[ext_resource type="Script" path="res://resources/damage.gd" id="2_kbmew"]
+
+[sub_resource type="Resource" id="Resource_575j6"]
+script = ExtResource("2_kbmew")
+damage_type = 1
+damage_amount = 10.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4y8km"]
 transparency = 1
@@ -105,6 +111,7 @@ radius = 2.0
 
 [node name="Explosion" type="Node3D"]
 script = ExtResource("1_q3uh0")
+damage = SubResource("Resource_575j6")
 
 [node name="blast" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_whh65")
