@@ -13,7 +13,7 @@ var associated_shell : Shell = null
 # this function should be called by a hitscan weapon when it fires, to which
 # it will pass its damage. We will check for a hit, and if there is one,
 # we pass some damage. Returns whether or not we hit an enemy.
-func check_hit(damage: float, tracer: PackedScene, barrel_pos: Vector3) -> bool:
+func check_hit(damage: Damage, tracer: PackedScene, barrel_pos: Vector3) -> bool:
 	var collider = raycast.get_collider()
 	if !collider:
 		return false

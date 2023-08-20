@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://bdqf5sm42j8vl"]
+[gd_scene load_steps=23 format=3 uid="uid://bdqf5sm42j8vl"]
 
 [ext_resource type="Texture2D" uid="uid://cqcakiodhwri1" path="res://addons/kenney_particle_pack/star_06.png" id="1_1u4a3"]
 [ext_resource type="Script" path="res://components/body_parts/machine_gun.gd" id="1_kqkdi"]
+[ext_resource type="Script" path="res://resources/damage.gd" id="2_pugcf"]
 [ext_resource type="PackedScene" uid="uid://d3vfx22o0he3a" path="res://components/bullet_tracer.tscn" id="2_xwwb5"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="3_uihti"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="4_eguk2"]
@@ -9,6 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://8sps1w4hu8vb" path="res://components/audio_queue_3d.tscn" id="6_qlmb5"]
 [ext_resource type="AudioStream" uid="uid://cyracjgrd2bgu" path="res://sounds/bang-43964.mp3" id="8_w5efk"]
 [ext_resource type="Texture2D" uid="uid://cdkw48oghqah6" path="res://addons/kenney_particle_pack/spark_02.png" id="9_yp81j"]
+
+[sub_resource type="Resource" id="Resource_s2nuw"]
+script = ExtResource("2_pugcf")
+damage_type = 0
+damage_amount = 1.8
 
 [sub_resource type="Curve" id="Curve_upc4u"]
 _data = [Vector2(0, 0.854545), 0.0, 0.0, 0, 0, Vector2(0.248804, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -69,6 +75,7 @@ material = SubResource("StandardMaterial3D_baj0y")
 
 [node name="MachineGun" type="Node3D"]
 script = ExtResource("1_kqkdi")
+hit_damage = SubResource("Resource_s2nuw")
 tracer_scene = ExtResource("2_xwwb5")
 
 [node name="Mesh" type="CSGCombiner3D" parent="."]
