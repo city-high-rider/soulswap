@@ -1,7 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4hsdiiq7w223"]
+[gd_scene load_steps=13 format=3 uid="uid://b4hsdiiq7w223"]
 
 [ext_resource type="Texture2D" uid="uid://lervnyrjgjsh" path="res://addons/kenney_particle_pack/spark_04.png" id="1_gohi0"]
 [ext_resource type="Script" path="res://interactive/energy_pellet.gd" id="1_tpuh5"]
+[ext_resource type="Script" path="res://resources/damage.gd" id="2_422yf"]
+
+[sub_resource type="Resource" id="Resource_o5io5"]
+script = ExtResource("2_422yf")
+damage_type = 2
+damage_amount = 15.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_c4o5c"]
 radius = 0.250649
@@ -57,6 +63,7 @@ rings = 4
 [node name="energy_pellet" type="RigidBody3D"]
 gravity_scale = 0.0
 script = ExtResource("1_tpuh5")
+damage = SubResource("Resource_o5io5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_c4o5c")
