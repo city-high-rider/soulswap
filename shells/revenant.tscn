@@ -23,6 +23,10 @@ material = SubResource("StandardMaterial3D_jbynq")
 
 [node name="Shell4" instance=ExtResource("1_1tad4")]
 
+[node name="Hitbox" parent="." index="0"]
+kinetic_mult = 1.2
+explosive_mult = 0.4
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 shape = SubResource("CapsuleShape3D_qocax")
 
