@@ -6,3 +6,7 @@
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_qx3eb")
+damage_multiplier = null
+kinetic_mult = null
+explosive_mult = null
+plasma_mult = null
