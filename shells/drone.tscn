@@ -17,6 +17,12 @@ size = Vector3(1.08764, 0.654938, 1.58448)
 motion_mode = 1
 possess_cost = 0.0
 
+[node name="Hitbox" parent="." index="0"]
+damage_multiplier = 1.0
+kinetic_mult = 1.0
+explosive_mult = 1.0
+plasma_mult = 1.0
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.188357, -0.0493674)
 shape = SubResource("BoxShape3D_yh22a")

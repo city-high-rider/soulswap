@@ -19,6 +19,12 @@ material = SubResource("StandardMaterial3D_8bt6j")
 
 [node name="Shell3" instance=ExtResource("1_06s5l")]
 
+[node name="Hitbox" parent="." index="0"]
+damage_multiplier = 1.0
+kinetic_mult = 1.0
+explosive_mult = 1.0
+plasma_mult = 1.0
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 shape = SubResource("SphereShape3D_b2tq5")
 
@@ -41,6 +47,7 @@ initial_state = NodePath("move")
 [node name="move" type="Node" parent="BodyStateMachine" index="0" node_paths=PackedStringArray("fall_state")]
 script = ExtResource("3_7y0q3")
 fall_state = NodePath("../fall")
+jump_height = 15.0
 
 [node name="fall" type="Node" parent="BodyStateMachine" index="1" node_paths=PackedStringArray("move_state")]
 script = ExtResource("4_tfuk2")

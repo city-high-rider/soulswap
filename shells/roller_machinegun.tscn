@@ -7,6 +7,12 @@
 
 [node name="Shell" instance=ExtResource("1_36xw1")]
 
+[node name="Hitbox" parent="." index="0"]
+damage_multiplier = 1.0
+kinetic_mult = 1.0
+explosive_mult = 1.0
+plasma_mult = 1.0
+
 [node name="BodyInformation" parent="PlayerUI" index="2"]
 shell_name = "Roller (Machine gun)"
 shell_description = "A standard roller drone equipped with two machine guns (which can break!)"
@@ -45,10 +51,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.634191, 0.0105973, 0)
 hitscan_manager = NodePath("../HitscanManager")
 ghost_mount = NodePath("../../GhostMount")
 
+[node name="Hitbox" parent="Head/MachineGun" index="4"]
+damage_multiplier = 1.0
+kinetic_mult = 1.0
+explosive_mult = 1.0
+plasma_mult = 1.0
+
 [node name="MachineGun2" parent="Head" index="3" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("2_eoyr7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.629007, 0.0105973, 0)
 hitscan_manager = NodePath("../HitscanManager")
 ghost_mount = NodePath("../../GhostMount")
+
+[node name="Hitbox" parent="Head/MachineGun2" index="4"]
+damage_multiplier = 1.0
+kinetic_mult = 1.0
+explosive_mult = 1.0
+plasma_mult = 1.0
 
 [editable path="Head"]
 [editable path="Head/MachineGun"]
