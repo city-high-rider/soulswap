@@ -106,6 +106,7 @@ draw_pass_1 = SubResource("QuadMesh_q4tkp")
 
 [node name="GunHealth" type="Node" parent="."]
 script = ExtResource("4_eguk2")
+max_health = 50
 
 [node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
 script = ExtResource("3_uihti")
@@ -135,4 +136,4 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_bkl61")
 draw_pass_1 = SubResource("QuadMesh_xo1i6")
 
-[connection signal="killed" from="GunHealth" to="." method="_on_gun_health_killed"]
+[connection signal="took_damage" from="Hitbox" to="." method="_on_hitbox_took_damage"]

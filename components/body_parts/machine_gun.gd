@@ -88,10 +88,13 @@ func load_data() -> void:
 	firing_time_left = current_save.saved_ammo
 
 
-func _on_gun_health_killed(source):
+func _on_hitbox_took_damage(lethal, damage, attacker):
+	if !lethal:
+		return
+		
 	is_broken = true
 	stop_shooting()
 	break_particles.emitting = true
-	if source is Shell and source.ghost_mount.ghost.has_method("award_style"):
-		source.ghost_mount.ghost.award_style(StyleManager.STYLE_FOR_BREAKING_WEAKPOINT, "+ WEAKPOINT BREAK")
+	if attacker is Shell and attacker.ghost_mount.ghost.has_method("award_style"):
+		attacker.ghost_mount.ghost.award_style(StyleManager.STYLE_FOR_BREAKING_WEAKPOINT, "+ WEAKPOINT BREAK")
 		break_sound.play()
