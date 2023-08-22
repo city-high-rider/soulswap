@@ -13,17 +13,17 @@ class_name Projectile
 ## How long should we wait before despawning the projectile?
 @export var despawn_time_s : float = 10
 
+# What function should we call on collision?
+var on_collide : Callable = func(): pass
+
+
 func _ready() -> void:
 	get_tree().create_timer(despawn_time_s).timeout.connect(queue_free)
 
-# Call this function when the projectile hits something (player / wall, etc)
-func on_collision() -> void:
-	pass
 
 func _physics_process(delta: float) -> void:
 	# By default, fly in the -ve z direction.
 	velocity = speed * -global_transform.basis.z
-	var collided : bool = move_and_slide()
-	if collided:
-		on_collision()
-		
+	# If we hit something, run the on_collide function
+	if move_and_slide():
+		on_collide.call()
