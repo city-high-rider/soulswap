@@ -50,3 +50,9 @@ func _on_health_component_died():
 	if !self == PlayerInfo.last_saved_player_shell and !self == PlayerInfo.current_player_shell:
 		queue_free()
 	died.emit()
+	
+	
+# Detect friedly fire and award style points.
+func _on_hitbox_took_damage(_lethal, damage, attacker):
+	if attacker is Shell and self != PlayerInfo.current_player_shell and attacker != PlayerInfo.current_player_shell:
+		PlayerInfo.current_player_shell.ghost_mount.ghost.award_style(0.5 * damage.damage_amount, "+ FRIENDLY FIRE")
