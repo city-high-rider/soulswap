@@ -27,7 +27,7 @@ func _ready() -> void:
 	save_data()
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Look around using the ghost's mouse direction.
 	var mouse_direction : Vector2 = ghost_mount.get_ghost_inputs().mouse_direction
 	rotate_y(-mouse_direction.x)
