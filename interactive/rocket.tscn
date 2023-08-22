@@ -37,7 +37,7 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_mto5o")
 
 [node name="Rocket" type="CharacterBody3D"]
-collision_layer = 0
+collision_layer = 8
 script = ExtResource("1_2pgdl")
 explosion = ExtResource("2_jrc86")
 

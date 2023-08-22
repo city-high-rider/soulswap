@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
-## This class is for projectiles (things like rockets, fireballs, etc.)
+## This class is for projectiles (things like rockets, fireballs, etc.).
+## Collision should mask the hitboxes layer. Hitboxes are responsible for detecting it.
 
 class_name Projectile
 
@@ -15,6 +16,10 @@ class_name Projectile
 
 # What function should we call on collision?
 var on_collide : Callable = func(): pass
+# What function should we call on hitbox collision? This is called by the hitbox.
+# it should NOT deal any damage as this is handled by the hitbox.
+# The on_collide function is NOT called when we hit a hitbox.
+var on_hitbox_collide : Callable = func(): pass
 
 
 func _ready() -> void:

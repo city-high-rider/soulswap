@@ -27,6 +27,9 @@ signal took_damage(lethal: bool, damage: Damage, attacker)
 @export var plasma_mult : float = 1
 
 
+func _ready() -> void:
+	body_entered.connect(_on_body_entered)
+
 # function that is called when we take damgae
 # damage is the damage object, attacker is usually the shell that attacked us
 func take_damage(damage : Damage, attacker) -> void:
@@ -43,6 +46,12 @@ func take_damage(damage : Damage, attacker) -> void:
 	if health_component:
 		var was_damage_lethal : bool = health_component.take_damage(damage.damage_amount * damage_multiplier * specific_type_multiplier)
 		took_damage.emit(was_damage_lethal, damage, attacker)
-		
-		
-		
+
+# We use this to detect collision with projectiles.
+func _on_body_entered(body) -> void:
+	print_debug("entered")
+	print_debug(body)
+	if body is Projectile:
+		print_debug("projectile entered")
+		take_damage(body.damage, null)
+		body.on_hitbox_collide.call()
