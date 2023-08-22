@@ -21,6 +21,10 @@ var on_collide : Callable = func(): pass
 # The on_collide function is NOT called when we hit a hitbox.
 var on_hitbox_collide : Callable = func(): pass
 
+# Reference to whoever shot the projectile. Set upon instantiation by the projectile launcher.
+# This is used to detect who shot who by the style system.
+var thrower : Node = null
+
 
 func _ready() -> void:
 	get_tree().create_timer(despawn_time_s).timeout.connect(queue_free)
