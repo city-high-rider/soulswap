@@ -8,14 +8,14 @@ class_name ShellBuff
 
 # Invoked by buff manager when we apply the buff. This function is applied to each health component
 # / weapon
-func on_apply_change_health(health_component : HealthComponent) -> void:
+func on_apply_change_health(_health_component : HealthComponent) -> void:
 	pass
 
-func on_apply_change_weapons(weapon : Node) -> void:
+func on_apply_change_weapons(_weapon : Node) -> void:
 	pass
 	
-func on_wearoff_change_health(health_component : HealthComponent) -> void:
+func on_wearoff_change_health(_health_component : HealthComponent) -> void:
 	pass
 
-func on_wearoff_change_weapons(weapon : Node) -> void:
+func on_wearoff_change_weapons(_weapon : Node) -> void:
 	pass

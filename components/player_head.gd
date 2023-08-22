@@ -33,7 +33,7 @@ func update_aimed_at() -> void:
 	else:
 		aimed_at.emit(null)
 		
-func _on_ghost_emitted_output(action: String, payload) -> void:
+func _on_ghost_emitted_output(action: String, _payload) -> void:
 	match action:
 		"possess":
 			if possess_ray.get_collider() is Shell and possess_cooldown == 0:
@@ -47,6 +47,6 @@ func _on_ghost_emitted_output(action: String, payload) -> void:
 				possess_cooldown = 1
 				ghost_mount.clear_ghost()
 
-func _on_ghost_mount_ghost_changed(new_ghost, is_player):
+func _on_ghost_mount_ghost_changed(_new_ghost, is_player):
 	if is_player:
 		make_current()
