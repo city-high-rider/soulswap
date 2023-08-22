@@ -11,6 +11,9 @@ extends Node3D
 ## How much damage does the explosion do?
 @export var damage : Damage = Damage.new()
 
+# Who is responsible for creating the explosion?
+var thrower : Node = null
+
 func _ready() -> void:
 	animation_player.play("explode")
 	explosion_sound.play()
@@ -20,7 +23,7 @@ func _ready() -> void:
 
 func _on_blast_radius_area_entered(area):
 	if area is Hitbox:
-		area.take_damage(damage, null)
+		area.take_damage(damage, thrower)
 
 
 func _on_blast_radius_body_entered(body):
