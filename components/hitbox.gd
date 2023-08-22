@@ -49,9 +49,6 @@ func take_damage(damage : Damage, attacker) -> void:
 
 # We use this to detect collision with projectiles.
 func _on_body_entered(body) -> void:
-	print_debug("entered")
-	print_debug(body)
 	if body is Projectile:
-		print_debug("projectile entered")
-		take_damage(body.damage, null)
+		take_damage(body.damage, body.thrower)
 		body.on_hitbox_collide.call()
