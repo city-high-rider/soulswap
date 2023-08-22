@@ -60,8 +60,7 @@ height = 0.1
 radial_segments = 8
 rings = 4
 
-[node name="energy_pellet" type="RigidBody3D"]
-gravity_scale = 0.0
+[node name="energy_pellet" type="CharacterBody3D"]
 script = ExtResource("1_tpuh5")
 damage = SubResource("Resource_o5io5")
 
