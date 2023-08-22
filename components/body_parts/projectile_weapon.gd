@@ -39,7 +39,7 @@ func fire():
 	var destination : Vector3 = get_destination_point()
 	new_projectile.look_at(destination)
 	# Set projectile owner
-	new_projectile.owner = ghost_mount.shell
+	new_projectile.thrower = ghost_mount.shell
 	if "linear_velocity" in new_projectile:
 		new_projectile.linear_velocity = (destination - new_projectile.global_transform.origin).normalized() * muzzle_speed
 	if gunfire_sound:
