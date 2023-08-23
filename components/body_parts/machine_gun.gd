@@ -88,7 +88,7 @@ func load_data() -> void:
 	firing_time_left = current_save.saved_ammo
 
 
-func _on_hitbox_took_damage(lethal, damage, attacker):
+func _on_hitbox_took_damage(lethal, damage, attacker, _is_direct):
 	if !lethal:
 		return
 		
