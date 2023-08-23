@@ -1,8 +1,8 @@
 extends CharacterBody3D
-class_name Shell
 
 ## this class is any character body that can be possessed by a player or an AI. The 
 ## entity controlling the "shell" is referred to as the "ghost".
+class_name Shell
 
 ## What is the player head? This will contain the camera and a raycast node.
 @export var head : PlayerHead
@@ -52,7 +52,14 @@ func _on_health_component_died():
 	died.emit()
 	
 	
-# Detect friedly fire and award style points.
-func _on_hitbox_took_damage(_lethal, damage, attacker):
+func _on_hitbox_took_damage(_lethal, damage, attacker, is_direct: bool):
+	# Detect friedly fire and award style points.
 	if attacker is Shell and self != PlayerInfo.current_player_shell and attacker != PlayerInfo.current_player_shell:
 		PlayerInfo.current_player_shell.ghost_mount.ghost.award_style(0.5 * damage.damage_amount, "+ FRIENDLY FIRE")
+		
+	# Detect direct hits and award style.
+	if is_direct and attacker != self and attacker is Shell and attacker.ghost_mount.ghost.has_method("award_style"):
+		attacker.ghost_mount.ghost.award_style(10 * damage.damage_amount, "+ DIRECT HIT")
+		# Furthermore, if we are in the air, give a further bonus.
+		if !is_on_floor():
+			attacker.ghost_mount.ghost.award_style(50, "+ AEIRAL HIT")
