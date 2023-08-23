@@ -14,6 +14,9 @@ class_name Hitbox
 ## Signal when we take damage from a distinct source
 signal took_damage(lethal: bool, damage: Damage, attacker)
 
+## Signal when we are directly hit by a projectile.
+signal directly_hit
+
 # Note that right now we have separate exports for each damage type.. if this grows we should change
 # to something like an array of tuples. I didn't do that right now because godot doesn't have built in tuples.
 
@@ -52,3 +55,4 @@ func _on_body_entered(body) -> void:
 	if body is Projectile:
 		take_damage(body.damage, body.thrower)
 		body.on_hitbox_collide.call()
+		directly_hit.emit()
