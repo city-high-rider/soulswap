@@ -25,12 +25,6 @@ shape = SubResource("CapsuleShape3D_vxp60")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
 mesh = SubResource("CapsuleMesh_3csjl")
 
-[node name="Hitbox" parent="." index="2"]
-damage_multiplier = 1.0
-kinetic_mult = 1.0
-explosive_mult = 1.0
-plasma_mult = 1.0
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 shape = SubResource("CapsuleShape3D_srfwc")
 

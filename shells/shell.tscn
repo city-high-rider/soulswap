@@ -21,7 +21,7 @@ buff_manager = NodePath("BuffManager")
 
 [node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
 collision_layer = 2
-collision_mask = 0
+collision_mask = 8
 script = ExtResource("2_of3k4")
 health_component = NodePath("../HealthComponent")
 
@@ -82,6 +82,7 @@ script = ExtResource("10_desn1")
 health_components = [NodePath("../HealthComponent")]
 
 [connection signal="died" from="." to="BuffManager" method="_on_shell_died"]
+[connection signal="took_damage" from="Hitbox" to="." method="_on_hitbox_took_damage"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="died" from="HealthComponent" to="GhostMount" method="_on_health_component_died"]
 [connection signal="ghost_cleared" from="GhostMount" to="PlayerUI" method="_on_ghost_mount_ghost_cleared"]
