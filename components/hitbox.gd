@@ -12,10 +12,8 @@ class_name Hitbox
 
 ## We are responsible for relaying information about the attack's origin.
 ## Signal when we take damage from a distinct source
-signal took_damage(lethal: bool, damage: Damage, attacker)
+signal took_damage(lethal: bool, damage: Damage, attacker, is_direct: bool)
 
-## Signal when we are directly hit by a projectile.
-signal directly_hit
 
 # Note that right now we have separate exports for each damage type.. if this grows we should change
 # to something like an array of tuples. I didn't do that right now because godot doesn't have built in tuples.
@@ -35,7 +33,7 @@ func _ready() -> void:
 
 # function that is called when we take damgae
 # damage is the damage object, attacker is usually the shell that attacked us
-func take_damage(damage : Damage, attacker) -> void:
+func take_damage(damage : Damage, attacker, is_direct : bool = false) -> void:
 	# Calculate the damage multiplier given our damage resistances defaulting to 1.
 	var specific_type_multiplier : float = 1
 	match damage.damage_type:
@@ -48,11 +46,10 @@ func take_damage(damage : Damage, attacker) -> void:
 			
 	if health_component:
 		var was_damage_lethal : bool = health_component.take_damage(damage.damage_amount * damage_multiplier * specific_type_multiplier)
-		took_damage.emit(was_damage_lethal, damage, attacker)
+		took_damage.emit(was_damage_lethal, damage, attacker, is_direct)
 
 # We use this to detect collision with projectiles.
 func _on_body_entered(body) -> void:
 	if body is Projectile:
-		take_damage(body.damage, body.thrower)
+		take_damage(body.damage, body.thrower, true)
 		body.on_hitbox_collide.call()
-		directly_hit.emit()
