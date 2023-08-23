@@ -30,7 +30,7 @@ func _ready() -> void:
 	get_tree().create_timer(despawn_time_s).timeout.connect(queue_free)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# By default, fly in the -ve z direction.
 	velocity = speed * -global_transform.basis.z
 	# If we hit something, run the on_collide function
