@@ -41,10 +41,10 @@ func save_data() -> void:
 	saved_state = is_open
 
 func load_data() -> void:
-	is_open = saved_state
-	if is_open:
+	var old_state_is_open = is_open
+	if !old_state_is_open and saved_state:
 		open()
-	else:
+	elif old_state_is_open and !saved_state:
 		close()
-
+	is_open = saved_state
 
