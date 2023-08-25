@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://danr4y7gq7sch"]
+[gd_scene load_steps=15 format=3 uid="uid://danr4y7gq7sch"]
 
 [ext_resource type="Script" path="res://ghosts/player_ghost.gd" id="1_8tcsk"]
 [ext_resource type="Script" path="res://ghosts/possession_modifier.gd" id="2_g7o7f"]
@@ -15,6 +15,9 @@ base_damage_multiplier = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gojlh"]
 bg_color = Color(0.321569, 0.615686, 0.0941176, 0.882353)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ombsv"]
+font_size = 21
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8667k"]
 bg_color = Color(0.960784, 0.0235294, 0.0470588, 0)
@@ -87,10 +90,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -256.0
-offset_top = -88.0
-offset_right = 257.0
-offset_bottom = -33.0
+offset_left = -311.0
+offset_top = -137.0
+offset_right = 310.0
+offset_bottom = -36.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_left = 10
@@ -104,6 +107,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="PopupText"]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_ombsv")
 horizontal_alignment = 1
 
 [node name="HurtIndicator" type="Panel" parent="."]
