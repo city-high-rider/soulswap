@@ -1,0 +1,126 @@
+[gd_scene load_steps=14 format=3 uid="uid://dyu0t1x11boek"]
+
+[ext_resource type="Material" uid="uid://c78qerjjpjysg" path="res://materials/light_proto.tres" id="1_v3bjq"]
+[ext_resource type="Material" uid="uid://b5anjtaljnhvs" path="res://materials/dark_proto.tres" id="2_0w2sq"]
+[ext_resource type="Material" uid="uid://ctir88q3d86hv" path="res://materials/orange_proto.tres" id="3_buif5"]
+[ext_resource type="PackedScene" uid="uid://bw42rj1kwnyl" path="res://shells/Husk.tscn" id="4_1t4xu"]
+[ext_resource type="PackedScene" uid="uid://b3cny3iljmcwh" path="res://shells/roller_machinegun.tscn" id="4_5clly"]
+[ext_resource type="PackedScene" uid="uid://4pb4cmdkvqam" path="res://ghosts/dummy_ghost.tscn" id="5_2lejl"]
+[ext_resource type="PackedScene" uid="uid://cht1nvmsvv4nx" path="res://interactive/popup_area.tscn" id="6_l60nu"]
+[ext_resource type="PackedScene" uid="uid://bu57v5cln1y64" path="res://interactive/checkpoint.tscn" id="7_0mppu"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k5u10"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_2n6pn"]
+sky_material = SubResource("ProceduralSkyMaterial_k5u10")
+
+[sub_resource type="Environment" id="Environment_s63vt"]
+background_mode = 2
+sky = SubResource("Sky_2n6pn")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k2ejs"]
+size = Vector3(4.91871, 1, 5.88833)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5sfht"]
+size = Vector3(3.48052, 1, 1.19594)
+
+[node name="first_level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_s63vt")
+
+[node name="Geometry" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="Room1" type="CSGBox3D" parent="Geometry"]
+size = Vector3(12.3984, 7.64734, 30.0166)
+
+[node name="Subtractor1" type="CSGBox3D" parent="Geometry/Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.55759)
+operation = 2
+size = Vector3(12.0599, 7.02059, 13.3831)
+material = ExtResource("2_0w2sq")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Geometry/Room1"]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 2.66522, 6.18528)
+light_energy = 3.0
+spot_range = 10.5675
+spot_angle = 20.9061
+
+[node name="Podium" type="CSGBox3D" parent="Geometry/Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.83798, 4.50944)
+size = Vector3(0.214503, 1.3725, 0.214363)
+material = ExtResource("2_0w2sq")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Geometry/Room1/Podium"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.612892, 0)
+size = Vector3(1, 0.175877, 1)
+material = ExtResource("3_buif5")
+
+[node name="Shell" parent="Geometry/Room1/Podium" instance=ExtResource("4_5clly")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.31565, 0)
+possess_cost = 0.0
+
+[node name="GhostMount" parent="Geometry/Room1/Podium/Shell" index="3" node_paths=PackedStringArray("ghost")]
+ghost = NodePath("DummyGhost")
+
+[node name="RollerGhost" parent="Geometry/Room1/Podium/Shell/GhostMount" index="0" node_paths=PackedStringArray("ghost_mount")]
+ghost_mount = NodePath("..")
+
+[node name="DummyGhost" parent="Geometry/Room1/Podium/Shell/GhostMount" index="1" node_paths=PackedStringArray("ghost_mount") instance=ExtResource("5_2lejl")]
+ghost_mount = NodePath("..")
+
+[node name="PopupArea" parent="Geometry/Room1/Podium" instance=ExtResource("6_l60nu")]
+message = "Press 'F\" to possess a body that you are looking at. This uses STYLE POINTS."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Room1/Podium/PopupArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.09228)
+shape = SubResource("BoxShape3D_k2ejs")
+
+[node name="Subtractor2" type="CSGBox3D" parent="Geometry/Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.22547)
+operation = 2
+size = Vector3(11.2022, 6.94637, 12.3558)
+material = ExtResource("1_v3bjq")
+
+[node name="VentSubtractor" type="CSGBox3D" parent="Geometry/Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.99148, -2.67779, 0)
+operation = 2
+size = Vector3(2.08829, 1.56311, 2.41313)
+material = ExtResource("2_0w2sq")
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Geometry/Room1/VentSubtractor"]
+transform = Transform3D(1, 0, 0, 0, -0.866025, 0.5, 0, -0.5, -0.866025, 0.0508883, 1.58189, -4.07767)
+light_color = Color(1, 0.0745098, 0.239216, 1)
+light_energy = 5.519
+spot_range = 8.01223
+spot_angle = 18.2447
+
+[node name="Checkpoint" parent="Geometry/Room1" instance=ExtResource("7_0mppu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75663, -2.90847, -10.0906)
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Geometry/Room1/Checkpoint"]
+transform = Transform3D(1, 0, 0, 0, -2.98023e-08, 1, 0, -1, -2.98023e-08, 0.285739, 5.73262, -1.11861)
+light_color = Color(1, 0.0745098, 0.239216, 1)
+light_energy = 5.519
+spot_range = 8.01223
+spot_angle = 18.2447
+
+[node name="PopupArea" parent="Geometry/Room1/Checkpoint" instance=ExtResource("6_l60nu")]
+message = "Stand under a checkpoint to save your progress. You may reset with 'R'."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Room1/Checkpoint/PopupArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.36181)
+shape = SubResource("BoxShape3D_5sfht")
+
+[node name="Husk" parent="." instance=ExtResource("4_1t4xu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.79586, 12.8056)
+
+[editable path="Geometry/Room1/Podium/Shell"]
+[editable path="Geometry/Room1/Podium/Shell/Head"]
+[editable path="Geometry/Room1/Podium/Shell/Head/MachineGun"]
+[editable path="Geometry/Room1/Podium/Shell/Head/MachineGun2"]
