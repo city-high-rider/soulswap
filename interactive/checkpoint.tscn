@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bu57v5cln1y64"]
+[gd_scene load_steps=16 format=3 uid="uid://bu57v5cln1y64"]
 
 [ext_resource type="Script" path="res://interactive/checkpoint.gd" id="1_uf1ik"]
 [ext_resource type="Texture2D" uid="uid://dsligvtxga0r3" path="res://addons/kenney_particle_pack/star_07.png" id="2_1dvdi"]
@@ -38,6 +38,42 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_qkr26"]
 material = SubResource("StandardMaterial3D_6xxpx")
 
+[sub_resource type="Animation" id="Animation_0ren3"]
+resource_name = "light_flicker"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OmniLight3D:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 0.5, 1),
+"update": 0,
+"values": [0.0, 2.0, 0.5]
+}
+
+[sub_resource type="Animation" id="Animation_t24pc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OmniLight3D:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jxjbs"]
+_data = {
+"RESET": SubResource("Animation_t24pc"),
+"light_flicker": SubResource("Animation_0ren3")
+}
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_2fkmd"]
 size = Vector3(2.09406, 1, 2.06391)
 
@@ -69,6 +105,15 @@ material = SubResource("StandardMaterial3D_p0mq5")
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_nytx6")
 draw_pass_1 = SubResource("QuadMesh_qkr26")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lantern/CSGBox3D3"]
+light_color = Color(0.337255, 0.662745, 1, 1)
+light_energy = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Lantern/CSGBox3D3"]
+libraries = {
+"": SubResource("AnimationLibrary_jxjbs")
+}
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0914145, 0)
