@@ -18,3 +18,8 @@ func _ready() -> void:
 func start() -> void:
 	if waves[0]:
 		waves[0].start()
+
+
+func _on_area_3d_body_entered(body):
+	if body == PlayerInfo.current_player_shell:
+		start()
