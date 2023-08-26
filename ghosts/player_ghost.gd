@@ -76,7 +76,7 @@ func award_style(pts: int, message: String) -> void:
 	style_points += pts
 	style_tab.display_style(message, pts)
 	
-func on_health_damaged(_new_health, _source) -> void:
+func on_health_damaged() -> void:
 	if hurt_audio and hurt_indicator:
 		hurt_audio.play()
 		hurt_indicator.play("hurt")
