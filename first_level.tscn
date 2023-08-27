@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dyu0t1x11boek"]
+[gd_scene load_steps=36 format=3 uid="uid://dyu0t1x11boek"]
 
 [ext_resource type="Material" uid="uid://c78qerjjpjysg" path="res://materials/light_proto.tres" id="1_v3bjq"]
 [ext_resource type="Material" uid="uid://b5anjtaljnhvs" path="res://materials/dark_proto.tres" id="2_0w2sq"]
@@ -21,7 +21,10 @@
 [ext_resource type="PackedScene" uid="uid://bdtj1l4cxv5j1" path="res://interactive/tp-trigger.tscn" id="18_r3qmj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k5u10"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sky_top_color = Color(0.560784, 0.345098, 0.760784, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+sky_energy_multiplier = 0.3
+sky_cover_modulate = Color(0.462745, 0.462745, 0.462745, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
 [sub_resource type="Sky" id="Sky_2n6pn"]
@@ -29,7 +32,9 @@ sky_material = SubResource("ProceduralSkyMaterial_k5u10")
 
 [sub_resource type="Environment" id="Environment_s63vt"]
 background_mode = 2
+background_energy_multiplier = 0.5
 sky = SubResource("Sky_2n6pn")
+ambient_light_source = 1
 tonemap_mode = 2
 glow_enabled = true
 fog_enabled = true
@@ -58,11 +63,30 @@ size = Vector3(6.32254, 4.10329, 1.18007)
 [sub_resource type="BoxShape3D" id="BoxShape3D_3phxa"]
 size = Vector3(6.31719, 4.00116, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mwm07"]
-size = Vector3(19.8284, 8.03872, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_tjxp2"]
+size = Vector3(20, 8, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m047r"]
 size = Vector3(274.718, 2.31082, 318.751)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mwm07"]
+size = Vector3(1.32249, 76.8125, 162.352)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_587ce"]
+transparency = 1
+albedo_color = Color(0.709804, 0.184314, 0.321569, 0.560784)
+emission_enabled = true
+emission = Color(0.933333, 0.0313726, 0.164706, 1)
+emission_energy_multiplier = 6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d3t1b"]
+albedo_color = Color(1, 1, 0.533333, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ps1iy"]
+size = Vector3(16.5214, 1.80149, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sqby6"]
+size = Vector3(19.0189, 3.01968, 48.8502)
 
 [node name="first_level" type="Node3D"]
 
@@ -206,6 +230,10 @@ size = Vector3(1, 3.32838, 3.20982)
 [node name="SlidingDoor" parent="NavigationRegion3D/Geometry/Room2/DoorHole" instance=ExtResource("8_xnapt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.73089, 0)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="NavigationRegion3D/Geometry/Room2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.518825, 3.55555)
+light_color = Color(0.921569, 0.137255, 0.262745, 1)
+
 [node name="Room3" type="CSGBox3D" parent="NavigationRegion3D/Geometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4339, -1.69764, 8.99804)
 size = Vector3(7.45036, 4.53824, 18.0991)
@@ -275,21 +303,6 @@ size = Vector3(1.20386, 3.32838, 3.20982)
 [node name="SlidingDoor" parent="NavigationRegion3D/Geometry/Room4/DoorHole2" instance=ExtResource("8_xnapt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.73089, 0)
 
-[node name="DroneSpawner" type="Area3D" parent="NavigationRegion3D/Geometry/Room4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.10945, -8.77804)
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry/Room4/DroneSpawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.85115, -4.94082)
-shape = SubResource("BoxShape3D_mwm07")
-
-[node name="EnemySpawner" type="Node3D" parent="NavigationRegion3D/Geometry/Room4/DroneSpawner" node_paths=PackedStringArray("trigger_area")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14957, 0)
-script = ExtResource("11_5tn5s")
-trigger_area = NodePath("..")
-enemy = ExtResource("13_uqtvl")
-
 [node name="Encounter" type="Node3D" parent="NavigationRegion3D/Geometry/Room4"]
 script = ExtResource("14_3clq5")
 
@@ -324,16 +337,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.61667, -6.67156, 5.17466)
 script = ExtResource("15_ega8m")
 enemy = ExtResource("4_5clly")
 
+[node name="StartArea" type="Area3D" parent="NavigationRegion3D/Geometry/Room4/Encounter"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry/Room4/Encounter/StartArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.77527, -11.1893)
+shape = SubResource("BoxShape3D_tjxp2")
+
 [node name="CornerPodium" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Room4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.98125, -6.18501, 12.0731)
 size = Vector3(3.82294, 5.89555, 4.50072)
 
 [node name="BuildingBase" type="CSGBox3D" parent="NavigationRegion3D/Geometry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -65.9198, 20.1888)
-size = Vector3(73.9736, 123.508, 71.9108)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11252, -66.6247, 19.2783)
+size = Vector3(48.7372, 123.856, 62.5689)
 
 [node name="Checkpoint" parent="NavigationRegion3D/Geometry/BuildingBase" instance=ExtResource("7_0mppu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.2887, 62.2309, 14.5842)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.287, 61.8725, 10.3604)
 
 [node name="tp-trigger" parent="NavigationRegion3D/Geometry/BuildingBase" node_paths=PackedStringArray("trigger_area", "tp_destination") instance=ExtResource("18_r3qmj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.2, 62.9111, 12.2345)
@@ -348,6 +369,315 @@ tp_destination = NodePath("Marker3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -36.7868, 0)
 shape = SubResource("BoxShape3D_m047r")
 
+[node name="Balcony" type="CSGBox3D" parent="NavigationRegion3D/Geometry/BuildingBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.3927, 61.2132, 14.6409)
+size = Vector3(9.90328, 0.370895, 16.216)
+material = ExtResource("12_aa8rx")
+
+[node name="Support" type="CSGBox3D" parent="NavigationRegion3D/Geometry/BuildingBase/Balcony"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 2.42923, -3.22969, -6.54047)
+size = Vector3(1, 8.56732, 1)
+material = ExtResource("2_0w2sq")
+
+[node name="Support2" type="CSGBox3D" parent="NavigationRegion3D/Geometry/BuildingBase/Balcony"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 2.42923, -3.22969, 6.90738)
+size = Vector3(1, 8.56732, 1)
+material = ExtResource("2_0w2sq")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/Geometry/BuildingBase/Balcony"]
+transform = Transform3D(0.853542, -2.27747e-08, 0.521025, -0.521025, -3.73095e-08, 0.853542, 0, -1, -4.37114e-08, 5.90443, 6.0859, 0)
+spot_range = 10.2912
+spot_angle = 18.9755
+
+[node name="Revenant" parent="NavigationRegion3D/Geometry/BuildingBase" instance=ExtResource("17_2y2m7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5427, 62.5596, 19.3679)
+
+[node name="GhostMount" parent="NavigationRegion3D/Geometry/BuildingBase/Revenant" index="3" node_paths=PackedStringArray("ghost")]
+ghost = NodePath("DummyGhost")
+
+[node name="DummyGhost" parent="NavigationRegion3D/Geometry/BuildingBase/Revenant/GhostMount" index="1" node_paths=PackedStringArray("ghost_mount") instance=ExtResource("5_2lejl")]
+ghost_mount = NodePath("..")
+
+[node name="Platform" type="CSGBox3D" parent="NavigationRegion3D/Geometry/BuildingBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.3845, 60.3377, 8.22898)
+size = Vector3(3.32138, 0.54272, 4.03642)
+material = ExtResource("3_buif5")
+
+[node name="Platform2" type="CSGBox3D" parent="NavigationRegion3D/Geometry/BuildingBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.4763, 64.8839, 8.22898)
+size = Vector3(3.32138, 0.54272, 4.03642)
+material = ExtResource("3_buif5")
+
+[node name="Platform3" type="CSGBox3D" parent="NavigationRegion3D/Geometry/BuildingBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.9447, 72.4359, 17.0645)
+size = Vector3(3.32138, 6.81669, 0.217819)
+material = ExtResource("3_buif5")
+
+[node name="Platform4" type="CSGBox3D" parent="NavigationRegion3D/Geometry/BuildingBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.9447, 81.4842, 13.0183)
+size = Vector3(3.32138, 6.81669, 0.217819)
+material = ExtResource("3_buif5")
+
+[node name="Platform5" type="CSGBox3D" parent="NavigationRegion3D/Geometry/BuildingBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.7865, 90.8279, 20.5148)
+size = Vector3(3.32138, 0.164792, 7.79941)
+material = ExtResource("3_buif5")
+
+[node name="Checkpoint" parent="NavigationRegion3D/Geometry/BuildingBase/Platform5" instance=ExtResource("7_0mppu")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 2.38072)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/Geometry/BuildingBase/Platform5/Checkpoint"]
+transform = Transform3D(1, 8.74228e-08, 8.74228e-08, -8.74228e-08, -4.37114e-08, 1, 8.74228e-08, -1, -4.37114e-08, 0, 7.5308, 0)
+spot_range = 8.0805
+spot_angle = 21.9799
+
+[node name="DroneSpawner" type="Area3D" parent="NavigationRegion3D/Geometry/BuildingBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3816, 78.9583, 13.872)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry/BuildingBase/DroneSpawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.3977, -5.36286, -4.77225)
+shape = SubResource("BoxShape3D_mwm07")
+
+[node name="EnemySpawner" type="Node3D" parent="NavigationRegion3D/Geometry/BuildingBase/DroneSpawner" node_paths=PackedStringArray("trigger_area")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14957, 0)
+script = ExtResource("11_5tn5s")
+trigger_area = NodePath("..")
+enemy = ExtResource("13_uqtvl")
+
+[node name="Building2" type="CSGBox3D" parent="NavigationRegion3D/Geometry"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -91.914, 12.4934, 33.157)
+size = Vector3(20.5895, 30.2306, 28.7626)
+
+[node name="Antenna" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.79877, 25.4425, -8.54924)
+size = Vector3(2.24362, 7.74386, 2.20845)
+material = ExtResource("3_buif5")
+
+[node name="Subtractor" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2/Antenna"]
+operation = 2
+size = Vector3(2.01332, 7.74386, 1.8571)
+
+[node name="Subtractor3" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2/Antenna"]
+operation = 2
+size = Vector3(1.62392, 7.3924, 2.32832)
+
+[node name="Subtractor2" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2/Antenna"]
+operation = 2
+size = Vector3(2.53676, 7.3446, 1.70411)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="NavigationRegion3D/Geometry/Building2/Antenna"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57012, 0)
+radius = 0.998558
+height = 10.0775
+material = ExtResource("2_0w2sq")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="NavigationRegion3D/Geometry/Building2/Antenna"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.4577, 0)
+radius = 0.0971168
+height = 10.0775
+material = ExtResource("1_v3bjq")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="NavigationRegion3D/Geometry/Building2/Antenna/CSGCylinder3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.01027, 0)
+light_color = Color(1, 0.0862745, 0.137255, 1)
+light_energy = 3.0
+omni_range = 29.7282
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="NavigationRegion3D/Geometry/Building2/Antenna/CSGCylinder3D2/OmniLight3D"]
+material = SubResource("StandardMaterial3D_587ce")
+
+[node name="helipad" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.6931, 15.8699)
+size = Vector3(17.1592, 0.234044, 15.0933)
+material = ExtResource("2_0w2sq")
+
+[node name="Ramp" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2/helipad"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -0.910545, -10.5768)
+size = Vector3(6.86411, 0.374051, 6.64932)
+
+[node name="SupportPillar" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2/helipad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56155, -0.855064, -6.47172)
+size = Vector3(1, 1.70393, 1)
+material = ExtResource("1_v3bjq")
+
+[node name="SupportPillar2" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2/helipad"]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, -7.56155, -2.98827, 2.71508)
+size = Vector3(1, 9.74448, 1)
+material = ExtResource("1_v3bjq")
+
+[node name="SupportPillar3" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2/helipad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.07385, -0.855064, -6.47172)
+size = Vector3(1, 1.70393, 1)
+material = ExtResource("1_v3bjq")
+
+[node name="SupportPillar4" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2/helipad"]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 7.07385, -2.98827, 2.71508)
+size = Vector3(1, 9.74448, 1)
+material = ExtResource("1_v3bjq")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/Geometry/Building2/helipad"]
+transform = Transform3D(1, 6.18172e-08, 1.4924e-07, -6.18173e-08, -0.707107, 0.707107, 1.4924e-07, -0.707107, -0.707107, 5.79877, 18.0082, -20.5739)
+light_color = Color(0.870588, 1, 1, 1)
+light_energy = 5.0
+spot_range = 36.3219
+spot_angle = 31.9996
+
+[node name="LetterHPart" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2/helipad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.60578, 0.130119, 0)
+size = Vector3(1.57184, 0.103239, 10.8577)
+material = SubResource("StandardMaterial3D_d3t1b")
+
+[node name="LetterHPart2" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2/helipad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91721, 0.130119, 0)
+size = Vector3(1.57184, 0.103239, 10.8577)
+material = SubResource("StandardMaterial3D_d3t1b")
+
+[node name="LetterHPart3" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2/helipad"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.112801, 0.130119, 0)
+size = Vector3(1.57184, 0.103239, 6.14397)
+material = SubResource("StandardMaterial3D_d3t1b")
+
+[node name="Troll" parent="NavigationRegion3D/Geometry/Building2/helipad" instance=ExtResource("6_l60nu")]
+message = "I hope you spared a drone....
+"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry/Building2/helipad/Troll"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.75086)
+shape = SubResource("BoxShape3D_ps1iy")
+
+[node name="Base" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -37.892, 0)
+size = Vector3(37.2299, 45.6105, 52.5974)
+
+[node name="Baser" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Building2/Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -44.8994, 19.6524)
+size = Vector3(55.9106, 64.1058, 93.1371)
+
+[node name="FullEncounter" type="Node3D" parent="NavigationRegion3D/Geometry/Building2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.6462, 0)
+
+[node name="StartVolume" type="Area3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter/StartVolume"]
+shape = SubResource("BoxShape3D_sqby6")
+
+[node name="RollersAndDrones" type="Node3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter"]
+script = ExtResource("14_3clq5")
+
+[node name="Rollers" type="Node3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter/RollersAndDrones"]
+script = ExtResource("9_gbe8j")
+
+[node name="EnemySpawner" type="Node3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter/RollersAndDrones/Rollers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.80709, -0.795565, 0)
+script = ExtResource("15_ega8m")
+enemy = ExtResource("4_5clly")
+
+[node name="EnemySpawner2" type="Node3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter/RollersAndDrones/Rollers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.492844, -0.795565, 0)
+script = ExtResource("15_ega8m")
+enemy = ExtResource("4_5clly")
+
+[node name="EnemySpawner3" type="Node3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter/RollersAndDrones/Rollers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.52569, -0.795565, 0)
+script = ExtResource("15_ega8m")
+enemy = ExtResource("4_5clly")
+
+[node name="EnemySpawner4" type="Node3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter/RollersAndDrones/Rollers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.52569, 1.43738, 10.191)
+script = ExtResource("15_ega8m")
+enemy = ExtResource("4_5clly")
+
+[node name="EnemySpawner5" type="Node3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter/RollersAndDrones/Rollers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95911, 1.43738, 10.191)
+script = ExtResource("15_ega8m")
+enemy = ExtResource("4_5clly")
+
+[node name="Drones" type="Node3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter/RollersAndDrones"]
+script = ExtResource("9_gbe8j")
+
+[node name="EnemySpawner" type="Node3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter/RollersAndDrones/Drones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57764e-05, -3.70215, -17.809)
+script = ExtResource("15_ega8m")
+enemy = ExtResource("13_uqtvl")
+
+[node name="EnemySpawner2" type="Node3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter/RollersAndDrones/Drones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.31985, -3.70215, -17.809)
+script = ExtResource("15_ega8m")
+enemy = ExtResource("13_uqtvl")
+
+[node name="EnemySpawner3" type="Node3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter/RollersAndDrones/Drones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66243, 2.02376, 15.2608)
+script = ExtResource("15_ega8m")
+enemy = ExtResource("16_x4yxp")
+
+[node name="Revenants" type="Node3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter"]
+script = ExtResource("9_gbe8j")
+
+[node name="EnemySpawner" type="Node3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter/Revenants"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23316, 20.4134)
+script = ExtResource("15_ega8m")
+enemy = ExtResource("17_2y2m7")
+
+[node name="EnemySpawner2" type="Node3D" parent="NavigationRegion3D/Geometry/Building2/FullEncounter/Revenants"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39534, 21.3321, -5.60216)
+script = ExtResource("15_ega8m")
+enemy = ExtResource("17_2y2m7")
+
+[node name="Finish" type="CSGBox3D" parent="NavigationRegion3D/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.9165, -15.7112, -73.9256)
+size = Vector3(52.3672, 63.3194, 45.4848)
+
+[node name="Roof" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Finish"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 41.5223, 0)
+size = Vector3(40.8688, 51.4988, 33.4756)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/Geometry/Finish/Roof"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 35.2544, 32.1107)
+light_energy = 6.0
+spot_range = 29.4593
+
+[node name="Antenna2" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Finish"]
+transform = Transform3D(-3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, -13.9594, 77.4782, 7.70843)
+size = Vector3(2.24362, 7.74386, 2.20845)
+material = ExtResource("3_buif5")
+
+[node name="Subtractor" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Finish/Antenna2"]
+operation = 2
+size = Vector3(2.01332, 7.74386, 1.8571)
+
+[node name="Subtractor3" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Finish/Antenna2"]
+operation = 2
+size = Vector3(1.62392, 7.3924, 2.32832)
+
+[node name="Subtractor2" type="CSGBox3D" parent="NavigationRegion3D/Geometry/Finish/Antenna2"]
+operation = 2
+size = Vector3(2.53676, 7.3446, 1.70411)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="NavigationRegion3D/Geometry/Finish/Antenna2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57012, 0)
+radius = 0.998558
+height = 10.0775
+material = ExtResource("2_0w2sq")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="NavigationRegion3D/Geometry/Finish/Antenna2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.4577, 0)
+radius = 0.0971168
+height = 10.0775
+material = ExtResource("1_v3bjq")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="NavigationRegion3D/Geometry/Finish/Antenna2/CSGCylinder3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.01027, 0)
+light_color = Color(1, 0.0862745, 0.137255, 1)
+light_energy = 3.0
+omni_range = 29.7282
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="NavigationRegion3D/Geometry/Finish/Antenna2/CSGCylinder3D2/OmniLight3D"]
+material = SubResource("StandardMaterial3D_587ce")
+
 [node name="Husk" parent="." instance=ExtResource("4_1t4xu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.79586, 12.8056)
 
@@ -356,10 +686,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.79586, 12.8056)
 [connection signal="all_enemies_killed" from="NavigationRegion3D/Geometry/Room2/Encounter/WaveSpawner" to="NavigationRegion3D/Geometry/Room2/DoorHole/SlidingDoor" method="_on_encounter_all_enemies_killed"]
 [connection signal="encounter_started" from="NavigationRegion3D/Geometry/Room2/Encounter/WaveSpawner" to="NavigationRegion3D/Geometry/Room1/DoorSubtractor/SlidingDoor" method="_on_encounter_encounter_started"]
 [connection signal="enemy_died" from="NavigationRegion3D/Geometry/Room3/FlankEncounter/EnemySpawner" to="NavigationRegion3D/Geometry/Room4/DoorHole/SlidingDoor" method="_on_encounter_all_enemies_killed"]
-[connection signal="body_entered" from="NavigationRegion3D/Geometry/Room4/DroneSpawner" to="NavigationRegion3D/Geometry/Room4/Encounter" method="_on_area_3d_body_entered"]
 [connection signal="encounter_ended" from="NavigationRegion3D/Geometry/Room4/Encounter" to="NavigationRegion3D/Geometry/Room4/DoorHole2/SlidingDoor" method="_on_encounter_all_enemies_killed"]
+[connection signal="body_entered" from="NavigationRegion3D/Geometry/Room4/Encounter/StartArea" to="NavigationRegion3D/Geometry/Room4/Encounter" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="NavigationRegion3D/Geometry/Building2/FullEncounter/StartVolume" to="NavigationRegion3D/Geometry/Building2/FullEncounter/RollersAndDrones" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="NavigationRegion3D/Geometry/Building2/FullEncounter/StartVolume" to="NavigationRegion3D/Geometry/Building2/FullEncounter/Revenants" method="_on_area_3d_body_entered"]
 
 [editable path="NavigationRegion3D/Geometry/Room1/Podium/Shell"]
 [editable path="NavigationRegion3D/Geometry/Room1/Podium/Shell/Head"]
 [editable path="NavigationRegion3D/Geometry/Room1/Podium/Shell/Head/MachineGun"]
 [editable path="NavigationRegion3D/Geometry/Room1/Podium/Shell/Head/MachineGun2"]
+[editable path="NavigationRegion3D/Geometry/BuildingBase/Revenant"]
+[editable path="NavigationRegion3D/Geometry/BuildingBase/Revenant/Head"]
