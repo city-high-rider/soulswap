@@ -61,6 +61,7 @@ radial_segments = 8
 rings = 4
 
 [node name="energy_pellet" type="CharacterBody3D"]
+collision_layer = 8
 script = ExtResource("1_tpuh5")
 damage = SubResource("Resource_o5io5")
 
