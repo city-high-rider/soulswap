@@ -33,6 +33,9 @@ scale_curve = SubResource("CurveTexture_6g1ku")
 transparency = 1
 albedo_color = Color(1, 1, 0.690196, 1)
 albedo_texture = ExtResource("1_1u4a3")
+emission_enabled = true
+emission = Color(0.858824, 0.498039, 0.2, 1)
+emission_energy_multiplier = 3.0
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -41,6 +44,7 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_q4tkp"]
 material = SubResource("StandardMaterial3D_sdtgu")
+size = Vector2(0.7, 0.7)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s3b4k"]
 size = Vector3(0.21985, 0.432274, 0.750673)
@@ -106,7 +110,7 @@ draw_pass_1 = SubResource("QuadMesh_q4tkp")
 
 [node name="GunHealth" type="Node" parent="."]
 script = ExtResource("4_eguk2")
-max_health = 20
+max_health = 40
 
 [node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
 collision_layer = 2
