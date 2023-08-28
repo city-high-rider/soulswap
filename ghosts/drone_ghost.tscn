@@ -18,6 +18,7 @@ initial_state = NodePath("FlyAround")
 script = ExtResource("3_j6mi8")
 swoop_state = NodePath("../Swoop")
 buff_state = NodePath("../Buff")
+action_delay = 4.0
 
 [node name="Swoop" type="Node" parent="StateMachine" node_paths=PackedStringArray("fly_state")]
 script = ExtResource("4_27bo3")
