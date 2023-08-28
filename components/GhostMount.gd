@@ -79,6 +79,7 @@ func _on_health_component_died() -> void:
 		ghost.on_shell_death()
 
 
-func _on_health_component_took_damage(new_health, source):
+
+func _on_hitbox_took_damage(_lethal, _damage, _attacker, _is_direct):
 	if ghost and ghost.has_method("on_health_damaged"):
-		ghost.on_health_damaged(new_health, source)
+		ghost.on_health_damaged()

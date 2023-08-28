@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvc16qrehqp2h"]
+
+[ext_resource type="Script" path="res://ghosts/drone_ghost.gd" id="1_0sos4"]
+[ext_resource type="Script" path="res://components/states/state_machine.gd" id="1_21a0u"]
+[ext_resource type="Script" path="res://components/states/ai_states/Wander.gd" id="2_2ujx3"]
+
+[node name="revenant_ghost" type="Node3D"]
+script = ExtResource("1_0sos4")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_21a0u")
+initial_state = NodePath("Wander")
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("nav_agent")]
+script = ExtResource("2_2ujx3")
+nav_agent = NodePath("../../NavigationAgent3D")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

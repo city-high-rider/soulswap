@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cuna3v5lattg1"]
+[gd_scene load_steps=25 format=3 uid="uid://cuna3v5lattg1"]
 
 [ext_resource type="PackedScene" uid="uid://bw42rj1kwnyl" path="res://shells/Husk.tscn" id="1_cbce8"]
 [ext_resource type="Material" uid="uid://c78qerjjpjysg" path="res://materials/light_proto.tres" id="2_4uniy"]
@@ -13,7 +13,7 @@
 [ext_resource type="Material" uid="uid://ctir88q3d86hv" path="res://materials/orange_proto.tres" id="10_bbn6t"]
 [ext_resource type="Material" uid="uid://b5anjtaljnhvs" path="res://materials/dark_proto.tres" id="11_5c1ji"]
 [ext_resource type="PackedScene" uid="uid://bdtj1l4cxv5j1" path="res://interactive/tp-trigger.tscn" id="13_l8t4h"]
-[ext_resource type="PackedScene" uid="uid://cpqfimtyl8vh3" path="res://shells/drone.tscn" id="14_twftv"]
+[ext_resource type="Script" path="res://interactive/multiwave.gd" id="16_o5kx5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_obdej"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -47,8 +47,8 @@ albedo_color = Color(0, 0.823529, 0.729412, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_0wou1"]
 size = Vector3(3.57662, 1.41764, 4.19065)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_j8ask"]
-size = Vector3(2.46891, 1, 5.67658)
+[sub_resource type="BoxShape3D" id="BoxShape3D_r4l31"]
+size = Vector3(2.51098, 1.28525, 3.37525)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_kcg1y"]
 vertices = PackedVector3Array(42.124, -2.72055, 9.21618, 42.124, -2.72055, 14.2162, 45.624, -2.72055, 14.2162, 45.624, -2.72055, 9.21618, 65.874, -2.72055, 9.46618, 65.874, -2.72055, 14.4662, 69.624, -2.72055, 14.4662, 69.624, -2.72055, 9.46618, 23.124, -3.97055, 15.2162, 23.124, -3.97055, 16.7162, 25.874, -3.97055, 16.7162, 25.874, -3.97055, 15.2162, 46.874, 69.5294, 15.4662, 36.874, 69.5294, 15.4662, 36.874, 69.5294, 24.7162, 36.874, 69.5294, 43.2162, 36.874, 69.5294, 52.7162, 46.874, 69.5294, 52.7162, 77.624, 69.5294, 24.7162, 77.624, 69.5294, 15.4662, 67.374, 69.5294, 15.4662, 67.374, 69.5294, 52.7162, 77.624, 69.5294, 52.7162, 77.624, 69.5294, 43.2162, 46.874, 69.5294, 15.4662, 36.874, 69.5294, 24.7162, 36.874, 69.5294, 33.9662, 57.124, 69.5294, 15.4662, 77.624, 69.5294, 33.9662, 77.624, 69.5294, 24.7162, 67.374, 69.5294, 15.4662, 36.874, 69.5294, 33.9662, 36.874, 69.5294, 43.2162, 46.874, 69.5294, 52.7162, 57.124, 69.5294, 52.7162, 67.374, 69.5294, 52.7162, 77.624, 69.5294, 43.2162, 77.624, 69.5294, 33.9662, 77.624, 69.5294, 33.9662, 67.374, 69.5294, 15.4662, 57.124, 69.5294, 15.4662, 36.874, 69.5294, 33.9662, 57.124, 69.5294, 52.7162, 67.374, 69.5294, 52.7162, 78.624, -2.97055, 24.7162, 82.624, -2.97055, 24.7162, 82.874, -2.97055, 22.9662, 85.624, -2.97055, 22.9662, 85.874, -2.97055, 23.4662, 86.124, -2.97055, 16.2162, 82.874, -2.97055, 22.9662, 85.624, -2.97055, 22.9662, 86.124, -2.97055, 16.2162, 82.874, -2.97055, 22.9662, 86.124, -2.97055, 16.2162, 78.624, -2.97055, 16.2162, 78.624, -2.97055, 24.7162, 85.874, -2.97055, 23.4662, 85.874, -2.97055, 25.9662, 86.124, -2.97055, 31.7162, 94.124, -2.97055, 31.7162, 94.124, -2.97055, 16.2162, 86.124, -2.97055, 16.2162, 113.874, -2.97055, 19.7162, 118.874, -2.97055, 19.4662, 118.874, -2.97055, 16.2162, 112.624, -2.97055, 16.2162, 94.124, -2.97055, 16.2162, 94.124, -2.97055, 31.7162, 95.874, -2.97055, 31.7162, 113.874, -2.97055, 28.4662, 113.874, -2.97055, 19.7162, 100.124, -2.97055, 16.2162, 113.874, -2.97055, 19.7162, 112.624, -2.97055, 16.2162, 106.374, -2.97055, 16.2162, 113.874, -2.97055, 19.7162, 106.374, -2.97055, 16.2162, 100.124, -2.97055, 16.2162, 119.874, 0.529449, 16.4662, 119.874, 0.529449, 19.4662, 120.374, 0.529449, 19.7162, 127.124, 0.529449, 22.9662, 127.124, 0.529449, 16.4662, 119.874, 0.529449, 31.2162, 127.124, 0.529449, 29.7162, 127.124, 0.529449, 22.9662, 120.374, 0.529449, 19.7162, 119.874, 0.529449, 31.2162, 127.124, 0.529449, 36.2162, 127.124, 0.529449, 29.7162, 119.874, 0.529449, 42.9662, 127.124, 0.529449, 42.9662, 127.124, 0.529449, 36.2162, 119.874, 0.529449, 31.2162, 114.874, 5.77945, 25.2162, 114.374, 5.77945, 25.7162, 116.874, 5.77945, 27.9662, 114.874, 5.77945, 25.2162, 116.874, 5.77945, 27.9662, 119.374, 5.52945, 27.9662, 119.374, 5.52945, 20.4662, 114.874, 5.52945, 20.4662, 94.124, 2.27945, 34.7162, 95.124, 2.27945, 34.4662, 95.124, 2.27945, 31.4662, 92.624, 2.27945, 34.4662, 83.624, 2.27945, 31.2162, 81.374, 2.27945, 31.4662, 81.374, 2.27945, 34.4662, 92.624, 2.27945, 34.4662, 95.124, 2.27945, 31.4662, 84.874, 2.27945, 31.2162, 92.874, -2.22055, 41.7162, 94.124, -2.22055, 41.7162, 94.124, 2.27945, 34.7162, 92.624, 2.27945, 34.4662, 92.674, 1.77945, 35.9162, 84.874, 2.27945, 31.2162, 84.874, -2.22055, 23.9662, 83.624, -2.22055, 23.9662, 83.624, 2.27945, 31.2162, 84.874, 1.77945, 29.7662, 83.624, 1.77945, 29.7662, 82.874, -2.97055, 26.4662, 82.624, -2.97055, 24.7162, 78.624, -2.97055, 24.7162, 86.124, -2.97055, 31.7162, 85.874, -2.97055, 25.9662, 85.624, -2.97055, 26.4662, 86.124, -2.97055, 31.7162, 85.624, -2.97055, 26.4662, 82.874, -2.97055, 26.4662, 82.874, -2.97055, 26.4662, 78.624, -2.97055, 24.7162, 78.624, -2.97055, 31.7162, 86.124, -2.97055, 31.7162, 108.124, 5.77945, 33.7162, 101.874, 5.77945, 41.4662, 104.624, 5.77945, 43.4662, 110.624, 5.77945, 35.7162, 116.874, 5.77945, 27.9662, 114.374, 5.77945, 25.7162, 108.124, 5.77945, 33.7162, 110.624, 5.77945, 35.7162, 95.124, -2.97055, 41.2162, 97.374, -2.97055, 41.7162, 97.624, -2.97055, 40.4662, 96.124, -2.97055, 33.9662, 95.124, -2.97055, 39.4662, 96.374, -2.97055, 31.9662, 96.124, -2.97055, 33.9662, 97.624, -2.97055, 40.4662, 103.624, -2.97055, 40.4662, 114.374, -2.97055, 28.9662, 113.874, -2.97055, 28.4662, 93.624, -2.97055, 33.9662, 93.624, -2.97055, 39.2162, 95.124, -2.97055, 39.4662, 96.124, -2.97055, 33.9662, 95.874, -2.97055, 31.7162, 96.374, -2.97055, 31.9662, 113.874, -2.97055, 28.4662, 121.124, -2.97055, 49.4662, 121.124, -2.97055, 43.9662, 118.874, -2.97055, 43.7162, 112.624, -2.97055, 49.4662, 104.124, -2.97055, 40.7162, 104.124, -2.97055, 49.4662, 112.624, -2.97055, 49.4662, 118.874, -2.97055, 43.7162, 118.874, -2.97055, 36.2162, 118.874, -2.97055, 36.2162, 118.874, -2.97055, 28.9662, 114.374, -2.97055, 28.9662, 103.624, -2.97055, 40.4662, 104.124, -2.97055, 40.7162, 91.874, -2.97055, 39.4662, 93.624, -2.97055, 39.2162, 93.624, -2.97055, 33.9662, 86.124, -2.97055, 33.9662, 93.374, -2.97055, 49.4662, 93.624, -2.97055, 42.7162, 91.874, -2.97055, 42.4662, 85.874, -2.97055, 49.4662, 91.874, -2.97055, 42.4662, 91.874, -2.97055, 39.4662, 86.124, -2.97055, 33.9662, 78.624, -2.97055, 33.9662, 78.624, -2.97055, 41.7162, 85.874, -2.97055, 49.4662, 78.624, -2.97055, 41.7162, 78.624, -2.97055, 49.4662, 85.874, -2.97055, 49.4662, 97.374, -2.97055, 41.7162, 95.124, -2.97055, 41.2162, 94.874, -2.97055, 42.7162, 94.874, -2.97055, 42.7162, 93.624, -2.97055, 42.7162, 93.374, -2.97055, 49.4662, 97.374, -2.97055, 49.4662, 97.374, -2.97055, 41.7162, 94.874, -2.97055, 42.7162, 93.374, -2.97055, 49.4662, 103.124, 5.77945, 44.9662, 104.624, 5.77945, 43.4662, 101.874, 5.77945, 41.4662, 103.124, 5.77945, 44.9662, 101.874, 5.77945, 41.4662, 98.374, 5.52945, 41.4662, 98.374, 5.52945, 48.9662, 103.124, 5.52945, 48.9662, 121.124, -2.97055, 49.4662, 127.124, -2.97055, 49.4662, 127.124, -2.97055, 43.9662, 121.124, -2.97055, 43.9662)
@@ -56,6 +56,9 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Arr
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2wuo1"]
 size = Vector3(224.288, 1, 105.668)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j8ask"]
+size = Vector3(51.1983, 5.68123, 56.1252)
 
 [node name="test_level" type="Node3D"]
 
@@ -167,6 +170,16 @@ transform = Transform3D(-0.983445, 0, -0.181206, 0, 1, 0, 0.181206, 0, -0.983445
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0506618, 1.77996, 1.35028)
 possess_cost = 0.0
 
+[node name="HealthComponent" parent="Shell" index="1"]
+max_health = 9999
+
+[node name="BodyInformation" parent="Shell/PlayerUI" index="2"]
+anchors_preset = 15
+anchor_top = 0.0
+offset_top = 0.0
+offset_right = 0.0
+grow_vertical = 2
+
 [node name="GhostMount" parent="Shell" index="3" node_paths=PackedStringArray("ghost")]
 ghost = NodePath("DummyGhost")
 
@@ -174,6 +187,9 @@ ghost = NodePath("DummyGhost")
 ghost_mount = NodePath("..")
 
 [node name="DummyGhost" parent="Shell/GhostMount" index="1" instance=ExtResource("3_sgn8s")]
+
+[node name="move" parent="Shell/BodyStateMachine" index="0"]
+jump_height = 2.0
 
 [node name="Checkpoint" parent="." instance=ExtResource("5_48qpn")]
 transform = Transform3D(-2.98023e-08, 0, 1, 0, 1, 0, -1, 0, -2.98023e-08, 0.101303, 0.212943, 12.4854)
@@ -227,36 +243,20 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Encounter/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.53142, 0.434407, 1.03476)
-shape = SubResource("BoxShape3D_j8ask")
-
-[node name="Encounter2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94.0389, -3.57978, 27.6208)
-script = ExtResource("7_0if2o")
-
-[node name="EnemySpawner" parent="Encounter2" instance=ExtResource("8_6grnl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99775, 6.37507, 4.8009)
-enemy = ExtResource("4_4aj81")
-
-[node name="EnemySpawner2" parent="Encounter2" instance=ExtResource("8_6grnl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.71213, 9.08468, 15.2289)
-enemy = ExtResource("4_4aj81")
-
-[node name="EnemySpawner3" parent="Encounter2" instance=ExtResource("8_6grnl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99775, 0, 3.80313)
-enemy = ExtResource("4_4aj81")
-
-[node name="Area3D" type="Area3D" parent="Encounter2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20674, 0, 0)
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Encounter2/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.53142, 0.434407, 1.03476)
-shape = SubResource("BoxShape3D_j8ask")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.50386, 0, 0.622471)
+shape = SubResource("BoxShape3D_r4l31")
 
 [node name="Shell2" parent="." instance=ExtResource("9_nenpd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.12235, -2.88981, 18.6076)
+
+[node name="Hitbox" parent="Shell2" index="0"]
+collision_mask = 0
+
+[node name="GhostMount" parent="Shell2" index="3" node_paths=PackedStringArray("ghost")]
+ghost = NodePath("DummyGhost")
+
+[node name="DummyGhost" parent="Shell2/GhostMount" index="1" node_paths=PackedStringArray("ghost_mount") instance=ExtResource("3_sgn8s")]
+ghost_mount = NodePath("..")
 
 [node name="NavigationRegion3D2" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_kcg1y")
@@ -344,15 +344,57 @@ shape = SubResource("BoxShape3D_2wuo1")
 [node name="Marker3D" type="Marker3D" parent="tp-trigger"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.51411, 8.60205, 1.32485)
 
-[node name="Shell3" parent="." instance=ExtResource("14_twftv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.55887, 0)
+[node name="firstWaves" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 103.809, 0, 27.4899)
+script = ExtResource("16_o5kx5")
 
+[node name="Encounter2" type="Node3D" parent="firstWaves"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9166, -3.57978, 7.91069)
+script = ExtResource("7_0if2o")
+
+[node name="EnemySpawner" parent="firstWaves/Encounter2" instance=ExtResource("8_6grnl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99775, 6.37507, 4.8009)
+enemy = ExtResource("4_4aj81")
+
+[node name="EnemySpawner2" parent="firstWaves/Encounter2" instance=ExtResource("8_6grnl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.71213, 9.08468, 15.2289)
+enemy = ExtResource("4_4aj81")
+
+[node name="EnemySpawner3" parent="firstWaves/Encounter2" instance=ExtResource("8_6grnl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99775, 1.21074, 3.80313)
+enemy = ExtResource("4_4aj81")
+
+[node name="Area3D" type="Area3D" parent="firstWaves/Encounter2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20674, 0, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="firstWaves/Encounter2/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.10151, 3.61577, -3.11586)
+shape = SubResource("BoxShape3D_j8ask")
+
+[node name="Revenants" type="Node3D" parent="firstWaves"]
+script = ExtResource("7_0if2o")
+
+[node name="EnemySpawner" parent="firstWaves/Revenants" instance=ExtResource("8_6grnl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.96391, 6.91514, 0)
+enemy = ExtResource("9_nenpd")
+
+[node name="EnemySpawner2" parent="firstWaves/Revenants" instance=ExtResource("8_6grnl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8278, 6.91514, -4.82194)
+enemy = ExtResource("9_nenpd")
+
+[connection signal="took_damage" from="Shell/Hitbox" to="Shell/GhostMount" method="_on_hitbox_took_damage" flags=18]
+[connection signal="died" from="Shell/HealthComponent" to="Shell/GhostMount" method="_on_health_component_died" flags=18]
+[connection signal="ghost_cleared" from="Shell/GhostMount" to="Shell/PlayerUI" method="_on_ghost_mount_ghost_cleared" flags=18]
 [connection signal="all_enemies_killed" from="Encounter" to="SlidingDoor" method="_on_encounter_all_enemies_killed"]
 [connection signal="encounter_started" from="Encounter" to="SlidingDoor" method="_on_encounter_encounter_started"]
 [connection signal="body_entered" from="Encounter/Area3D" to="Encounter" method="_on_area_3d_body_entered"]
-[connection signal="body_entered" from="Encounter2/Area3D" to="Encounter2" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="firstWaves/Encounter2/Area3D" to="firstWaves/Encounter2" method="_on_area_3d_body_entered"]
 
 [editable path="Shell"]
 [editable path="Shell/Head"]
 [editable path="Shell/Head/MachineGun"]
 [editable path="Shell/Head/MachineGun2"]
+[editable path="Shell2"]
+[editable path="Shell2/Head"]

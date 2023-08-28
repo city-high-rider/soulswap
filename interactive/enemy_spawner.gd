@@ -24,6 +24,7 @@ func spawn() -> void:
 		return
 	spawned_entity = enemy.instantiate()
 	spawned_entity.died.connect(on_enemy_died)
+	spawned_entity.ghost_mount.ghost_changed.connect(_on_spawned_entity_ghost_changed)
 	add_child(spawned_entity)
 	is_used = true
 
@@ -40,3 +41,8 @@ func load_state() -> void:
 func on_enemy_died() -> void:
 	spawned_entity = null
 	enemy_died.emit()
+
+func _on_spawned_entity_ghost_changed(_new_ghost, is_player: bool):
+	if is_player:
+		enemy_died.emit()
+		

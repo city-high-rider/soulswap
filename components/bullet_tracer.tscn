@@ -5,12 +5,16 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbcmt"]
 transparency = 1
 albedo_color = Color(1, 1, 0.74902, 0.862745)
+emission_enabled = true
+emission = Color(0.701961, 0.345098, 0.0941176, 1)
+emission_energy_multiplier = 0.4
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_mepmm"]
 material = SubResource("StandardMaterial3D_wbcmt")
 top_radius = 0.025
 bottom_radius = 0.025
 height = 0.03
+radial_segments = 8
 
 [sub_resource type="Animation" id="Animation_7mq8q"]
 length = 0.001

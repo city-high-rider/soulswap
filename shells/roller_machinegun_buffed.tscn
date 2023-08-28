@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://y4efc42n87hi"]
+
+[ext_resource type="PackedScene" uid="uid://bqtugrbwwuh6u" path="res://shells/roller_shell.tscn" id="1_q2lpe"]
+[ext_resource type="PackedScene" uid="uid://cq5g02v88a56k" path="res://components/UI/health_bar.tscn" id="2_ercyc"]
+[ext_resource type="PackedScene" uid="uid://bqsvtustc0gp6" path="res://ghosts/roller_ghost_strafe.tscn" id="3_7814h"]
+[ext_resource type="PackedScene" uid="uid://bdqf5sm42j8vl" path="res://components/body_parts/machine_gun.tscn" id="4_6tyls"]
+[ext_resource type="PackedScene" uid="uid://ccwql0w3yiavg" path="res://components/buffs/DroneBuff.tscn" id="5_hgp1c"]
+
+[node name="Shell" instance=ExtResource("1_q2lpe")]
+
+[node name="HealthComponent" parent="." index="1"]
+max_health = 350
+
+[node name="BodyInformation" parent="PlayerUI" index="2"]
+shell_name = "Roller (Machine gun)"
+shell_description = "A standard roller drone equipped with two machine guns (which can break!)"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerUI" index="3"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -286.0
+offset_top = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="GunHp1" parent="PlayerUI/VBoxContainer" index="0" node_paths=PackedStringArray("health") instance=ExtResource("2_ercyc")]
+layout_mode = 2
+size_flags_horizontal = 3
+health = NodePath("../../../Head/MachineGun2/GunHealth")
+text = "Left gun"
+
+[node name="GunHp2" parent="PlayerUI/VBoxContainer" index="1" node_paths=PackedStringArray("health") instance=ExtResource("2_ercyc")]
+layout_mode = 2
+size_flags_horizontal = 3
+health = NodePath("../../../Head/MachineGun/GunHealth")
+text = "Right gun"
+
+[node name="GhostMount" parent="." index="3" node_paths=PackedStringArray("ghost")]
+ghost = NodePath("RollerGhost")
+
+[node name="RollerGhost" parent="GhostMount" index="0" instance=ExtResource("3_7814h")]
+
+[node name="MachineGun" parent="Head" index="2" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("4_6tyls")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.634191, 0.0105973, 0)
+hitscan_manager = NodePath("../HitscanManager")
+ghost_mount = NodePath("../../GhostMount")
+
+[node name="MachineGun2" parent="Head" index="3" node_paths=PackedStringArray("hitscan_manager", "ghost_mount") instance=ExtResource("4_6tyls")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.629007, 0.0105973, 0)
+hitscan_manager = NodePath("../HitscanManager")
+ghost_mount = NodePath("../../GhostMount")
+
+[node name="move" parent="BodyStateMachine" index="0"]
+acceleration = 100.0
+top_speed = 13.0
+
+[node name="DroneBuff" parent="BuffManager" index="0" instance=ExtResource("5_hgp1c")]
+
+[editable path="Head"]
+[editable path="Head/MachineGun"]
+[editable path="Head/MachineGun2"]

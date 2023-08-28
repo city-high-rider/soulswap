@@ -1,13 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://ytotx0jlnt1y"]
+[gd_scene load_steps=11 format=3 uid="uid://ytotx0jlnt1y"]
 
 [ext_resource type="Script" path="res://interactive/explosion.gd" id="1_q3uh0"]
 [ext_resource type="AudioStream" uid="uid://bp25hds3bkelj" path="res://sounds/explode5.wav" id="2_1vdcc"]
+[ext_resource type="Script" path="res://resources/damage.gd" id="2_kbmew"]
+
+[sub_resource type="Resource" id="Resource_575j6"]
+script = ExtResource("2_kbmew")
+damage_type = 1
+damage_amount = 20.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4y8km"]
 transparency = 1
 albedo_color = Color(1, 0.258824, 0.364706, 0.435294)
 
 [sub_resource type="SphereMesh" id="SphereMesh_whh65"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_4y8km")
 radius = 0.1
 height = 0.2
@@ -54,6 +61,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_1r41g"]
+resource_local_to_scene = true
 resource_name = "explode"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -103,6 +111,8 @@ radius = 2.0
 
 [node name="Explosion" type="Node3D"]
 script = ExtResource("1_q3uh0")
+knockback = 6.0
+damage = SubResource("Resource_575j6")
 
 [node name="blast" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_whh65")
@@ -121,6 +131,7 @@ shape = SubResource("SphereShape3D_cim07")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_1vdcc")
+volume_db = -14.0
 
 [connection signal="area_entered" from="BlastRadius" to="." method="_on_blast_radius_area_entered"]
 [connection signal="body_entered" from="BlastRadius" to="." method="_on_blast_radius_body_entered"]

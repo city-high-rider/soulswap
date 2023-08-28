@@ -1,4 +1,6 @@
 extends Control
+## Label settings for the style labels.
+@export var style_label_settings : LabelSettings = LabelSettings.new()
 
 @onready var style_label : Label = $PanelContainer/VBoxContainer/TotalStyle
 
@@ -11,6 +13,7 @@ func display_style(message: String, points : int ) -> void:
 	var new_label : Label = Label.new()
 	new_label.text = message
 	new_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	new_label.label_settings = style_label_settings
 	# delete that node when the timer runs out.
 	show_timer.timeout.connect(func(): new_label.queue_free())
 	

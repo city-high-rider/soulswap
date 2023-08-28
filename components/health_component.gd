@@ -31,14 +31,6 @@ signal max_health_changed(new_max_health: int)
 ## Emitted when health reaches zero.
 signal died
 
-## Emitted when we take damage from a specified source. Similar to health_changed, but
-## carries additional information
-signal took_damage(new_health: int, source)
-
-## Emitted when the health reaches zero due to something. Similar to died, but has information
-## about the source.
-signal killed(source)
-
 
 func _ready() -> void:
 	CheckpointManager.checkpoint_activated.connect(save_health)
@@ -46,16 +38,20 @@ func _ready() -> void:
 	current_health = max_health
 	save_health()
 
-
-func take_damage(damage: int, source) -> void:
+# function that takes a raw number to subtract from the health. Hitbox is responsible for
+# calculating this given damage types / resistances etc.
+# We return whether the damage was lethal (took us below 0hp) or not.
+func take_damage(damage: int) -> bool:
 	var is_already_dead : bool = current_health <= 0
+	var is_damage_lethal : bool = false
+	
 	current_health = clamp(current_health - damage, 0, max_health)
 	if current_health <= 0 and !is_already_dead:
 		emit_signal("died")
-		killed.emit(source)
+		is_damage_lethal = true
 	else:
 		emit_signal("health_changed", current_health)
-		took_damage.emit(current_health, source)
+	return is_damage_lethal
 
 
 func save_health() -> void:

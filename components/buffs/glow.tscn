@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://12nx2ry7mukj"]
+[gd_scene load_steps=8 format=3 uid="uid://ltyv37ylkl5t"]
 
 [ext_resource type="Script" path="res://components/buffs/glow.gd" id="1_nk8kh"]
 [ext_resource type="Texture2D" uid="uid://c0yu8frauafb3" path="res://addons/kenney_particle_pack/smoke_07.png" id="2_u75c2"]

@@ -1,6 +1,7 @@
 extends Node3D
 ## This is a base for a weapon that shoots projectiles, such as a 
 ## rocket or a fireball
+class_name ProjectileCannon
 
 ## what are we shooting?
 @export var projectile : PackedScene 
@@ -24,17 +25,21 @@ var current_fire_cooldown = fire_period_s
 ## Which audio player do we use for gunfire sound?
 @export var gunfire_sound : AudioQueue3D
 
+# Instantiates our projectile and makes it fly in the correct direction.
+# Return a reference to the instantiated projectile in case any inheriting scripts
+# want to do some more with it.
 func fire():
 	if current_fire_cooldown > 0:
 		return
 	current_fire_cooldown = fire_period_s
+	# Instance our projectile.
 	var new_projectile = projectile.instantiate()
 	get_node("/root").add_child(new_projectile)
 	new_projectile.global_transform.origin = global_transform.origin if !barrel_pos else barrel_pos.global_transform.origin
 	var destination : Vector3 = get_destination_point()
 	new_projectile.look_at(destination)
-	if "linear_velocity" in new_projectile:
-		new_projectile.linear_velocity = (destination - new_projectile.global_transform.origin).normalized() * muzzle_speed
+	# Set projectile owner
+	new_projectile.thrower = ghost_mount.shell
 	if gunfire_sound:
 		gunfire_sound.play_sound()
 	

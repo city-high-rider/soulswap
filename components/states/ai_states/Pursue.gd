@@ -17,6 +17,7 @@ func handle_physics(delta: float) -> void:
 	time_until_new_path -= delta
 	if time_until_new_path <= 0 and target:
 		time_until_new_path = new_path_poll_rate_seconds
+		target = PlayerInfo.current_player_shell
 		nav_agent.set_target_position(target.global_transform.origin)
 	
 	var user_inputs : GhostInput = user.current_inputs	

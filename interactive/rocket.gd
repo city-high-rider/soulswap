@@ -1,29 +1,23 @@
-extends CharacterBody3D
+extends Projectile
 
-@export var speed : float = 27
 @export var explosion : PackedScene
-
-var despawn_time : float = 10
-
-@onready var detonate_area : Area3D = $Area3D
 @onready var booster_sound : AudioStreamPlayer3D = $AudioStreamPlayer3D
 
-func _ready() -> void:
-	get_tree().create_timer(despawn_time).timeout.connect(queue_free)
-	
-	
-func _physics_process(delta: float) -> void:
-	velocity = -global_transform.basis.z * speed
-	move_and_slide()
 
+# Set the rocket to explode on collision
+func _init() -> void:
+	on_collide = explode
+	on_hitbox_collide = explode
 
-func _on_area_3d_body_entered(body):
+# Spawn an explosion if we have one and delete ourselves
+func explode() -> void:
 	if explosion:
 		var new_explosion = explosion.instantiate()
 		get_node("/root").add_child(new_explosion)
 		new_explosion.global_transform.origin = global_transform.origin
+		new_explosion.thrower = thrower
 	queue_free()
-
+	
 # Make sure the sound loops
 func _on_audio_stream_player_3d_finished():
 	booster_sound.play()
