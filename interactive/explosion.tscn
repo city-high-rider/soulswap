@@ -131,6 +131,7 @@ shape = SubResource("SphereShape3D_cim07")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_1vdcc")
+volume_db = -14.0
 
 [connection signal="area_entered" from="BlastRadius" to="." method="_on_blast_radius_area_entered"]
 [connection signal="body_entered" from="BlastRadius" to="." method="_on_blast_radius_body_entered"]
