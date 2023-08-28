@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dyu0t1x11boek"]
+[gd_scene load_steps=37 format=3 uid="uid://dyu0t1x11boek"]
 
 [ext_resource type="Material" uid="uid://c78qerjjpjysg" path="res://materials/light_proto.tres" id="1_v3bjq"]
 [ext_resource type="Material" uid="uid://b5anjtaljnhvs" path="res://materials/dark_proto.tres" id="2_0w2sq"]
@@ -19,7 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://y4efc42n87hi" path="res://shells/roller_machinegun_buffed.tscn" id="16_x4yxp"]
 [ext_resource type="PackedScene" uid="uid://citqaeuav6del" path="res://shells/revenant.tscn" id="17_2y2m7"]
 [ext_resource type="PackedScene" uid="uid://bdtj1l4cxv5j1" path="res://interactive/tp-trigger.tscn" id="18_r3qmj"]
-[ext_resource type="Script" path="res://interactive/popup_area.gd" id="19_n41t0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k5u10"]
 sky_top_color = Color(0.560784, 0.345098, 0.760784, 1)
@@ -131,6 +130,13 @@ material = ExtResource("3_buif5")
 [node name="Shell" parent="NavigationRegion3D/Geometry/Room1/Podium" instance=ExtResource("4_5clly")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.31565, 0)
 possess_cost = 0.0
+
+[node name="BodyInformation" parent="NavigationRegion3D/Geometry/Room1/Podium/Shell/PlayerUI" index="2"]
+anchors_preset = 15
+anchor_top = 0.0
+offset_top = 0.0
+offset_right = 0.0
+grow_vertical = 2
 
 [node name="GhostMount" parent="NavigationRegion3D/Geometry/Room1/Podium/Shell" index="3" node_paths=PackedStringArray("ghost")]
 ghost = NodePath("DummyGhost")
@@ -679,19 +685,21 @@ omni_range = 29.7282
 [node name="CSGSphere3D" type="CSGSphere3D" parent="NavigationRegion3D/Geometry/Finish/Antenna2/CSGCylinder3D2/OmniLight3D"]
 material = SubResource("StandardMaterial3D_587ce")
 
-[node name="PopupArea" type="Area3D" parent="NavigationRegion3D/Geometry/Finish"]
+[node name="PopupArea2" parent="NavigationRegion3D/Geometry/Finish" instance=ExtResource("6_l60nu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 68.3353, 0)
-script = ExtResource("19_n41t0")
 message = "Congrats, you won! Now see if you can kill all the enemies, or beat the game faster...
 "
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry/Finish/PopupArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Geometry/Finish/PopupArea2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.0857, 0)
 shape = SubResource("BoxShape3D_t6xl2")
 
 [node name="Husk" parent="." instance=ExtResource("4_1t4xu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.48757, 11.8059)
 
+[connection signal="took_damage" from="NavigationRegion3D/Geometry/Room1/Podium/Shell/Hitbox" to="NavigationRegion3D/Geometry/Room1/Podium/Shell/GhostMount" method="_on_hitbox_took_damage" flags=18]
+[connection signal="died" from="NavigationRegion3D/Geometry/Room1/Podium/Shell/HealthComponent" to="NavigationRegion3D/Geometry/Room1/Podium/Shell/GhostMount" method="_on_health_component_died" flags=18]
+[connection signal="ghost_cleared" from="NavigationRegion3D/Geometry/Room1/Podium/Shell/GhostMount" to="NavigationRegion3D/Geometry/Room1/Podium/Shell/PlayerUI" method="_on_ghost_mount_ghost_cleared" flags=18]
 [connection signal="body_entered" from="NavigationRegion3D/Geometry/Room2/Encounter" to="NavigationRegion3D/Geometry/Room2/Encounter/WaveSpawner" method="_on_area_3d_body_entered"]
 [connection signal="all_enemies_killed" from="NavigationRegion3D/Geometry/Room2/Encounter/WaveSpawner" to="NavigationRegion3D/Geometry/Room1/DoorSubtractor/SlidingDoor" method="_on_encounter_all_enemies_killed"]
 [connection signal="all_enemies_killed" from="NavigationRegion3D/Geometry/Room2/Encounter/WaveSpawner" to="NavigationRegion3D/Geometry/Room2/DoorHole/SlidingDoor" method="_on_encounter_all_enemies_killed"]
